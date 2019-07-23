@@ -1,8 +1,0 @@
-spring:
-  application:
-    name: logger-base
-  cloud:
-    config:
-      uri: http://localhost:2000
-      profile: dev
-      label: master
