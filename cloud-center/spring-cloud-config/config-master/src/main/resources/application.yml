@@ -11,8 +11,8 @@ spring:
         git:
           uri: https://github.com/hack-feng/maple-cloud-properties
           search-paths: /
-          username: 1150640979@qq.com
-          password: zhangQQ94264
+          username: 
+          password: 
       label: master
 
 eureka:
