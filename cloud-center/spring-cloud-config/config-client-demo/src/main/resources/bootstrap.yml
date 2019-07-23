@@ -1,0 +1,10 @@
+spring:
+  application:
+    name: maple-config
+  cloud:
+    config:
+      uri: http://localhost:2001
+      profile: dev
+      label: master
+server:
+  port: 2002

@@ -1,0 +1,8 @@
+spring:
+  application:
+    name: admin-server
+  cloud:
+    config:
+      uri: http://localhost:2000
+      profile: dev
+      label: master
