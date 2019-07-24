@@ -13,12 +13,10 @@ spring:
 
 # eureka的配置信息
 eureka:
-  instance:
-    hostname: localhost
   client:
     fetch-registry: false
     register-with-eureka: false
-    serviceUrl:
+    service-url:
       defaultZone: http://localhost:1111/eureka/
 
 management:
