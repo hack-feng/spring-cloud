@@ -6,6 +6,8 @@ import com.maple.user.service.IBaseUserService;
 import com.maple.userapi.bean.BaseUser;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -24,7 +26,11 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/baseUser")
+@RefreshScope
 public class BaseUserController {
+
+    @Value("${test}")
+    private String test;
 
     @Autowired
     private IBaseUserService userService;
@@ -53,6 +59,7 @@ public class BaseUserController {
         BaseUser user = null;
         try {
             user = userService.getById(1);
+            System.out.println(test);
         } catch (Exception e) {
             e.printStackTrace();
         }

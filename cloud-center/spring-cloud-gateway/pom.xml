@@ -12,11 +12,23 @@
 
     <artifactId>spring-cloud-gateway</artifactId>
 
+    <modules>
+        <module>gateway-master</module>
+    </modules>
+
     <dependencies>
+        <!-- 引入gateway -->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-gateway</artifactId>
         </dependency>
+
+        <!-- 开启config统一配置中心 -->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-config-client</artifactId>
+        </dependency>
+
     </dependencies>
 
 
