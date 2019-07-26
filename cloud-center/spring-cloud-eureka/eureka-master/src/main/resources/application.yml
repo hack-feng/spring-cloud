@@ -6,13 +6,11 @@ server:
 spring:
   application:
     name: eureka-master
-  security:
-    user:
-      name: admin
-      password: 123456
 
 # eureka的配置信息
 eureka:
+  instance:
+    hostname: localhost
   client:
     fetch-registry: false
     register-with-eureka: false

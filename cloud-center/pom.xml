@@ -17,6 +17,7 @@
         <module>spring-cloud-zuul</module>
         <module>spring-cloud-zipkin</module>
         <module>spring-cloud-admin</module>
+        <module>spring-cloud-gateway</module>
     </modules>
 
 
