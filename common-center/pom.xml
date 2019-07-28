@@ -11,6 +11,10 @@
 
     <artifactId>common-center</artifactId>
     <packaging>pom</packaging>
+    <modules>
+        <module>common-core</module>
+        <module>common-security</module>
+    </modules>
 
 
 </project>

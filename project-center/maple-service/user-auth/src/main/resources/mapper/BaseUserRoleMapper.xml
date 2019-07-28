@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.maple.userauth.mapper.BaseUserRoleMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.maple.userapi.bean.BaseUserRole">
+        <id column="id" property="id" />
+        <result column="user_id" property="userId" />
+        <result column="role_id" property="roleId" />
+        <result column="create_date" property="createDate" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, user_id, role_id, create_date
+    </sql>
+
+
+    <select id="findUserRole" resultType="string">
+        select r.role_code from base_user_role sur, base_user u, base_role r
+        where sur.role_id = r.id and sur.user_id = u.id and u.user_name = #{username}
+    </select>
+    <select id="findUserRes" resultType="java.lang.String">
+		SELECT
+            res.id
+        FROM
+            base_resources res,
+            base_role_res rr,
+            base_user_role ur,
+            base_user u
+        WHERE
+            res.res_type = 2
+            AND res.id = rr.res_id
+            AND rr.role_id = ur.role_id
+            AND ur.user_id = u.id
+            AND u.user_name = #{username}
+    </select>
+
+</mapper>
