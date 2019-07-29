@@ -29,6 +29,18 @@
             <artifactId>spring-cloud-config-client</artifactId>
         </dependency>
 
+        <!-- 添加路由重试依赖 -->
+        <dependency>
+            <groupId>org.springframework.retry</groupId>
+            <artifactId>spring-retry</artifactId>
+        </dependency>
+
+        <!-- 添加通过redis 实现限流-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-redis-reactive</artifactId>
+        </dependency>
+
     </dependencies>
 
 

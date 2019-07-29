@@ -40,6 +40,7 @@
 				<type>pom</type>
 				<scope>import</scope>
 			</dependency>
+
 		</dependencies>
 	</dependencyManagement>
 
@@ -55,23 +56,29 @@
 			<scope>test</scope>
 		</dependency>
 
-		<!-- 开启eureka客户端注册需要 -->
+		<!-- Spring Cloud ==> 开启eureka客户端注册需要 -->
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
 		</dependency>
 		
-		<!-- 引入admin 监控的客户端 -->
+		<!-- Spring Boot ==> 引入admin 监控的客户端 -->
 		<dependency>
 			<groupId>de.codecentric</groupId>
 			<artifactId>spring-boot-admin-starter-client</artifactId>
 			<version>2.1.5</version>
 		</dependency>
 
-		<!-- 引入bus的消息总线-->
+		<!-- Spring Cloud ==> 引入bus的消息总线-->
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-bus-amqp</artifactId>
+		</dependency>
+
+		<!-- Spring Cloud ==> 引入Hystrix 断路器-熔断、降级-->
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-netflix-hystrix</artifactId>
 		</dependency>
 
 		<dependency>
@@ -91,6 +98,15 @@
 			<artifactId>lombok</artifactId>
 			<scope>provided</scope>
 		</dependency>
+
+
+		<!-- Global project references start -->
+		<dependency>
+			<groupId>com.maple</groupId>
+			<artifactId>common-core</artifactId>
+			<version>${global-project.version}</version>
+		</dependency>
+		<!-- Global project references end -->
 	</dependencies>
 	
 	<properties>
@@ -101,6 +117,9 @@
 		<kaptcha.version>0.0.9</kaptcha.version>
 		<mybatis-plus.version>3.0.6</mybatis-plus.version>
 		<mysql.connector.version>8.0.16</mysql.connector.version>
+		<global-project.version>0.0.1-SNAPSHOT</global-project.version>
+		<maven.compiler.source>8</maven.compiler.source>
+		<maven.compiler.target>8</maven.compiler.target>
 	</properties>
 	
 	<build>

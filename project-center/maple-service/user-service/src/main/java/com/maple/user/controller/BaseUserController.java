@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -38,6 +39,7 @@ public class BaseUserController {
     @HystrixCommand(fallbackMethod = "baseHys")
     @GetMapping(value = "getList")
     public JSONObject getList(){
+        System.out.println(new Date() + "====123");
         JSONObject result = new JSONObject();
         List<BaseUser> list = userService.list(null);
         result.put("code", 200);

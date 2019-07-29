@@ -36,12 +36,6 @@
             <version>${mybatis-plus-boot-starter.version}</version>
         </dependency>
 
-        <!-- 引入 Hystrix 断路器-->
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-netflix-hystrix</artifactId>
-        </dependency>
-
         <!-- 引入swagger2自动生成文档-->
         <dependency>
             <groupId>io.springfox</groupId>
