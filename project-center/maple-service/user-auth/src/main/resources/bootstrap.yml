@@ -1,9 +1,10 @@
 server:
   port: 3000
 
+
 spring:
   application:
-    name: @artifactId@
+    name: user-auth
   # 配置中心
   cloud:
     config:
