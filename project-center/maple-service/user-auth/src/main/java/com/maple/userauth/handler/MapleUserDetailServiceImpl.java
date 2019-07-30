@@ -35,7 +35,7 @@ public class MapleUserDetailServiceImpl implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
         QueryWrapper<BaseUser> queryWrapper = new QueryWrapper<BaseUser>();
-        queryWrapper.eq("username",username);
+        queryWrapper.eq("user_name",username);
         BaseUser user = baseUserMapper.selectOne(queryWrapper);
         if(user == null) {
             throw new UsernameNotFoundException("用户不存在");
