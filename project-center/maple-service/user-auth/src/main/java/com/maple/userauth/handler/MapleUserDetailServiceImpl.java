@@ -1,5 +1,6 @@
 package com.maple.userauth.handler;
 
+import cn.hutool.core.convert.Convert;
 import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.maple.common.core.constant.CommonConstants;
@@ -57,10 +58,10 @@ public class MapleUserDetailServiceImpl implements UserDetailsService {
             authorities = AuthorityUtils.createAuthorityList(dbAuthsSet.toArray(new String[0]));
         }
 
-        boolean enabled =  CommonConstants.STATUS_NORMAL.equals(user.getIsLock());
+        boolean enabled =  CommonConstants.STATUS_NORMAL.equals(Convert.toStr(user.getIsLock()));
         //返回UserDetails的实现user不为空，则验证通过
         // 构造security用户
         return new AuthUser(user.getId(),user.getUserName(), SecurityConstants.NOOP + user.getPassWord(),
-                enabled, true, true, !CommonConstants.STATUS_LOCK.equals(user.getIsLock()), authorities);
+                enabled, true, true, !CommonConstants.STATUS_LOCK.equals(Convert.toStr(user.getIsLock())), authorities);
     }
 }

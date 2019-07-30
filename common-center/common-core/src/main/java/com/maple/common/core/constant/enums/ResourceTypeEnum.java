@@ -5,7 +5,7 @@ import lombok.Getter;
 
 /**
  * @author zhua
- * @date 2018/9/30
+ * @date 2019/7/30
  * 资源类型
  */
 @Getter
@@ -19,7 +19,32 @@ public enum ResourceTypeEnum {
 	/**
 	 * xml资源
 	 */
-	XML("xml", "xml资源");
+	XML("xml", "xml资源"),
+
+	/**
+	 * xls资源
+	 */
+	XLS("xls", "xls资源"),
+
+	/**
+	 * xlsx资源
+	 */
+	XLSX("xlsx", "xlsx资源"),
+
+	/**
+	 * doc资源
+	 */
+	DOC("doc", "doc资源"),
+
+	/**
+	 * docx资源
+	 */
+	DOCX("docx", "docx资源"),
+
+	/**
+	 * pdf资源
+	 */
+	PDF("pdf", "pdf资源");
 
 	/**
 	 * 类型
