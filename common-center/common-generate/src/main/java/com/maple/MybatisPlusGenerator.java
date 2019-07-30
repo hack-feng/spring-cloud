@@ -137,6 +137,8 @@ public class MybatisPlusGenerator {
                 .setEntityLombokModel(false)
                 //表名生成策略  下划线转驼峰
                 .setNaming(NamingStrategy.underline_to_camel)
+                //生成的去掉以system，可以配置多个
+                .setTablePrefix(new String[]{"system_"})
                 //自动填充设置
                 .setTableFillList(tableFillList)
                 //修改替换成你需要的表名，多个表名传数组
@@ -152,7 +154,7 @@ public class MybatisPlusGenerator {
                 .setPackageInfo(
                         new PackageConfig()
                                 //提取公共父级包名
-                                .setParent("com.maple.demo")
+                                .setParent(packageName)
                                 //设置controller信息
                                 .setController("controller")
                                 //设置实体类信息

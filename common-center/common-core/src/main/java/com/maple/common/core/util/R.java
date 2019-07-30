@@ -60,6 +60,12 @@ public class R<T> implements Serializable {
 	public static <T> R<T> failed(T data, String msg) {
 		return restResult(data, CommonConstants.FAIL, msg);
 	}
+	public static <T> R<T> isOk(boolean isOk, String msg){
+		if(isOk)
+			return restResult(null, CommonConstants.SUCCESS, msg + "成功");
+		else
+			return restResult(null, CommonConstants.FAIL, msg + "失败");
+	}
 
 	private static <T> R<T> restResult(T data, int code, String msg) {
 		R<T> apiResult = new R<>();
@@ -68,5 +74,4 @@ public class R<T> implements Serializable {
 		apiResult.setMsg(msg);
 		return apiResult;
 	}
-
 }

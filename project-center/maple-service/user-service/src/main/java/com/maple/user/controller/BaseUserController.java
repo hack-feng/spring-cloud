@@ -39,7 +39,7 @@ public class BaseUserController {
     @HystrixCommand(fallbackMethod = "baseHys")
     @GetMapping(value = "getList")
     public JSONObject getList(){
-        System.out.println(new Date() + "====123");
+        System.out.println(test);
         JSONObject result = new JSONObject();
         List<BaseUser> list = userService.list(null);
         result.put("code", 200);
