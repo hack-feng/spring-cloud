@@ -43,7 +43,7 @@ public class MybatisPlusGenerator {
             path = pathSc;
         }
 
-        String sqlInfo = scanner("请输入数据库连接信息，必须为以下格式(连接地址:端口号/数据库名称|用户名|密码)（默认：127.0.0.1:3306/maple&root&123456）：");
+        String sqlInfo = scanner("请输入数据库连接信息，必须为以下格式(连接地址:端口号/数据库名称&用户名&密码)（默认：127.0.0.1:3306/maple&root&123456）：");
         if(StringUtils.isNotEmpty(sqlInfo)){
             String[] drivers = sqlInfo.split("&");
             if(StringUtils.isNotEmpty(drivers[0])){
