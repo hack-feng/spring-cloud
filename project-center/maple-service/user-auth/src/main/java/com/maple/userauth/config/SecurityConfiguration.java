@@ -1,6 +1,6 @@
 package com.maple.userauth.config;
 
-import com.zhcloud.zhua.auth.handler.ZhuaUserDetailServiceImpl;
+import com.maple.userauth.handler.MapleUserDetailServiceImpl;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
@@ -28,7 +28,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Bean
     @Override
     protected UserDetailsService userDetailsService() {
-        return new ZhuaUserDetailServiceImpl();
+        return new MapleUserDetailServiceImpl();
     }
 
     /**

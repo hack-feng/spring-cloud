@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.maple.common.core.constant.CommonConstants;
 import com.maple.userapi.bean.BaseOauthClientDetails;
 import com.maple.userauth.mapper.BaseOauthClientDetailsMapper;
+import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.oauth2.provider.ClientDetails;
@@ -20,7 +21,9 @@ import java.util.concurrent.TimeUnit;
 
 /**
  * 自定义客户端认证
+ * @author zhua
  */
+@NoArgsConstructor
 public class MapleClientDetailServiceImpl implements ClientDetailsService {
 
     @Autowired
