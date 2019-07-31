@@ -134,12 +134,11 @@ public class MybatisPlusGenerator {
                 //全局大写命名是否开启
                 .setCapitalMode(true)
                 //【实体】是否为lombok模型
-                .setEntityLombokModel(false)
+                .setEntityLombokModel(true)
                 //表名生成策略  下划线转驼峰
                 .setNaming(NamingStrategy.underline_to_camel)
                 //生成的去掉以system，可以配置多个
                 .setTablePrefix(new String[]{"system_"})
-                .setEntityLombokModel(true)
                 //自动填充设置
                 .setTableFillList(tableFillList)
                 //修改替换成你需要的表名，多个表名传数组
