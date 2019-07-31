@@ -139,6 +139,7 @@ public class MybatisPlusGenerator {
                 .setNaming(NamingStrategy.underline_to_camel)
                 //生成的去掉以system，可以配置多个
                 .setTablePrefix(new String[]{"system_"})
+                .setEntityLombokModel(true)
                 //自动填充设置
                 .setTableFillList(tableFillList)
                 //修改替换成你需要的表名，多个表名传数组
