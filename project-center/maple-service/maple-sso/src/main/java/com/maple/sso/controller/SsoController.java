@@ -25,7 +25,7 @@ class SsoController {
     @HystrixCommand(fallbackMethod = "loginHys")
     @RequestMapping(value = "login")
     public JSONObject sso(){
-        JSONObject result = restTemplate.getForEntity("http://127.0.0.1:4001/user-service/baseUser/getList", JSONObject.class).getBody();
+        JSONObject result = restTemplate.getForEntity("http://127.0.0.1:5001/user/baseUser/getList", JSONObject.class).getBody();
         System.out.println(result);
         return result;
     }
@@ -41,7 +41,7 @@ class SsoController {
     @RequestMapping(value = "getUserInfo")
     public JSONObject getUserInfo(){
         JSONObject result = new JSONObject();
-        JSONObject a = restTemplate.getForEntity("http://127.0.0.1:4001/user-service/baseUser/getUserInfo?id=1", JSONObject.class).getBody();
+        JSONObject a = restTemplate.getForEntity("http://127.0.0.1:5001/user/baseUser/getUserInfo?id=1", JSONObject.class).getBody();
         result.put("code", 200);
         result.put("data", a);
         return result;

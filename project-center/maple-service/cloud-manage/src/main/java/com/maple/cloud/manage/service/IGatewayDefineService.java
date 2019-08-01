@@ -2,6 +2,7 @@ package com.maple.cloud.manage.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.maple.system.api.bean.GatewayDefine;
+import com.maple.system.api.vo.GatewayDefineVo;
 
 /**
  * <p>
@@ -13,4 +14,11 @@ import com.maple.system.api.bean.GatewayDefine;
  */
 public interface IGatewayDefineService extends IService<GatewayDefine> {
 
+    boolean add(GatewayDefine gatewayDefine);
+
+    boolean update(GatewayDefine gatewayDefine);
+
+    boolean delete(Integer id);
+
+    GatewayDefineVo get(Integer id);
 }

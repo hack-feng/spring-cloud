@@ -31,7 +31,7 @@ public class GatewayDefineController {
             dataType = "GatewayDefineRo", dataTypeClass = GatewayDefineRo.class)
     @PostMapping
     public R add(@RequestBody GatewayDefineRo gatewayDefineRo){
-       boolean isOk = gatewayDefineService.save(gatewayDefineRo.toBean(GatewayDefine.class));
+       boolean isOk = gatewayDefineService.add(gatewayDefineRo.toBean(GatewayDefine.class));
        return R.isOk(isOk, "新增网关路由");
     }
 
@@ -45,7 +45,7 @@ public class GatewayDefineController {
     public R update(@PathVariable Integer id, GatewayDefineRo gatewayDefineRo){
         GatewayDefine gatewayDefine = gatewayDefineRo.toBean(GatewayDefine.class);
         gatewayDefine.setId(id);
-        return R.isOk(gatewayDefineService.updateById(gatewayDefine), "修改网关路由");
+        return R.isOk(gatewayDefineService.update(gatewayDefine), "修改网关路由");
     }
 
 
@@ -53,7 +53,12 @@ public class GatewayDefineController {
     @ApiImplicitParam(name = "id", value = "网关路由id", required = true, dataType = "Integer")
     @DeleteMapping(value = "/{id}")
     public R delete(@PathVariable Integer id){
-        return R.isOk(gatewayDefineService.removeById(id), "删除网关路由");
+        return R.isOk(gatewayDefineService.delete(id), "删除网关路由");
+    }
+
+    @GetMapping(value = "/{id}")
+    public R get(@PathVariable Integer id){
+        return R.ok(gatewayDefineService.get(id));
     }
 
 }
