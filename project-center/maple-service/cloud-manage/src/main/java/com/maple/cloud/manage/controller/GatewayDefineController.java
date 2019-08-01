@@ -11,6 +11,8 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+
 /**
  * <p>
  * 系统配置-gateway动态路由配置 前端控制器
@@ -30,7 +32,7 @@ public class GatewayDefineController {
     @ApiImplicitParam(name = "gatewayDefineRo", value = "需要新增网关实体对象", required = true,
             dataType = "GatewayDefineRo", dataTypeClass = GatewayDefineRo.class)
     @PostMapping
-    public R add(@RequestBody GatewayDefineRo gatewayDefineRo){
+    public R add(@Valid @RequestBody GatewayDefineRo gatewayDefineRo){
        boolean isOk = gatewayDefineService.add(gatewayDefineRo.toBean(GatewayDefine.class));
        return R.isOk(isOk, "新增网关路由");
     }
@@ -42,7 +44,7 @@ public class GatewayDefineController {
                     dataType = "GatewayDefineRo", dataTypeClass = GatewayDefineRo.class)
     })
     @PutMapping(value = "/{id}")
-    public R update(@PathVariable Integer id, GatewayDefineRo gatewayDefineRo){
+    public R update(@PathVariable Integer id, @Valid @RequestBody GatewayDefineRo gatewayDefineRo){
         GatewayDefine gatewayDefine = gatewayDefineRo.toBean(GatewayDefine.class);
         gatewayDefine.setId(id);
         return R.isOk(gatewayDefineService.update(gatewayDefine), "修改网关路由");

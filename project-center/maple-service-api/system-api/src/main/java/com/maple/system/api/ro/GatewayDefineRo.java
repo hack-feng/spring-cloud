@@ -14,6 +14,8 @@ import lombok.experimental.Accessors;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -36,15 +38,18 @@ public class GatewayDefineRo extends BaseRo<GatewayDefine> {
     private Integer id;
 
     @ApiModelProperty(value = "对应routes的uri")
+    @NotBlank(message = "uri不能为空")
     private String uri;
 
     @ApiModelProperty(value = "对应routes的predicates")
+    @NotEmpty(message = "predicates不能为空")
     private List<PredicateDefinition> predicates = new ArrayList<>();
 
     @ApiModelProperty(value = "对应routes的filters")
     private List<FilterDefinition> filters = new ArrayList<>();
 
     @ApiModelProperty(value = "Eureka注册的服务名,对应routes的- id")
+    @NotBlank(message = "routeId不能为空")
     private String routeId;
 
     @ApiModelProperty(value = "路由描述")

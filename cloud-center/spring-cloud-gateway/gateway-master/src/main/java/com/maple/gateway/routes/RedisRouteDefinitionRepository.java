@@ -6,6 +6,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.gateway.route.RouteDefinition;
 import org.springframework.cloud.gateway.route.RouteDefinitionRepository;
+import org.springframework.cloud.gateway.support.NotFoundException;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
@@ -15,6 +16,9 @@ import reactor.core.publisher.Mono;
 import java.io.IOException;
 import java.util.*;
 
+/**
+ * 动态的从redis读取路由信息
+ */
 @Slf4j
 @Component
 public class RedisRouteDefinitionRepository implements RouteDefinitionRepository {
@@ -43,12 +47,18 @@ public class RedisRouteDefinitionRepository implements RouteDefinitionRepository
     @Override
     public Mono<Void> delete(Mono<String> routeId) {
         return routeId.flatMap(id -> {
-            routeDefinitionMaps.remove(id);
-            return Mono.empty();
+            if (this.routeDefinitionMaps.containsKey(id)) {
+                this.routeDefinitionMaps.remove(id);
+                return Mono.empty();
+            } else {
+                return Mono.defer(() -> Mono.error(new NotFoundException("RouteDefinition not found: " + routeId)));
+            }
         });
     }
 
     private void loadRouteDefinition() {
+        //删除时没有触发delete，导致这里需要清空routeDefinitionMaps
+        routeDefinitionMaps.clear();
         Set<String> gatewayKeys = stringRedisTemplate.keys(MAPLE_CLOUD_GATEWAY_ROUTES + "*");
 //        Collection keys = Collections.singleton(MAPLE_CLOUD_GATEWAY_ROUTES + "*");
 //        List<String> gatewayKeys = stringRedisTemplate.opsForValue().multiGet(keys);
