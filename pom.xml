@@ -111,16 +111,6 @@
 			<scope>provided</scope>
 		</dependency>
 
-
-		<!-- Global project references start -->
-
-		<dependency>
-			<groupId>com.maple</groupId>
-			<artifactId>common-core</artifactId>
-			<version>${global-project.version}</version>
-		</dependency>
-
-		<!-- Global project references end -->
 	</dependencies>
 	
 	<properties>
