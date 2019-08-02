@@ -22,6 +22,12 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-webflux</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.maple</groupId>
+            <artifactId>common-core</artifactId>
+            <version>${global-project.version}</version>
+        </dependency>
+
     </dependencies>
 
 </project>
