@@ -14,8 +14,9 @@
 * 交结志同道合的朋友，有兴趣的朋友都可以加入我们，QQ群：680348385
 * 为开源贡献一份绵薄之力
 
-项目介绍：
-## cloud-center(spring-cloud组件中心)
+
+## 项目介绍
+### cloud-center(spring-cloud组件中心)
 #### spring-cloud-config(配置中心)
 * config-master(已启用，本项目的配置中心)
 #### spring-cloud-eureka(注册中心)
@@ -29,13 +30,26 @@
 #### spring-cloud-admin(spring boot admin 服务监控)
 * admin-server(已启用，本项目的服务监控)
   
-## common-center(工具中心，暂未开发)
+### common-center(工具中心，暂未开发)
   
-## project-center(项目中心)
+### project-center(项目中心)
 #### maple-service-api(本项目的实体类)
 * user-api(用户模块api)
 #### maple-service(本项目的微服务)
 * user-service(已启用，用户模块微服务)
 * maple-sso(已启用，用户登录微服务)
 
-## logger-center(日志中心，暂未开发)
+### logger-center(日志中心，暂未开发)
+
+
+## 开发规范
+
+### 项目规范
+ * 遵循阿里的《JAVA开发手册-华山版》
+ * 项目创建放在对应的目录中，例如Eureka放在cloud-center下。
+ * 项目命名
+### 数据库规范
+
+### 文档规范
+
+### 部署规范
