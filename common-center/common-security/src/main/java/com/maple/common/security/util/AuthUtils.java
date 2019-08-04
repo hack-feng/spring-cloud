@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 
 /**
  * @author zhua
- * @date 2019/2/1
+ * @date 2019/7/30
  * 认证授权相关工具类
  */
 @Slf4j

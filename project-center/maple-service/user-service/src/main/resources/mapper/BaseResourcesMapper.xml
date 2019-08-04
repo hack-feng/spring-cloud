@@ -7,6 +7,7 @@
         <id column="id" property="id" />
         <result column="parent_id" property="parentId" />
         <result column="res_name" property="resName" />
+        <result column="res_code" property="resCode" />
         <result column="res_desc" property="resDesc" />
         <result column="res_type" property="resType" />
         <result column="icon" property="icon" />
@@ -20,7 +21,21 @@
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        id, parent_id, res_name, res_desc, res_type, icon, sort_num, res_url, create_date, modify_date, is_delete, status
+        id, parent_id, res_name,res_code, res_desc, res_type, icon, sort_num, res_url, create_date, modify_date, is_delete, status
     </sql>
+    <select id="getResourcesByRoleId" resultType="com.maple.userapi.bean.BaseResources">
+        SELECT
+            r.*
+        FROM
+            base_resources r
+            LEFT JOIN base_role_res rr ON r.id = rr.res_id
+        WHERE
+            r.is_delete = 0
+            AND r.`status` = 0
+            AND rr.role_id = #{roleId}
+
+        ORDER BY
+            r.sort_num DESC
+    </select>
 
 </mapper>

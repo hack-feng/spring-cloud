@@ -4,7 +4,7 @@ import lombok.NoArgsConstructor;
 
 /**
  * @author zhua
- * @date 2018年06月22日16:22:10
+ * @date 2019/7/30
  */
 @NoArgsConstructor
 public class UnloginException extends RuntimeException {

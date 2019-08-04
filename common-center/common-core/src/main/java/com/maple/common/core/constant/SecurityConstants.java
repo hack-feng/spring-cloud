@@ -2,7 +2,7 @@ package com.maple.common.core.constant;
 
 /**
  * @author zhua
- * @date 2017-12-18
+ * @date 2019/7/30
  */
 public interface SecurityConstants {
 

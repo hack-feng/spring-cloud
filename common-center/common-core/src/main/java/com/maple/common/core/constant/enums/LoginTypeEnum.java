@@ -5,7 +5,7 @@ import lombok.Getter;
 
 /**
  * @author zhua
- * @date 2018/8/15
+ * @date 2019/7/30
  * 社交登录类型
  */
 @Getter

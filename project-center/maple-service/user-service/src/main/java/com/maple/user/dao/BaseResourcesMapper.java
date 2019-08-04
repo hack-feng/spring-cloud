@@ -4,6 +4,8 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.maple.userapi.bean.BaseResources;
 import org.apache.ibatis.annotations.Mapper;
 
+import java.util.List;
+
 /**
  * <p>
  * 基础信息-资源表 Mapper 接口
@@ -15,4 +17,5 @@ import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface BaseResourcesMapper extends BaseMapper<BaseResources> {
 
+    List<BaseResources> getResourcesByRoleId(Integer roleId);
 }

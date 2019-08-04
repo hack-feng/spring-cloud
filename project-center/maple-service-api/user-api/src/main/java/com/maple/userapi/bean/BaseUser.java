@@ -7,6 +7,8 @@ import java.util.Date;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableField;
 import java.io.Serializable;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
@@ -35,6 +37,7 @@ public class BaseUser extends Model<BaseUser> {
     @TableField("user_name")
     private String userName;
 
+    @JsonIgnore
     @ApiModelProperty(value = "密码")
     @TableField("pass_word")
     private String passWord;

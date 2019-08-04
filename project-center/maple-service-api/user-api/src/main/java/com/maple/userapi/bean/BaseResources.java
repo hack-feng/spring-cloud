@@ -36,6 +36,10 @@ public class BaseResources extends Model<BaseResources> {
     @TableField("res_name")
     private String resName;
 
+    @ApiModelProperty(value = "资源代码")
+    @TableField("res_code")
+    private String resCode;
+
     @ApiModelProperty(value = "资源描述")
     @TableField("res_desc")
     private String resDesc;
@@ -188,5 +192,13 @@ public class BaseResources extends Model<BaseResources> {
         ", isDelete=" + isDelete +
         ", status=" + status +
         "}";
+    }
+
+    public String getResCode() {
+        return resCode;
+    }
+
+    public void setResCode(String resCode) {
+        this.resCode = resCode;
     }
 }

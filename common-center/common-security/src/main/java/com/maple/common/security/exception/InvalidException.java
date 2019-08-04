@@ -5,7 +5,7 @@ import com.maple.common.security.component.MapleAuth2ExceptionSerializer;
 
 /**
  * @author zhua
- * @date 2019/2/1
+ * @date 2019/7/30
  */
 @JsonSerialize(using = MapleAuth2ExceptionSerializer.class)
 public class InvalidException extends MapleAuth2Exception {

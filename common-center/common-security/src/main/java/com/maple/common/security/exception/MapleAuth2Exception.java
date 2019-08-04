@@ -7,7 +7,7 @@ import org.springframework.security.oauth2.common.exceptions.OAuth2Exception;
 
 /**
  * @author zhua
- * @date 2019/2/1
+ * @date 2019/7/30
  * 自定义OAuth2Exception
  */
 @JsonSerialize(using = MapleAuth2ExceptionSerializer.class)

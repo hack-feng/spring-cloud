@@ -6,6 +6,7 @@
     <resultMap id="BaseResultMap" type="com.maple.userapi.bean.BaseRole">
         <id column="id" property="id" />
         <result column="role_name" property="roleName" />
+        <result column="role_code" property="roleCode" />
         <result column="create_date" property="createDate" />
         <result column="modify_date" property="modifyDate" />
         <result column="is_delete" property="isDelete" />
@@ -15,7 +16,19 @@
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        id, role_name, create_date, modify_date, is_delete, status, remark
+        id, role_name, role_code, create_date, modify_date, is_delete, status, remark
     </sql>
+    <select id="listRolesByUserId" resultType="com.maple.userapi.bean.BaseRole">
+        SELECT
+            r.*
+        FROM
+            base_role r,
+            base_user_role ur
+        WHERE
+            r.id = ur.role_id
+            AND r.is_delete = 0
+            AND r.status = 0
+            AND ur.user_id = #{id}
+    </select>
 
 </mapper>

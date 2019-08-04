@@ -2,6 +2,9 @@ package com.maple.user.controller;
 
 
 import com.alibaba.fastjson.JSONObject;
+import com.baomidou.mybatisplus.core.toolkit.Wrappers;
+import com.maple.common.core.util.R;
+import com.maple.common.security.util.SecurityUtils;
 import com.maple.user.service.IBaseUserService;
 import com.maple.userapi.bean.BaseUser;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
@@ -35,6 +38,21 @@ public class BaseUserController {
 
     @Autowired
     private IBaseUserService userService;
+
+    /**
+     * 获取当前用户全部信息
+     * @return zhua
+     */
+    @GetMapping(value = {"/info"})
+    public R info() {
+        String username = SecurityUtils.getUsername();
+        BaseUser user = userService.getOne(Wrappers.<BaseUser>query()
+                .lambda().eq(BaseUser::getUserName, username));
+        if (user == null) {
+            return R.failed("获取当前用户信息失败");
+        }
+        return R.ok(userService.getUserInfo(user));
+    }
 
     @HystrixCommand(fallbackMethod = "baseHys")
     @GetMapping(value = "getList")
