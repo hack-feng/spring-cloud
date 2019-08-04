@@ -59,6 +59,10 @@ public class BaseResources extends Model<BaseResources> {
     @TableField("res_url")
     private String resUrl;
 
+    @ApiModelProperty(value = "vue component")
+    @TableField("component")
+    private String component;
+
     @ApiModelProperty(value = "创建时间")
     @TableField("create_date")
     private Date createDate;
@@ -200,5 +204,13 @@ public class BaseResources extends Model<BaseResources> {
 
     public void setResCode(String resCode) {
         this.resCode = resCode;
+    }
+
+    public String getComponent() {
+        return component;
+    }
+
+    public void setComponent(String component) {
+        this.component = component;
     }
 }
