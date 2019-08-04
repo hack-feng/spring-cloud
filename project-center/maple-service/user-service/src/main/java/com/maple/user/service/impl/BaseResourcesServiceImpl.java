@@ -4,7 +4,10 @@ import com.maple.user.dao.BaseResourcesMapper;
 import com.maple.user.service.IBaseResourcesService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.maple.userapi.bean.BaseResources;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * <p>
@@ -17,4 +20,11 @@ import org.springframework.stereotype.Service;
 @Service
 public class BaseResourcesServiceImpl extends ServiceImpl<BaseResourcesMapper, BaseResources> implements IBaseResourcesService {
 
+    @Autowired
+    private BaseResourcesMapper baseResourcesMapper;
+
+    @Override
+    public List<BaseResources> getMenuByRoleCode(String roleCode) {
+        return baseResourcesMapper.getResourcesByRoleCode(roleCode);
+    }
 }
