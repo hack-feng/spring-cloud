@@ -11,7 +11,7 @@ import java.util.Date;
 
 @Data
 @EqualsAndHashCode(callSuper = true)
-public class PermissionTree extends TreeNode {
+public class MenuTree extends TreeNode {
 
     /**
      * 权限名称
@@ -95,24 +95,24 @@ public class PermissionTree extends TreeNode {
 
     private Meta meta;
 
-    public PermissionTree() {
+    public MenuTree() {
     }
 
-    public PermissionTree(int id, String name, int parentId) {
+    public MenuTree(int id, String name, int parentId) {
         this.id = id;
         this.parentId = parentId;
         this.name = name;
         this.title = name;
     }
 
-    public PermissionTree(int id, String name, PermissionTree parent) {
+    public MenuTree(int id, String name, MenuTree parent) {
         this.id = id;
         this.parentId = parent.getId();
         this.name = name;
         this.title = name;
     }
 
-    public PermissionTree(BaseResources resource) {
+    public MenuTree(BaseResources resource) {
         this.id = resource.getId();
         this.parentId = resource.getParentId();
         this.icon = resource.getIcon();
