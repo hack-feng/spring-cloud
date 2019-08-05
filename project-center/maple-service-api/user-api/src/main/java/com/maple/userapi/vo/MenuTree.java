@@ -1,6 +1,7 @@
 package com.maple.userapi.vo;
 
 import cn.hutool.core.convert.Convert;
+import cn.hutool.core.util.StrUtil;
 import com.maple.userapi.bean.BaseResources;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -140,6 +141,7 @@ public class MenuTree extends TreeNode {
 //        this.meta.setNotCache(resource.isNotCache());
 //        if(StrUtil.isNotEmpty(resource.getAccess())) {
 //            String access = resource.getAccess();
-            this.meta.setAccess(Arrays.asList(access.split(",")));
+//            this.meta.setAccess(Arrays.asList(access.split(",")));
+//        }
     }
 }
