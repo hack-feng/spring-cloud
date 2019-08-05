@@ -1,7 +1,6 @@
 package com.maple.gateway.routes;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.google.common.collect.Lists;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.gateway.route.RouteDefinition;
@@ -66,8 +65,7 @@ public class RedisRouteDefinitionRepository implements RouteDefinitionRepository
             return;
         }
 
-        List<String> gatewayRoutes = Optional.ofNullable(
-                stringRedisTemplate.opsForValue().multiGet(gatewayKeys)).orElse(Lists.newArrayList());
+        List<String> gatewayRoutes = stringRedisTemplate.opsForValue().multiGet(gatewayKeys);
         gatewayRoutes.forEach(value -> {
             try {
                 RouteDefinition routeDefinition = new ObjectMapper().readValue(value, RouteDefinition.class);
