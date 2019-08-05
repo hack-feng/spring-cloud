@@ -1,6 +1,7 @@
 package com.maple.user.controller;
 
 
+import cn.hutool.core.convert.Convert;
 import com.maple.common.core.constant.CommonConstants;
 import com.maple.common.core.util.R;
 import com.maple.common.security.util.SecurityUtils;
@@ -46,7 +47,7 @@ public class BaseResourcesController {
         SecurityUtils.getRoles()
                 .forEach(roleCode -> all.addAll(baseResourcesService.getMenuByRoleCode(roleCode)));
         List<MenuTree> menuTreeList = all.stream()
-                .filter(menuVo -> CommonConstants.MENU.equals(menuVo.getResType()))
+                .filter(menuVo -> CommonConstants.MENU.equals(Convert.toStr(menuVo.getResType())))
                 .map(MenuTree::new)
                 .sorted(Comparator.comparingInt(MenuTree::getSort))
                 .collect(Collectors.toList());
