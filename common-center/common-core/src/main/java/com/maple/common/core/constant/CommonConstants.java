@@ -23,12 +23,12 @@ public interface CommonConstants {
 	/**
 	 * 菜单
 	 */
-	String MENU = "0";
+	String MENU = "1";
 
 	/**
-	 * 菜单
+	 * 按钮
 	 */
-	String BUTTON = "1";
+	String BUTTON = "2";
 
 	/**
 	 * 编码
