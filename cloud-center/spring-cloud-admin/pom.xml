@@ -12,6 +12,9 @@
         <groupId>com.maple</groupId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
+    <modules>
+        <module>admin-server</module>
+    </modules>
 
     <dependencies>
         <dependency>

@@ -12,6 +12,10 @@
     <artifactId>spring-cloud-config</artifactId>
     <packaging>pom</packaging>
 
+    <modules>
+        <module>config-master</module>
+    </modules>
+
     <dependencies>
         <dependency>
             <groupId>org.springframework.cloud</groupId>

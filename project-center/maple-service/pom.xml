@@ -13,8 +13,10 @@
     <packaging>pom</packaging>
 
     <modules>
+        <module>cloud-manage</module>
         <module>user-service</module>
         <module>user-auth</module>
+        <module>maple-sso</module>
     </modules>
 
     <dependencies>

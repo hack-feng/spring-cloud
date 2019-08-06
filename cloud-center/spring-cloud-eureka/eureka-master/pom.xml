@@ -10,33 +10,36 @@
 
     <artifactId>eureka-master</artifactId>
     <packaging>jar</packaging>
+
     <build>
-        <finalName>eureka-master</finalName>
+        <finalName>${artifactId}</finalName>
         <plugins>
-            <!-- Docker maven plugin -->
             <plugin>
-                <groupId>com.spotify</groupId>
-                <artifactId>docker-maven-plugin</artifactId>
-                <version>1.0.0</version>
-                <configuration>
-                    <!-- 镜像名称-->
-                    <imageName>${project.artifactId}</imageName>
-                    <!-- 镜像标签-->
-                    <imageTags>
-                        <!--可以指定多个标签    建议弄成自增序列或者时间戳类型，用于区分版本-->
-                        <imageTag>${maven.build.timestamp}</imageTag>
-                    </imageTags>
-                    <!-- dockerfile文件路径-->
-                    <dockerDirectory>${basedir}/src/main/docker</dockerDirectory>
-                    <resources>
-                        <resource>
-                            <targetPath>/</targetPath>
-                            <directory>${project.build.directory}</directory>
-                            <include>${project.build.finalName}.jar</include>
-                        </resource>
-                    </resources>
-                </configuration>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <version>${maven-plugin-version}</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>repackage</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
+        <resources>
+            <resource>
+                <directory>src/main/java</directory>
+                <includes>
+                    <include>**/*.*</include>
+                </includes>
+            </resource>
+            <resource>
+                <directory>src/main/resources</directory>
+                <includes>
+                    <include>**/*.*</include>
+                </includes>
+            </resource>
+        </resources>
     </build>
 </project>
