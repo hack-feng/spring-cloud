@@ -1,5 +1,7 @@
 package com.maple.gateway.routes;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,14 +26,17 @@ public class RedisRouteDefinitionRepository implements RouteDefinitionRepository
 
     //路由信息存放在redis的前缀
     private static final String MAPLE_CLOUD_GATEWAY_ROUTES = "maple_cloud_gateway_routes::";
-    private Map<String, RouteDefinition> routeDefinitionMaps = new HashMap<>();
+    private static volatile Map<String, RouteDefinition> routeDefinitionMaps = new HashMap<>();
 
     @Autowired
     private StringRedisTemplate stringRedisTemplate;
 
     @Override
     public Flux<RouteDefinition> getRouteDefinitions() {
-        loadRouteDefinition();
+        log.info(routeDefinitionMaps.toString());
+        if(routeDefinitionMaps == null || routeDefinitionMaps.size() == 0){
+            loadRouteDefinition();
+        }
         return Flux.fromIterable(routeDefinitionMaps.values());
     }
 
@@ -46,25 +51,44 @@ public class RedisRouteDefinitionRepository implements RouteDefinitionRepository
     @Override
     public Mono<Void> delete(Mono<String> routeId) {
         return routeId.flatMap(id -> {
-            if (this.routeDefinitionMaps.containsKey(id)) {
-                this.routeDefinitionMaps.remove(id);
-                return Mono.empty();
-            } else {
-                return Mono.defer(() -> Mono.error(new NotFoundException("RouteDefinition not found: " + routeId)));
-            }
+            routeDefinitionMaps.remove(id);
+            return Mono.empty();
         });
     }
 
-    private void loadRouteDefinition() {
-        //删除时没有触发delete，导致这里需要清空routeDefinitionMaps
-        routeDefinitionMaps.clear();
+    /**
+     * redis topic "saveRouteDefinition" 消费者
+     * 动态新增或修改路由
+     * @param routeDefinitionJson
+     */
+    public void saveRouteDefinition(String routeDefinitionJson){
+        log.info("saveRouteDefinition--------------->" + routeDefinitionJson);
+        try {
+            RouteDefinition routeDefinition = new ObjectMapper().readValue(routeDefinitionJson, RouteDefinition.class);
+            routeDefinitionMaps.put(routeDefinition.getId(), routeDefinition);
+        } catch (IOException e) {
+            log.info("动态修改路由数据转换失败--------------" + e.getMessage());
+        }
+    }
+
+    /**
+     * redis topic "deleteRouteDefinition" 消费者
+     * 动态删除路由
+     * @param routeId
+     */
+    public void deleteRouteDefinition(String routeId){
+        log.info("deleteRouteDefinition----------->" + routeId);
+        routeDefinitionMaps.remove(routeId);
+    }
+
+    /**
+     * 初始化路由中redis的数据
+     */
+    public void loadRouteDefinition(){
         Set<String> gatewayKeys = stringRedisTemplate.keys(MAPLE_CLOUD_GATEWAY_ROUTES + "*");
-//        Collection keys = Collections.singleton(MAPLE_CLOUD_GATEWAY_ROUTES + "*");
-//        List<String> gatewayKeys = stringRedisTemplate.opsForValue().multiGet(keys);
         if (CollectionUtils.isEmpty(gatewayKeys)) {
             return;
         }
-
         List<String> gatewayRoutes = stringRedisTemplate.opsForValue().multiGet(gatewayKeys);
         gatewayRoutes.forEach(value -> {
             try {

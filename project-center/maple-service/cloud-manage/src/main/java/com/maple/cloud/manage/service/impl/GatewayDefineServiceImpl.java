@@ -29,8 +29,13 @@ import java.io.IOException;
 @Service
 public class GatewayDefineServiceImpl extends ServiceImpl<GatewayDefineMapper, GatewayDefine> implements IGatewayDefineService {
 
-    //路由信息存放在redis的前缀
+    // 路由信息存放在redis的前缀
     private static final String MAPLE_CLOUD_GATEWAY_ROUTES = "maple_cloud_gateway_routes::";
+    // 路由信息发布订阅的redis新增修改信道
+    public static final String MAPLE_CLOUD_GATEWAY_ROUTES_UPDATE = "maple_cloud_gateway_routes_update";
+    // 路由信息发布订阅的redis删除信道
+    public static final String MAPLE_CLOUD_GATEWAY_ROUTES_DELETE = "maple_cloud_gateway_routes_delete";
+
     @Autowired
     private GatewayDefineMapper gatewayDefineMapper;
 
@@ -46,6 +51,8 @@ public class GatewayDefineServiceImpl extends ServiceImpl<GatewayDefineMapper, G
             //存放到redis数据库
             stringRedisTemplate.opsForValue().set(MAPLE_CLOUD_GATEWAY_ROUTES + gatewayDefine.getId(),
                     toJson(new GatewayDefineVo(gatewayDefine)));
+
+            stringRedisTemplate.convertAndSend(MAPLE_CLOUD_GATEWAY_ROUTES_UPDATE, toJson(new GatewayDefineVo(gatewayDefine)));
             return true;
         }
         return false;
@@ -61,8 +68,10 @@ public class GatewayDefineServiceImpl extends ServiceImpl<GatewayDefineMapper, G
 
     @Override
     public boolean delete(Integer id) {
+        GatewayDefine define = gatewayDefineMapper.selectById(id);
         gatewayDefineMapper.deleteById(id);
         stringRedisTemplate.delete(MAPLE_CLOUD_GATEWAY_ROUTES + id);
+        stringRedisTemplate.convertAndSend(MAPLE_CLOUD_GATEWAY_ROUTES_DELETE, define.getRouteId());
         return true;
     }
 
@@ -92,6 +101,7 @@ public class GatewayDefineServiceImpl extends ServiceImpl<GatewayDefineMapper, G
             //存放到redis数据库
             stringRedisTemplate.opsForValue().set(MAPLE_CLOUD_GATEWAY_ROUTES + gatewayDefine.getId(),
                     toJson(new GatewayDefineVo(gatewayDefine)));
+            stringRedisTemplate.convertAndSend(MAPLE_CLOUD_GATEWAY_ROUTES_UPDATE, toJson(new GatewayDefineVo(gatewayDefine)));
         }
         return new GatewayDefineVo(gatewayDefine);
     }
