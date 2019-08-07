@@ -1,24 +1,39 @@
 server:
   port: 2000
-
 spring:
+  profiles:
+    active: jdbc
   application:
     name: config-master
   rabbitmq:
-    host: 127.0.0.1
+    host: localhost
     port: 5672
     username: admin
     password: 123456
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/maple?useUnicode=true&characterEncoding=utf8&characterSetResults=utf8&serverTimezone=GMT%2B8
+    username: root
+    password: 123456
   cloud:
     config:
-      profile: dev
-      server:
-        git:
-          uri: https://github.com/hack-feng/maple-cloud-properties
-          search-paths: /
-          username: 
-          password: 
       label: master
+      server:
+        jdbc:
+          sql: SELECT key1, value1 from system_config_properties where APPLICATION=? and PROFILE=? and LABEL=?
+        default-label: master
+      profile: dev
+# 将信息改为保存在mysql数据库中
+#  cloud:
+#    config:
+#      profile: dev
+#      server:
+#        git:
+#          uri: https://github.com/hack-feng/spring-cloud
+#          search-paths: /
+#          username:
+#          password:
+#      label: master
 
 eureka:
   client:
