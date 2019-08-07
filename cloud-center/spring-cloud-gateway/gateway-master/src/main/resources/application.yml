@@ -1,0 +1,43 @@
+spring:
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: false
+          lowerCaseServiceId: true
+      default-filters:
+        # 熔断降级配置
+        - name: Hystrix
+          args:
+            name : fallbackcmd
+            fallbackUri: 'forward:/defaultfallback'
+        - name: RequestRateLimiter
+          args:
+            rate-limiter: "#{@defaultRedisRateLimiter}"  #SPEL表达式去的对应的bean
+            key-resolver: "#{@apiKeyResolver}" #SPEL表达式去的对应的bean
+            redis-rate-limiter.replenishRate: 1
+            redis-rate-limiter.burstCapacity: 5
+        - name: Retry
+          args:
+            retries: 3
+            statuses: BAD_GATEWAY
+
+# hystrix 信号量隔离，3秒后自动超时
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          strategy: SEMAPHORE
+          thread:
+            timeoutInMilliseconds: 3000
+  shareSecurityContext: true
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  endpoint:
+    health:
+      show-details: ALWAYS
