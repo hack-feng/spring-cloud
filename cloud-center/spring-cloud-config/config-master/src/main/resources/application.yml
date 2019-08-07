@@ -5,10 +5,10 @@ spring:
   application:
     name: config-master
   rabbitmq:
-    host: 47.101.181.228
+    host: 127.0.0.1
     port: 5672
     username: admin
-    password: zhangQQ123456
+    password: 123456
   cloud:
     config:
       profile: dev
