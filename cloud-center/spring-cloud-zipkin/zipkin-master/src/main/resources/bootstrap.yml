@@ -1,6 +1,6 @@
 
 server:
-  port: 2222
+  port: 3101
   use-forward-headers: true
   compression:
     enabled: true
@@ -33,3 +33,8 @@ management:
     web:
       server:
         auto-time-requests: false
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:1111/eureka/
