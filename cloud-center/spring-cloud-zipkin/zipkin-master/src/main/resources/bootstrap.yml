@@ -9,7 +9,6 @@ spring:
   application:
     #应用名称
     name: zipkin-server
-  datasource:
 
 #去除控制台异常
 management:
