@@ -9,6 +9,16 @@ spring:
   application:
     #应用名称
     name: zipkin-server
+ 
+spring.main.web-application-type: none
+
+armeria:
+  ports:
+  - port: ${server.port}
+    protocols:
+    - http
+  gracefulShutdownQuietPeriodMillis: -1
+  gracefulShutdownTimeoutMillis: -1
 
 #去除控制台异常
 management:
