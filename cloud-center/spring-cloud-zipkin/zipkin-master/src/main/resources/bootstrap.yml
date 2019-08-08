@@ -1,8 +1,26 @@
+
+server:
+  port: 2222
+  use-forward-headers: true
+  compression:
+    enabled: true
+    mime-types: application/json,application/javascript,text/css,image/svg
 spring:
   application:
-    name: zipkin-master
-  cloud:
-    config:
-      uri: http://localhost:2000
-      profile: dev
-      label: master
+    #应用名称
+    name: zipkin-server
+  datasource:
+
+#去除控制台异常
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  endpoint:
+    health:
+      show-details: always
+  metrics:
+    web:
+      server:
+        auto-time-requests: false

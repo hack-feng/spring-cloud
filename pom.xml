@@ -128,6 +128,7 @@
 		<mybatis-plus.version>3.0.6</mybatis-plus.version>
 		<mysql.connector.version>8.0.16</mysql.connector.version>
 		<global-project.version>0.0.1-SNAPSHOT</global-project.version>
+		<zipkin.version>2.15.0</zipkin.version>
 		<maven.compiler.source>8</maven.compiler.source>
 		<maven.compiler.target>8</maven.compiler.target>
 		<maven.build.timestamp.format>yyyyMMddHHmmss</maven.build.timestamp.format>
