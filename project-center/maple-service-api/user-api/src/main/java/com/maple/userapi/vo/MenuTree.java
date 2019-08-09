@@ -27,7 +27,7 @@ public class MenuTree extends TreeNode {
     /**
      * 菜单权限标识
      */
-    private String resource;
+    private String resCode;
 
     /**
      * 前端URL
@@ -50,12 +50,7 @@ public class MenuTree extends TreeNode {
     private Integer sort;
 
     /**
-     * 0-开启，1- 关闭
-     */
-    private String keepAlive;
-
-    /**
-     * 菜单类型 （0菜单 1按钮）
+     * 菜单类型 （1菜单 2按钮）
      */
     private String type;
 
@@ -69,26 +64,6 @@ public class MenuTree extends TreeNode {
      */
     private Date updateTime;
 
-    /**
-     * 逻辑删除标记(0--正常 1--删除)
-     */
-    private String delFlag;
-    /**
-     * 是否隐藏(0--显示  1--隐藏)
-     */
-    private boolean hideInMenu;
-    /**
-     * 是否总显示
-     */
-    private boolean showAlways;
-    /**
-     * 是否缓存(0--否 1--是)
-     */
-    private boolean notCache;
-    /**
-     * 菜单权限数组
-     */
-    private String access;
     /**
      * 用于跳转到外部连接
      */
@@ -118,30 +93,17 @@ public class MenuTree extends TreeNode {
         this.parentId = resource.getParentId();
         this.icon = resource.getIcon();
         this.name = resource.getResName();
-        this.resource = resource.getResCode();
+        this.resCode = resource.getResCode();
         this.path = resource.getResUrl();
         this.component = resource.getComponent();
         this.type = Convert.toStr(resource.getResType());
         this.sort = resource.getSortNum();
-//        this.keepAlive = resource.getKeepAlive();
         this.title = resource.getResName();
-//        this.showAlways = resource.isShowAlways();
         this.href = resource.getResUrl();
-//        this.hideInMenu = resource.isHideInMenu();
-//        this.notCache = resource.isNotCache();
-        this.delFlag = Convert.toStr(resource.getIsDelete());
-//        this.access = resource.getAccess();
 
         this.meta = new Meta();
         this.meta.setTitle(resource.getResName());
-//        this.meta.setShowAlways(resource.isShowAlways());
-//        this.meta.setHideInMenu(resource.isHideInMenu());
         this.meta.setHref(resource.getResUrl());
         this.meta.setIcon(resource.getIcon());
-//        this.meta.setNotCache(resource.isNotCache());
-//        if(StrUtil.isNotEmpty(resource.getAccess())) {
-//            String access = resource.getAccess();
-//            this.meta.setAccess(Arrays.asList(access.split(",")));
-//        }
     }
 }
