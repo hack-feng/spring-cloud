@@ -1,0 +1,8 @@
+spring:
+  application:
+    name: cloud-manage
+  cloud:
+    config:
+      uri: http://127.0.0.1:2000
+      profile: dev
+      label: master
