@@ -33,9 +33,6 @@ import java.util.List;
 @RefreshScope
 public class BaseUserController {
 
-    @Value("${test}")
-    private String test;
-
     @Autowired
     private IBaseUserService userService;
 
@@ -57,7 +54,6 @@ public class BaseUserController {
     @HystrixCommand(fallbackMethod = "baseHys")
     @GetMapping(value = "getList")
     public JSONObject getList(){
-        System.out.println(test);
         JSONObject result = new JSONObject();
         List<BaseUser> list = userService.list(null);
         result.put("code", 200);
@@ -79,7 +75,6 @@ public class BaseUserController {
         BaseUser user = null;
         try {
             user = userService.getById(1);
-            System.out.println(test);
         } catch (Exception e) {
             e.printStackTrace();
         }

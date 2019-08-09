@@ -2,7 +2,7 @@ package com.maple.cloud.manage.service.impl;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.maple.cloud.manage.dao.GatewayDefineMapper;
+import com.maple.cloud.manage.mapper.GatewayDefineMapper;
 import com.maple.cloud.manage.service.IGatewayDefineService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.maple.system.api.bean.GatewayDefine;

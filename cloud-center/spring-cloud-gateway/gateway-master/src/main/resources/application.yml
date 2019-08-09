@@ -15,8 +15,8 @@ spring:
           args:
             rate-limiter: "#{@defaultRedisRateLimiter}"  #SPEL表达式去的对应的bean
             key-resolver: "#{@apiKeyResolver}" #SPEL表达式去的对应的bean
-            redis-rate-limiter.replenishRate: 1
-            redis-rate-limiter.burstCapacity: 5
+            redis-rate-limiter.replenishRate: 10
+            redis-rate-limiter.burstCapacity: 20
         - name: Retry
           args:
             retries: 3

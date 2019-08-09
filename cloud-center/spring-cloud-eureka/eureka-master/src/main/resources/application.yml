@@ -10,7 +10,8 @@ spring:
 # eureka的配置信息
 eureka:
   instance:
-    hostname: localhost
+    preferIpAddress: true
+    instance-id: ${spring.cloud.client.ip-address}:${server.port}
   client:
     fetch-registry: false
     register-with-eureka: false

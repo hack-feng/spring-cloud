@@ -159,7 +159,7 @@ public class MybatisPlusGenerator {
                                 .setController("controller")
                                 //设置实体类信息
                                 .setEntity("bean")
-                                .setMapper("dao")
+                                .setMapper("mapper")
                                 .setXml("mapper")
                 )
                 //设置自定义模板
