@@ -1,5 +1,7 @@
 package com.maple.user.service;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.maple.userapi.bean.BaseUser;
 import com.maple.userapi.vo.UserInfo;
@@ -17,4 +19,6 @@ public interface IBaseUserService extends IService<BaseUser> {
     BaseUser userLogin(String username, String password);
 
     UserInfo getUserInfo(BaseUser user);
+
+    IPage getUserPage(Page page, BaseUser user);
 }

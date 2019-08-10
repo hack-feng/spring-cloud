@@ -3,6 +3,7 @@ package com.maple.user.controller;
 
 import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.maple.common.core.util.R;
 import com.maple.common.security.util.SecurityUtils;
 import com.maple.user.service.IBaseUserService;
@@ -88,6 +89,19 @@ public class BaseUserController {
         a.put("code", 500);
         a.put("data", "BaseUserController的线路中断");
         return a;
+    }
+
+
+    /**
+     * 分页查询用户
+     *
+     * @param page    参数集
+     * @param user 查询参数列表
+     * @return 用户集合
+     */
+    @GetMapping("/page")
+    public R getUserPage(Page page, BaseUser user) {
+        return R.ok(userService.getUserPage(page, user));
     }
 
 }

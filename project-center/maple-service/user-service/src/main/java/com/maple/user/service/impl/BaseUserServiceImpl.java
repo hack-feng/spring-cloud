@@ -3,6 +3,9 @@ package com.maple.user.service.impl;
 import cn.hutool.core.util.ArrayUtil;
 import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.maple.common.core.util.R;
 import com.maple.user.dao.BaseResourcesMapper;
 import com.maple.user.dao.BaseRoleMapper;
 import com.maple.user.dao.BaseUserMapper;
@@ -86,5 +89,10 @@ public class BaseUserServiceImpl extends ServiceImpl<BaseUserMapper, BaseUser> i
         }
 
         return userInfo;
+    }
+
+    @Override
+    public IPage getUserPage(Page page, BaseUser user) {
+        return userMapper.getUserPage(page,user);
     }
 }

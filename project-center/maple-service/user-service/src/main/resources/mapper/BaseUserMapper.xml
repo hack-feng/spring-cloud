@@ -24,7 +24,27 @@
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        id, nick_name, user_name, pass_word, phone, email_status, email, qq_status, qq_link, wx_status, wx_link, create_date, modify_date, is_delete, is_lock, content
+        id, nick_name, user_name, phone, email_status, email, qq_status, qq_link, wx_status, wx_link, create_date, modify_date, is_delete, is_lock, content
     </sql>
+    <select id="getUserPage" resultType="com.maple.userapi.bean.BaseUser">
+        select <include refid="Base_Column_List"></include>
+        from base_user
+        <where>
+            <if test="user != null">
+                <if test="user.nickName != null and user.nickName != ''">
+                    and nick_name like concat('%',#{user.nickName},'%')
+                </if>
+                <if test="user.userName != null and user.userName != ''">
+                    and user_name like concat('%',#{user.userName},'%')
+                </if>
+                <if test="user.phone != null and user.phone != ''">
+                    and phone like concat('%',#{user.phone},'%')
+                </if>
+                <if test="user.isDelete != null and user.isDelete != ''">
+                    and is_delete = #{user.isDelete}
+                </if>
+            </if>
+        </where>
+    </select>
 
 </mapper>
