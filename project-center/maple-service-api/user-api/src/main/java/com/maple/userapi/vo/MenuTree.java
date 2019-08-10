@@ -6,7 +6,6 @@ import com.maple.userapi.bean.BaseResources;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
-import java.util.Arrays;
 import java.util.Date;
 
 
@@ -64,11 +63,6 @@ public class MenuTree extends TreeNode {
      */
     private Date updateTime;
 
-    /**
-     * 用于跳转到外部连接
-     */
-    private String href;
-
     private Meta meta;
 
     public MenuTree() {
@@ -94,16 +88,20 @@ public class MenuTree extends TreeNode {
         this.icon = resource.getIcon();
         this.name = resource.getResName();
         this.resCode = resource.getResCode();
-        this.path = resource.getResUrl();
+        this.path = resource.getPath();
+
         this.component = resource.getComponent();
         this.type = Convert.toStr(resource.getResType());
         this.sort = resource.getSortNum();
         this.title = resource.getResName();
-        this.href = resource.getResUrl();
 
         this.meta = new Meta();
         this.meta.setTitle(resource.getResName());
-        this.meta.setHref(resource.getResUrl());
+        if(StrUtil.isNotEmpty(resource.getComponent()) && resource.getComponent().startsWith("http")) {
+            this.meta.setHref(resource.getComponent());
+        }
         this.meta.setIcon(resource.getIcon());
     }
+
+
 }

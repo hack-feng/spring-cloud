@@ -84,7 +84,7 @@ public class BaseResourcesController {
         }
         res.setCreateDate(new Date());
         res.setModifyDate(new Date());
-        return R.ok(baseResourcesService.save(res));
+        return R.ok(baseResourcesService.save(res), "操作成功");
     }
 
     /**
@@ -97,7 +97,7 @@ public class BaseResourcesController {
             return R.failed("获取资源信息失败");
         }
         res.setModifyDate(new Date());
-        return R.ok(baseResourcesService.updateById(res));
+        return R.ok(baseResourcesService.updateById(res), "操作成功");
     }
 
 }
