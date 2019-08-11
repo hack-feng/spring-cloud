@@ -1,28 +1,10 @@
-server:
-  port: 3000
-
-
 spring:
   application:
     name: user-auth
-  # 配置中心
   cloud:
     config:
-      fail-fast: true
-      name: ${spring.application.name}
-      profile: ${spring.profiles.active}
-      discovery:
-        enabled: true
-        service-id: config-master
+      uri: http://localhost:2000
+      profile: dev
+      label: master
   main:
     allow-bean-definition-overriding: true
-  profiles:
-    active: dev
-
-# 注册中心配置
-eureka:
-  instance:
-    prefer-ip-address: true
-  client:
-    service-url:
-      defaultZone: http://localhost:1111/eureka/
