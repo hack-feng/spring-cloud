@@ -19,14 +19,22 @@
 ### cloud-center(spring-cloud组件中心)
 #### spring-cloud-config(配置中心)
 * config-master(已启用，本项目的配置中心)
+
 #### spring-cloud-eureka(注册中心)
 * eureka-master(已启用，本项目的注册中心)
 * eureka-slave(未启用，配置高可用注册中心时使用)
 * eureka-backup(未启用，配置高可用注册中心时使用)
-#### spring-cloud-zuul(服务网关)
-* zuul-demo(已启用，本项目的网关配置)
+
+eureka使用手册：https://github.com/hack-feng/spring-cloud/blob/master/cloud-center/spring-cloud-eureka/readme.md
+
+#### spring-cloud-gateway(服务网关)
+* gateway-master(已启用，本项目的网关配置)
+
+gateway手册：https://github.com/hack-feng/spring-cloud/blob/master/cloud-center/spring-cloud-gateway/gateway-master/readme.md
+
 #### spring-cloud-zipkin(链路跟踪)
 * zipkin-master(已启用，本项目的链路跟踪)
+
 #### spring-cloud-admin(spring boot admin 服务监控)
 * admin-server(已启用，本项目的服务监控)
   
