@@ -5,16 +5,11 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.maple.cloud.manage.service.IMicroservicesService;
 import com.maple.common.core.util.R;
 import com.maple.system.api.bean.Microservices;
-import com.maple.system.api.ro.GatewayDefineRo;
 import com.maple.system.api.ro.MicroservicesRo;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
-import org.springframework.stereotype.Controller;
-
-import java.util.Map;
 
 /**
  * <p>
