@@ -30,5 +30,16 @@
             AND r.status = 0
             AND ur.user_id = #{id}
     </select>
+    <select id="getRolePage" resultType="com.maple.userapi.bean.BaseRole">
+        select <include refid="Base_Column_List"></include>
+        from base_role
+        <where>
+            <if test="role != null">
+                <if test="role.roleName != null and role.roleName != ''">
+                    and role_name like concat('%',#{role.roleName},'%')
+                </if>
+            </if>
+        </where>
+    </select>
 
 </mapper>

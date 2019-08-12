@@ -1,5 +1,7 @@
 package com.maple.user.service;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.maple.userapi.bean.BaseRole;
 
@@ -13,4 +15,5 @@ import com.maple.userapi.bean.BaseRole;
  */
 public interface IBaseRoleService extends IService<BaseRole> {
 
+    IPage getRolePage(Page page, BaseRole role);
 }

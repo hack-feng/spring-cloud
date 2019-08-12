@@ -1,9 +1,12 @@
 package com.maple.user.service.impl;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.maple.user.dao.BaseRoleMapper;
 import com.maple.user.service.IBaseRoleService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.maple.userapi.bean.BaseRole;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
@@ -17,4 +20,11 @@ import org.springframework.stereotype.Service;
 @Service
 public class BaseRoleServiceImpl extends ServiceImpl<BaseRoleMapper, BaseRole> implements IBaseRoleService {
 
+    @Autowired
+    private BaseRoleMapper baseRoleMapper;
+
+    @Override
+    public IPage getRolePage(Page page, BaseRole role) {
+        return baseRoleMapper.getRolePage(page,role);
+    }
 }
