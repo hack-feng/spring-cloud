@@ -7,7 +7,6 @@ import com.baomidou.mybatisplus.core.toolkit.ExceptionUtils;
 import com.baomidou.mybatisplus.core.toolkit.ReflectionKit;
 import com.baomidou.mybatisplus.core.toolkit.sql.SqlHelper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.maple.cloud.manage.mapper.ConfigPropertiesMapper;
 import com.maple.cloud.manage.mapper.InfoMapper;
 import com.maple.cloud.manage.mapper.MicroservicesMapper;
 import com.maple.cloud.manage.service.IMicroservicesService;
@@ -41,8 +40,6 @@ public class MicroservicesServiceImpl extends ServiceImpl<MicroservicesMapper, M
     private MicroservicesMapper microservicesMapper;
     @Autowired
     private InfoMapper infoMapper;
-    @Autowired
-    private ConfigPropertiesMapper configPropertiesMapper;
 
     @Override
     public IPage<Microservices> getList() {
