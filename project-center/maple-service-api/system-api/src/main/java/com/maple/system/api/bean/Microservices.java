@@ -1,5 +1,7 @@
 package com.maple.system.api.bean;
 
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
 import java.util.Date;
@@ -23,12 +25,13 @@ import lombok.experimental.Accessors;
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
 @TableName("system_microservices")
-@ApiModel(value="Microservices对象", description="")
+@ApiModel(value="Microservices对象", description="微服务备案")
 public class Microservices extends Model<Microservices> {
 
     private static final long serialVersionUID = 1L;
 
     @ApiModelProperty(value = "主键id")
+    @TableId(value = "id", type = IdType.AUTO)
     private Integer id;
 
     @ApiModelProperty(value = "微服务名称")
@@ -38,6 +41,10 @@ public class Microservices extends Model<Microservices> {
     @ApiModelProperty(value = "微服务部署机器ip")
     @TableField("service_ip")
     private String serviceIp;
+
+    @ApiModelProperty(value = "微服务端口号")
+    @TableField("service_port")
+    private String servicePort;
 
     @ApiModelProperty(value = "是否启动")
     @TableField("is_start")
@@ -51,28 +58,28 @@ public class Microservices extends Model<Microservices> {
     private Integer isCreateConfig;
 
     @ApiModelProperty(value = "是否使用数据库")
-    @TableField("is_use_msyql")
-    private Integer isUseMsyql;
+    @TableField("is_use_mysql")
+    private Integer isUseMysql;
 
     @ApiModelProperty(value = "是否使用redis")
-    @TableField("is_user_redis")
-    private Integer isUserRedis;
+    @TableField("is_use_redis")
+    private Integer isUseRedis;
 
-    @ApiModelProperty(value = "是否使用redis")
+    @ApiModelProperty(value = "是否使用Rabbitmq")
     @TableField("is_use_rabbitmq")
     private Integer isUseRabbitmq;
 
     @ApiModelProperty(value = "mysql信息")
     @TableField("mysql_info")
-    private String mysqlInfo;
+    private Integer mysqlInfo;
 
     @ApiModelProperty(value = "redis信息")
     @TableField("redis_info")
-    private String redisInfo;
+    private Integer redisInfo;
 
     @ApiModelProperty(value = "rabbitmq信息")
     @TableField("rabbitmq_info")
-    private String rabbitmqInfo;
+    private Integer rabbitmqInfo;
 
     @ApiModelProperty(value = "创建时间")
     @TableField("create_date")

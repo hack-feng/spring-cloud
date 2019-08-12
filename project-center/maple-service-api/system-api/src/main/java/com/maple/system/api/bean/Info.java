@@ -45,6 +45,10 @@ public class Info extends Model<Info> {
     @TableField("pass_word")
     private String passWord;
 
+    @ApiModelProperty(value = "数据库名称")
+    @TableField("data_name")
+    private String dataName;
+
     @ApiModelProperty(value = "信息类型（mysql ; redis；rabbitmq）")
     @TableField("info_type")
     private String infoType;
