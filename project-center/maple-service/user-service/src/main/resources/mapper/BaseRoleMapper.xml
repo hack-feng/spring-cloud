@@ -18,6 +18,7 @@
     <sql id="Base_Column_List">
         id, role_name, role_code, create_date, modify_date, is_delete, status, remark
     </sql>
+
     <select id="listRolesByUserId" resultType="com.maple.userapi.bean.BaseRole">
         SELECT
             r.*
@@ -41,5 +42,11 @@
             </if>
         </where>
     </select>
-
+    <delete id="deleteByIds">
+      delete from base_role
+      where id in
+      <foreach collection="idArr" item="id" open="(" separator="," close=")">
+        #{id}
+      </foreach>
+    </delete>
 </mapper>

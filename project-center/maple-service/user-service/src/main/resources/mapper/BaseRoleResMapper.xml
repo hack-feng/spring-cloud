@@ -14,5 +14,12 @@
     <sql id="Base_Column_List">
         id, role_id, res_id, create_date
     </sql>
+    <delete id="deleteByRoleId">
+        delete from base_role_res
+        where role_id in
+        <foreach collection="idArr" item="id" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
 
 </mapper>

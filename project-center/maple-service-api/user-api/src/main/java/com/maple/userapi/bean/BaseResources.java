@@ -8,6 +8,7 @@ import com.baomidou.mybatisplus.extension.activerecord.Model;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -21,6 +22,7 @@ import java.util.Date;
  * @since 2019-07-09
  */
 @Data
+@EqualsAndHashCode(callSuper=false)
 @TableName("base_resources")
 @ApiModel(value="BaseResources对象", description="基础信息-资源表")
 public class BaseResources extends Model<BaseResources> {

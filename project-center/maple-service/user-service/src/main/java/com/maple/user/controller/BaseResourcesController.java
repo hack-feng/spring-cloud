@@ -2,19 +2,19 @@ package com.maple.user.controller;
 
 
 import cn.hutool.core.convert.Convert;
+import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.maple.common.core.constant.CommonConstants;
 import com.maple.common.core.util.R;
 import com.maple.common.security.util.SecurityUtils;
 import com.maple.user.service.IBaseResourcesService;
+import com.maple.user.service.IBaseRoleResService;
 import com.maple.userapi.bean.BaseResources;
+import com.maple.userapi.bean.BaseRoleRes;
 import com.maple.userapi.util.TreeUtil;
 import com.maple.userapi.vo.MenuTree;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -33,6 +33,8 @@ public class BaseResourcesController {
 
     @Autowired
     private IBaseResourcesService baseResourcesService;
+    @Autowired
+    private IBaseRoleResService roleResService;
 
     /**
      * 返回当前用户的树形菜单集合
@@ -75,6 +77,7 @@ public class BaseResourcesController {
 
     /**
      * 添加
+     * @author zhua
      * @return
      */
     @PostMapping("addMenu")
@@ -89,6 +92,7 @@ public class BaseResourcesController {
 
     /**
      * 修改
+     * @author zhua
      * @return
      */
     @PostMapping("updateMenu")
@@ -98,6 +102,58 @@ public class BaseResourcesController {
         }
         res.setModifyDate(new Date());
         return R.ok(baseResourcesService.updateById(res), "操作成功");
+    }
+
+    /**
+     * 删除菜单
+     * @param id
+     * @author zhua
+     * @return
+     */
+    @DeleteMapping("/delete/{id}")
+    public R delete(@PathVariable("id") String id) {
+        if(id == null) {
+            return R.failed("获取菜单信息失败");
+        }
+        return R.ok(baseResourcesService.removeById(id));
+    }
+
+    /**
+     * 获取权限菜单树
+     * @param roleId
+     * @author zhua
+     * @return
+     */
+    @GetMapping("getAuthTree")
+    public R getAuthTree(String roleId) {
+        QueryWrapper<BaseResources> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("is_delete",CommonConstants.STATUS_NORMAL);
+        List<BaseResources> menuList = baseResourcesService.list(queryWrapper);
+        if(menuList == null || menuList.size() == 0) {
+            return R.ok(null,"无菜单树");
+        }
+
+        List<MenuTree> menuTreeList = menuList.stream()
+                .map(MenuTree::new)
+                .sorted(Comparator.comparingInt(MenuTree::getSort))
+                .collect(Collectors.toList());
+
+        if(StrUtil.isNotEmpty(roleId)) {
+            QueryWrapper<BaseRoleRes> resQueryWrapper = new QueryWrapper<>();
+            resQueryWrapper.eq("role_id",roleId);
+            List<BaseRoleRes> roleResList = roleResService.list(resQueryWrapper);
+            if(roleResList != null && roleResList.size() > 0) {
+                menuTreeList.forEach(menuTree -> {
+                    for(BaseRoleRes roleRes : roleResList) {
+                        if(roleRes.getResId() == menuTree.getId()) {
+                            menuTree.setChecked(true);
+                            continue;
+                        }
+                    }
+                });
+            }
+        }
+        return R.ok(TreeUtil.buildByRecursive(menuTreeList, -1));
     }
 
 }

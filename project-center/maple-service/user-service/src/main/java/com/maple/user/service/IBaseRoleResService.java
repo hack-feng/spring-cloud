@@ -13,4 +13,5 @@ import com.maple.userapi.bean.BaseRoleRes;
  */
 public interface IBaseRoleResService extends IService<BaseRoleRes> {
 
+    String updateRoleAuth(Integer roleId, String resIds);
 }

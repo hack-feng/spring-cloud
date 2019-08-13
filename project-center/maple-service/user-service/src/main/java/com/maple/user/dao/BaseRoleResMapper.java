@@ -3,6 +3,7 @@ package com.maple.user.dao;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.maple.userapi.bean.BaseRoleRes;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 /**
  * <p>
@@ -15,4 +16,5 @@ import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface BaseRoleResMapper extends BaseMapper<BaseRoleRes> {
 
+    void deleteByRoleId(@Param("idArr") String[] idArr);
 }

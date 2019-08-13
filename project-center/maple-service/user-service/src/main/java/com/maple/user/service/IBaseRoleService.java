@@ -16,4 +16,6 @@ import com.maple.userapi.bean.BaseRole;
 public interface IBaseRoleService extends IService<BaseRole> {
 
     IPage getRolePage(Page page, BaseRole role);
+
+    String deleteByIds(String ids);
 }
