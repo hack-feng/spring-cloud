@@ -5,6 +5,7 @@ import com.maple.cloud.manage.service.IGatewayDefineService;
 import com.maple.common.core.util.R;
 import com.maple.system.api.bean.GatewayDefine;
 import com.maple.system.api.ro.GatewayDefineRo;
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
@@ -21,6 +22,7 @@ import javax.validation.Valid;
  * @author maple
  * @since 2019-07-30
  */
+@Api(value = "动态路由配置模块")
 @RestController
 @RequestMapping("/gateway/define")
 public class GatewayDefineController {

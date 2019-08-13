@@ -21,4 +21,8 @@ public interface IMicroservicesService extends IService<Microservices> {
     IPage<Microservices> getList();
 
     R add(Microservices microservices);
+
+    R update(Microservices microservices);
+
+    R delete(Integer id);
 }

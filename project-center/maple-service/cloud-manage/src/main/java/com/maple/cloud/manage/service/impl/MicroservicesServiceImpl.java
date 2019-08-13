@@ -7,6 +7,7 @@ import com.baomidou.mybatisplus.core.toolkit.ExceptionUtils;
 import com.baomidou.mybatisplus.core.toolkit.ReflectionKit;
 import com.baomidou.mybatisplus.core.toolkit.sql.SqlHelper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.maple.cloud.manage.mapper.ConfigPropertiesMapper;
 import com.maple.cloud.manage.mapper.InfoMapper;
 import com.maple.cloud.manage.mapper.MicroservicesMapper;
 import com.maple.cloud.manage.service.IMicroservicesService;
@@ -40,6 +41,8 @@ public class MicroservicesServiceImpl extends ServiceImpl<MicroservicesMapper, M
     private MicroservicesMapper microservicesMapper;
     @Autowired
     private InfoMapper infoMapper;
+    @Autowired
+    private ConfigPropertiesMapper configPropertiesMapper;
 
     @Override
     public IPage<Microservices> getList() {
@@ -139,12 +142,25 @@ public class MicroservicesServiceImpl extends ServiceImpl<MicroservicesMapper, M
             }
         }
         int count = microservicesMapper.insert(microservices);
-        if(count > 0){
-            return R.ok();
-        }
-        return R.failed("添加为微服务失败，请重试");
+        return R.isOk(count > 0, "添加微服务");
     }
 
+    @Override
+    public R update(Microservices microservices) {
+        int count = microservicesMapper.updateById(microservices);
+        return R.isOk(count > 0, "修改微服务");
+    }
+
+    @Override
+    @Transactional
+    public R delete(Integer id) {
+        Microservices mic = microservicesMapper.selectById(id);
+        // 删除config配置文件
+        configPropertiesMapper.delete(new QueryWrapper<ConfigProperties>().eq("application", mic.getServiceName()));
+        // 删除微服务
+        int count = microservicesMapper.deleteById(id);
+        return R.isOk(count > 0, "删除微服务");
+    }
 
     private ConfigProperties createBaseConfig(String remark, ConfigProperties configFlag, String key, String value, int sort) {
         ConfigProperties config = new ConfigProperties();

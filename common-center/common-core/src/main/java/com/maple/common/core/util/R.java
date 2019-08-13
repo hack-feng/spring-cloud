@@ -64,7 +64,7 @@ public class R<T> implements Serializable {
 		if(isOk)
 			return restResult(null, CommonConstants.SUCCESS, msg + "成功");
 		else
-			return restResult(null, CommonConstants.FAIL, msg + "失败");
+			return restResult(null, CommonConstants.FAIL, msg + "失败, 请重试");
 	}
 
 	private static <T> R<T> restResult(T data, int code, String msg) {

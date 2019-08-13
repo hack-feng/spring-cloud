@@ -20,8 +20,6 @@ import java.util.Date;
 @ApiModel(value="Microservices对象", description="微服务备案")
 public class MicroservicesVo{
 
-    private static final long serialVersionUID = 1L;
-
     @ApiModelProperty(value = "主键id")
     private Integer id;
 
