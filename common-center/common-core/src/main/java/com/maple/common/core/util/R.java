@@ -1,5 +1,6 @@
 package com.maple.common.core.util;
 
+import cn.hutool.core.util.StrUtil;
 import com.maple.common.core.constant.CommonConstants;
 import lombok.*;
 import lombok.experimental.Accessors;
@@ -72,7 +73,7 @@ public class R<T> implements Serializable {
         R<T> apiResult = new R<>();
         apiResult.setCode(code);
         apiResult.setData(data);
-        apiResult.setMsg(msg);
+        apiResult.setMsg(StrUtil.isEmpty(msg) ? "操作成功" : msg);
         return apiResult;
     }
 }
