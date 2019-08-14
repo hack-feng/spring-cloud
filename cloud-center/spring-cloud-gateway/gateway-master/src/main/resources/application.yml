@@ -22,7 +22,7 @@ spring:
             retries: 3
             statuses: BAD_GATEWAY
 
-# hystrix 信号量隔离，3秒后自动超时
+# hystrix 信号量隔离，5秒后自动超时
 hystrix:
   command:
     default:
@@ -30,7 +30,7 @@ hystrix:
         isolation:
           strategy: SEMAPHORE
           thread:
-            timeoutInMilliseconds: 3000
+            timeoutInMilliseconds: 5000
   shareSecurityContext: true
 
 management:
