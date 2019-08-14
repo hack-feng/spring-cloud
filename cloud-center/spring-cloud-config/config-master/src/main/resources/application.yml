@@ -1,20 +1,21 @@
 server:
   port: 2000
+
 spring:
   profiles:
     active: jdbc
   application:
     name: config-master
   rabbitmq:
-    host: localhost
+    host: 47.101.181.228
     port: 5672
     username: admin
-    password: 123456
+    password: zhangQQ123456
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/maple?useUnicode=true&characterEncoding=utf8&characterSetResults=utf8&serverTimezone=GMT%2B8
+    url: jdbc:mysql://47.101.181.228:3306/maple?useUnicode=true&characterEncoding=utf8&characterSetResults=utf8&serverTimezone=GMT%2B8
     username: root
-    password: 123456
+    password: zhangQQ94264
   cloud:
     config:
       label: master
@@ -38,4 +39,4 @@ spring:
 eureka:
   client:
     service-url:
-      defaultZone: http://localhost:1111/eureka/
+      defaultZone: http://47.101.181.228:1111/eureka/

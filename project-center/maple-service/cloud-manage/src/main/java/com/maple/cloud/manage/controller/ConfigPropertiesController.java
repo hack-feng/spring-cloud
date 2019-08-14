@@ -31,6 +31,7 @@ public class ConfigPropertiesController {
     @Autowired
     private IConfigPropertiesService configPropertiesService;
 
+    @ApiOperation(value = "查询微服务列表", notes = "分页查询微服务的列表")
     @GetMapping("/getList")
     public R getList(ConfigPropertiesRo configPropertiesRo) {
         if (StringUtils.isEmpty(configPropertiesRo.getApplication())) {

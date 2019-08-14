@@ -32,6 +32,7 @@ public class MicroservicesController {
     @Autowired
     private IMicroservicesService microservicesService;
 
+    @ApiOperation(value = "查询微服务列表", notes = "分页查询微服务的列表")
     @GetMapping("/getList")
     public R getList(Page page) {
         IPage<Microservices> result = microservicesService.getList();
