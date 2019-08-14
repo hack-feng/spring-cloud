@@ -14,6 +14,7 @@ import reactor.core.publisher.Mono;
 
 /**
  * 解决前后端分离项目网关跨域问题
+ *
  * @author Maple
  */
 public class RouteConfiguration {

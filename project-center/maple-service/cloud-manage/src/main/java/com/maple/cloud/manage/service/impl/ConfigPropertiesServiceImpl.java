@@ -31,17 +31,17 @@ public class ConfigPropertiesServiceImpl extends ServiceImpl<ConfigPropertiesMap
     public List<ConfigProperties> getList(ConfigProperties configProperties) {
         Class cls = configProperties.getClass();
         Map<String, Object> map = new HashMap<>();
-        if(configProperties.getApplication() != null){
+        if (configProperties.getApplication() != null) {
             map.put("application", configProperties.getApplication());
-        }else{
+        } else {
             map.put("application", "不存在");
         }
 
-        if(configProperties.getKey1() != null){
+        if (configProperties.getKey1() != null) {
             map.put("key1", configProperties.getKey1());
         }
 
-        if(configProperties.getValue1() != null){
+        if (configProperties.getValue1() != null) {
             map.put("value1", configProperties.getValue1());
         }
         return configPropertiesMapper.selectByMap(map);
@@ -52,10 +52,10 @@ public class ConfigPropertiesServiceImpl extends ServiceImpl<ConfigPropertiesMap
         int configCount = configProperties.selectCount(new QueryWrapper<ConfigProperties>()
                 .eq("application", configProperties.getApplication())
                 .eq("key1", configProperties.getKey1()));
-        if(configCount > 0){
+        if (configCount > 0) {
             return R.failed("该配置已存在，不能重复添加");
         }
-        int count =  configPropertiesMapper.insert(configProperties);
+        int count = configPropertiesMapper.insert(configProperties);
         return R.isOk(count > 0, "新增配置信息");
     }
 
@@ -65,10 +65,10 @@ public class ConfigPropertiesServiceImpl extends ServiceImpl<ConfigPropertiesMap
                 .ne("id", configProperties.getId())
                 .eq("application", configProperties.getApplication())
                 .eq("key1", configProperties.getKey1()));
-        if(configCount > 0){
+        if (configCount > 0) {
             return R.failed("该配置已存在，不能重复添加");
         }
-        int count =  configPropertiesMapper.updateById(configProperties);
+        int count = configPropertiesMapper.updateById(configProperties);
         return R.isOk(count > 0, "修改配置信息");
     }
 

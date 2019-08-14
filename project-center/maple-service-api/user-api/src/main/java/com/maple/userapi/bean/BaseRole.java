@@ -20,7 +20,7 @@ import java.util.Date;
  * @since 2019-07-09
  */
 @TableName("base_role")
-@ApiModel(value="BaseRole对象", description="基础信息-用户角色表")
+@ApiModel(value = "BaseRole对象", description = "基础信息-用户角色表")
 public class BaseRole extends Model<BaseRole> {
 
     private static final long serialVersionUID = 1L;
@@ -120,14 +120,14 @@ public class BaseRole extends Model<BaseRole> {
     @Override
     public String toString() {
         return "BaseRole{" +
-        ", id=" + id +
-        ", roleName=" + roleName +
-        ", createDate=" + createDate +
-        ", modifyDate=" + modifyDate +
-        ", isDelete=" + isDelete +
-        ", status=" + status +
-        ", remark=" + remark +
-        "}";
+                ", id=" + id +
+                ", roleName=" + roleName +
+                ", createDate=" + createDate +
+                ", modifyDate=" + modifyDate +
+                ", isDelete=" + isDelete +
+                ", status=" + status +
+                ", remark=" + remark +
+                "}";
     }
 
     public String getRoleCode() {

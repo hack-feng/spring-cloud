@@ -4,18 +4,18 @@
 
     <!-- 通用查询映射结果 -->
     <resultMap id="BaseResultMap" type="com.maple.system.api.bean.Info">
-        <result column="id" property="id" />
-        <result column="host" property="host" />
-        <result column="port" property="port" />
-        <result column="user_name" property="userName" />
-        <result column="pass_word" property="passWord" />
-        <result column="info_type" property="infoType" />
-        <result column="create_date" property="createDate" />
-        <result column="modify_date" property="modifyDate" />
-        <result column="create_id" property="createId" />
-        <result column="modify_id" property="modifyId" />
-        <result column="remark" property="remark" />
-        <result column="status" property="status" />
+        <result column="id" property="id"/>
+        <result column="host" property="host"/>
+        <result column="port" property="port"/>
+        <result column="user_name" property="userName"/>
+        <result column="pass_word" property="passWord"/>
+        <result column="info_type" property="infoType"/>
+        <result column="create_date" property="createDate"/>
+        <result column="modify_date" property="modifyDate"/>
+        <result column="create_id" property="createId"/>
+        <result column="modify_id" property="modifyId"/>
+        <result column="remark" property="remark"/>
+        <result column="status" property="status"/>
     </resultMap>
 
     <!-- 通用查询结果列 -->

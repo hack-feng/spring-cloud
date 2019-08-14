@@ -27,7 +27,7 @@ import java.util.Date;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-@ApiModel(value="ConfigProperties对象", description="系统配置-config动态配置")
+@ApiModel(value = "ConfigProperties对象", description = "系统配置-config动态配置")
 public class ConfigPropertiesRo extends BaseRo<ConfigProperties> {
 
     @ApiModelProperty(value = "配置中key的值")

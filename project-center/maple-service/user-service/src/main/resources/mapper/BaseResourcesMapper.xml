@@ -4,54 +4,55 @@
 
     <!-- 通用查询映射结果 -->
     <resultMap id="BaseResultMap" type="com.maple.userapi.bean.BaseResources">
-        <id column="id" property="id" />
-        <result column="parent_id" property="parentId" />
-        <result column="res_name" property="resName" />
-        <result column="res_code" property="resCode" />
-        <result column="res_desc" property="resDesc" />
-        <result column="res_type" property="resType" />
-        <result column="icon" property="icon" />
-        <result column="sort_num" property="sortNum" />
-        <result column="res_url" property="resUrl" />
-        <result column="component" property="component" />
-        <result column="create_date" property="createDate" />
-        <result column="modify_date" property="modifyDate" />
-        <result column="is_delete" property="isDelete" />
-        <result column="status" property="status" />
+        <id column="id" property="id"/>
+        <result column="parent_id" property="parentId"/>
+        <result column="res_name" property="resName"/>
+        <result column="res_code" property="resCode"/>
+        <result column="res_desc" property="resDesc"/>
+        <result column="res_type" property="resType"/>
+        <result column="icon" property="icon"/>
+        <result column="sort_num" property="sortNum"/>
+        <result column="res_url" property="resUrl"/>
+        <result column="component" property="component"/>
+        <result column="create_date" property="createDate"/>
+        <result column="modify_date" property="modifyDate"/>
+        <result column="is_delete" property="isDelete"/>
+        <result column="status" property="status"/>
     </resultMap>
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        id, parent_id, res_name,res_code, res_desc, res_type, icon, sort_num, res_url,component, create_date, modify_date, is_delete, status
+        id, parent_id, res_name,res_code, res_desc, res_type, icon, sort_num, res_url,component, create_date,
+        modify_date, is_delete, status
     </sql>
     <select id="getResourcesByRoleId" resultType="com.maple.userapi.bean.BaseResources">
         SELECT
-            r.*
+        r.*
         FROM
-            base_resources r
-            LEFT JOIN base_role_res rr ON r.id = rr.res_id
+        base_resources r
+        LEFT JOIN base_role_res rr ON r.id = rr.res_id
         WHERE
-            r.is_delete = 0
-            AND r.`status` = 0
-            AND rr.role_id = #{roleId}
+        r.is_delete = 0
+        AND r.`status` = 0
+        AND rr.role_id = #{roleId}
 
         ORDER BY
-            r.sort_num DESC
+        r.sort_num DESC
     </select>
     <select id="getResourcesByRoleCode" resultType="com.maple.userapi.bean.BaseResources">
         SELECT
-            res.*
+        res.*
         FROM
-            base_resources res
-            LEFT JOIN base_role_res rr ON res.id = rr.res_id
-            LEFT JOIN base_role r ON rr.role_id = r.id
+        base_resources res
+        LEFT JOIN base_role_res rr ON res.id = rr.res_id
+        LEFT JOIN base_role r ON rr.role_id = r.id
         WHERE
-            res.is_delete = 0
-            AND res.`status` = 0
-            AND r.role_code = #{roleCode}
+        res.is_delete = 0
+        AND res.`status` = 0
+        AND r.role_code = #{roleCode}
 
         ORDER BY
-            res.sort_num DESC
+        res.sort_num DESC
     </select>
 
 </mapper>

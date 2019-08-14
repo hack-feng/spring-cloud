@@ -21,6 +21,7 @@ import java.util.concurrent.TimeUnit;
 
 /**
  * 自定义客户端认证
+ *
  * @author zhua
  */
 @NoArgsConstructor
@@ -32,43 +33,43 @@ public class MapleClientDetailServiceImpl implements ClientDetailsService {
     @Override
     public ClientDetails loadClientByClientId(String clientId) throws ClientRegistrationException {
         BaseClientDetails client = null;
-        if(StrUtil.isNotEmpty(clientId)) {
+        if (StrUtil.isNotEmpty(clientId)) {
             QueryWrapper<BaseOauthClientDetails> wrapper = new QueryWrapper<>();
-            wrapper.eq("client_id",clientId);
+            wrapper.eq("client_id", clientId);
             BaseOauthClientDetails sysOauthClientDetails = baseOauthClientDetailsMapper.selectOne(wrapper);
-            if(sysOauthClientDetails != null) {
+            if (sysOauthClientDetails != null) {
                 client = new BaseClientDetails();
                 client.setClientId(clientId);
                 //                client.setClientSecret(new BCryptPasswordEncoder().encode(sysOauthClientDetails.getClientSecret()));
-                client.setClientSecret("{noop}"+sysOauthClientDetails.getClientSecret());
-                if(StrUtil.isNotEmpty(sysOauthClientDetails.getResourceIds())) {
+                client.setClientSecret("{noop}" + sysOauthClientDetails.getClientSecret());
+                if (StrUtil.isNotEmpty(sysOauthClientDetails.getResourceIds())) {
                     client.setResourceIds(Arrays.asList(sysOauthClientDetails.getResourceIds().split(",")));
                 }
-                if(StrUtil.isNotEmpty(sysOauthClientDetails.getAuthorizedGrantTypes())) {
+                if (StrUtil.isNotEmpty(sysOauthClientDetails.getAuthorizedGrantTypes())) {
                     client.setAuthorizedGrantTypes(Arrays.asList(sysOauthClientDetails.getAuthorizedGrantTypes().split(",")));
                 }
                 //不同的client可以通过 一个scope 对应 权限集
-                if(StrUtil.isNotEmpty(sysOauthClientDetails.getScope())) {
+                if (StrUtil.isNotEmpty(sysOauthClientDetails.getScope())) {
                     client.setScope(Arrays.asList(sysOauthClientDetails.getScope().split(",")));
                 }
-                if(StrUtil.isNotEmpty(sysOauthClientDetails.getAuthorities())) {
+                if (StrUtil.isNotEmpty(sysOauthClientDetails.getAuthorities())) {
                     client.setAuthorities(AuthorityUtils.createAuthorityList(sysOauthClientDetails.getAuthorities().split(",")));
                 }
-                if(sysOauthClientDetails.getAccessTokenValidity() != null) {
+                if (sysOauthClientDetails.getAccessTokenValidity() != null) {
                     client.setAccessTokenValiditySeconds((int) TimeUnit.DAYS.toSeconds(sysOauthClientDetails.getAccessTokenValidity()));
-                }else {
+                } else {
                     client.setAccessTokenValiditySeconds((int) TimeUnit.DAYS.toSeconds(CommonConstants.CLIENT_ACCESS_TOKEN_TIME)); //1天
                 }
-                if(sysOauthClientDetails.getRefreshTokenValidity() != null) {
+                if (sysOauthClientDetails.getRefreshTokenValidity() != null) {
                     client.setRefreshTokenValiditySeconds((int) TimeUnit.DAYS.toSeconds(sysOauthClientDetails.getRefreshTokenValidity()));
-                }else {
+                } else {
                     client.setRefreshTokenValiditySeconds((int) TimeUnit.DAYS.toSeconds(CommonConstants.CLIENT_REFRESH_TOKEN_TIME)); //1天
                 }
-                if(StrUtil.isNotEmpty(sysOauthClientDetails.getWebServerRedirectUri())) {
+                if (StrUtil.isNotEmpty(sysOauthClientDetails.getWebServerRedirectUri())) {
                     String[] redirectUriArr = sysOauthClientDetails.getWebServerRedirectUri().split(",");
-                    if(redirectUriArr != null && redirectUriArr.length > 0) {
+                    if (redirectUriArr != null && redirectUriArr.length > 0) {
                         Set<String> uris = new HashSet<>();
-                        for(String redirectUri : redirectUriArr) {
+                        for (String redirectUri : redirectUriArr) {
                             uris.add(redirectUri);
                         }
                         client.setRegisteredRedirectUri(uris);

@@ -8,6 +8,7 @@ import java.util.Collection;
 
 /**
  * 扩展用户信息
+ *
  * @author zhua
  */
 public class AuthUser extends User {

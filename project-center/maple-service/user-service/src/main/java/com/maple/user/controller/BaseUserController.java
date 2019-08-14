@@ -39,6 +39,7 @@ public class BaseUserController {
 
     /**
      * 获取当前用户全部信息
+     *
      * @return zhua
      */
     @GetMapping(value = {"/info"})
@@ -54,7 +55,7 @@ public class BaseUserController {
 
     @HystrixCommand(fallbackMethod = "baseHys")
     @GetMapping(value = "getList")
-    public JSONObject getList(){
+    public JSONObject getList() {
         JSONObject result = new JSONObject();
         List<BaseUser> list = userService.list(null);
         result.put("code", 200);
@@ -62,7 +63,7 @@ public class BaseUserController {
         return result;
     }
 
-    private JSONObject baseHys(){
+    private JSONObject baseHys() {
         JSONObject a = new JSONObject();
         a.put("code", 500);
         a.put("data", "BaseUserController的线路中断");
@@ -71,7 +72,7 @@ public class BaseUserController {
 
     @HystrixCommand(fallbackMethod = "getUserInfoHys")
     @RequestMapping(value = "getUserInfo")
-    public JSONObject getUserInfo(Integer id){
+    public JSONObject getUserInfo(Integer id) {
         JSONObject result = new JSONObject();
         BaseUser user = null;
         try {
@@ -84,7 +85,7 @@ public class BaseUserController {
         return result;
     }
 
-    private JSONObject getUserInfoHys(Integer id){
+    private JSONObject getUserInfoHys(Integer id) {
         JSONObject a = new JSONObject();
         a.put("code", 500);
         a.put("data", "BaseUserController的线路中断");
@@ -95,7 +96,7 @@ public class BaseUserController {
     /**
      * 分页查询用户
      *
-     * @param page    参数集
+     * @param page 参数集
      * @param user 查询参数列表
      * @return 用户集合
      */

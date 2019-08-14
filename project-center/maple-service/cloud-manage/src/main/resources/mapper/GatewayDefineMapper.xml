@@ -4,11 +4,11 @@
 
     <!-- 通用查询映射结果 -->
     <resultMap id="BaseResultMap" type="com.maple.system.api.bean.GatewayDefine">
-        <id column="id" property="id" />
-        <result column="uri" property="uri" />
-        <result column="predicates" property="predicates" />
-        <result column="filters" property="filters" />
-        <result column="eureka_id" property="eurekaId" />
+        <id column="id" property="id"/>
+        <result column="uri" property="uri"/>
+        <result column="predicates" property="predicates"/>
+        <result column="filters" property="filters"/>
+        <result column="eureka_id" property="eurekaId"/>
     </resultMap>
 
     <!-- 通用查询结果列 -->

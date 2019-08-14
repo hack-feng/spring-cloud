@@ -9,7 +9,7 @@ import lombok.EqualsAndHashCode;
 
 /**
  * <p>
- * 
+ *
  * </p>
  *
  * @author maple
@@ -17,7 +17,7 @@ import lombok.EqualsAndHashCode;
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
-@ApiModel(value="Microservices对象", description="微服务备案")
+@ApiModel(value = "Microservices对象", description = "微服务备案")
 public class MicroservicesRo extends BaseRo<Microservices> {
 
     private static final long serialVersionUID = 1L;

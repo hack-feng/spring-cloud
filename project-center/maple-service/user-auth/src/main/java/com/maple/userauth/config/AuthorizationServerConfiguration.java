@@ -24,6 +24,7 @@ import java.util.concurrent.TimeUnit;
 
 /**
  * 授权服务器配置
+ *
  * @author
  */
 @Configuration

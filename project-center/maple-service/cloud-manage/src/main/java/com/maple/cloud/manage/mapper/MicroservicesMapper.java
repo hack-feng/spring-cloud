@@ -5,7 +5,7 @@ import com.maple.system.api.bean.Microservices;
 
 /**
  * <p>
- *  微服务备案Mapper 接口
+ * 微服务备案Mapper 接口
  * </p>
  *
  * @author maple

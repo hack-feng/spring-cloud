@@ -11,18 +11,18 @@ import org.springframework.http.HttpStatus;
 @JsonSerialize(using = MapleAuth2ExceptionSerializer.class)
 public class UnauthorizedException extends MapleAuth2Exception {
 
-	public UnauthorizedException(String msg, Throwable t) {
-		super(msg);
-	}
+    public UnauthorizedException(String msg, Throwable t) {
+        super(msg);
+    }
 
-	@Override
-	public String getOAuth2ErrorCode() {
-		return "unauthorized";
-	}
+    @Override
+    public String getOAuth2ErrorCode() {
+        return "unauthorized";
+    }
 
-	@Override
-	public int getHttpErrorCode() {
-		return HttpStatus.UNAUTHORIZED.value();
-	}
+    @Override
+    public int getHttpErrorCode() {
+        return HttpStatus.UNAUTHORIZED.value();
+    }
 
 }

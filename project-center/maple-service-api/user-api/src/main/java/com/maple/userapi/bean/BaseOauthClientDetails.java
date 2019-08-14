@@ -16,7 +16,7 @@ import java.io.Serializable;
  * @since 2019-06-06
  */
 @TableName("base_oauth_client_details")
-@ApiModel(value="BaseOauthClientDetails对象", description="基础信息-客户端表")
+@ApiModel(value = "BaseOauthClientDetails对象", description = "基础信息-客户端表")
 public class BaseOauthClientDetails implements Serializable {
 
     private static final long serialVersionUID = 1L;

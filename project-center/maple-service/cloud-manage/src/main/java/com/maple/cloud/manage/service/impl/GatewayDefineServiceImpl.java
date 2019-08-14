@@ -44,10 +44,10 @@ public class GatewayDefineServiceImpl extends ServiceImpl<GatewayDefineMapper, G
 
     @Override
     @Transactional
-    public boolean add(GatewayDefine gatewayDefine){
+    public boolean add(GatewayDefine gatewayDefine) {
         //插入到MySql数据库
         Integer id = gatewayDefineMapper.insert(gatewayDefine);
-        if(null != id){
+        if (null != id) {
             //存放到redis数据库
             stringRedisTemplate.opsForValue().set(MAPLE_CLOUD_GATEWAY_ROUTES + gatewayDefine.getId(),
                     toJson(new GatewayDefineVo(gatewayDefine)));
@@ -78,26 +78,27 @@ public class GatewayDefineServiceImpl extends ServiceImpl<GatewayDefineMapper, G
     @Override
     public GatewayDefineVo get(Integer id) {
         String value = stringRedisTemplate.opsForValue().get(MAPLE_CLOUD_GATEWAY_ROUTES + id);
-        if(StringUtils.isNotBlank(value)){
+        if (StringUtils.isNotBlank(value)) {
             GatewayDefineVo vo = toVo(value, GatewayDefineVo.class);
-            if(vo != null){
+            if (vo != null) {
                 return vo;
-            }else{
+            } else {
                 return updateToRedis(id);
             }
-        }else{
+        } else {
             return updateToRedis(id);
         }
     }
 
     /**
      * 根据id更新redis 并返回 GatewayDefineVo对象
+     *
      * @param id GatewayDefine主键id
      * @return GatewayDefineVo
      */
-    private GatewayDefineVo updateToRedis(Integer id){
+    private GatewayDefineVo updateToRedis(Integer id) {
         GatewayDefine gatewayDefine = gatewayDefineMapper.selectById(id);
-        if(gatewayDefine != null){
+        if (gatewayDefine != null) {
             //存放到redis数据库
             stringRedisTemplate.opsForValue().set(MAPLE_CLOUD_GATEWAY_ROUTES + gatewayDefine.getId(),
                     toJson(new GatewayDefineVo(gatewayDefine)));
@@ -124,11 +125,12 @@ public class GatewayDefineServiceImpl extends ServiceImpl<GatewayDefineMapper, G
 
     /**
      * json转换为Vo
-     * @param json 从redis取到的vo对象的json
+     *
+     * @param json  从redis取到的vo对象的json
      * @param clazz 返回对象类型
      * @return T
      */
-    private <T> T toVo(String json, Class<T> clazz){
+    private <T> T toVo(String json, Class<T> clazz) {
         T vo = null;
         try {
             vo = new ObjectMapper().readValue(json, clazz);

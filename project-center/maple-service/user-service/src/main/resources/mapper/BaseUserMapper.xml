@@ -4,30 +4,32 @@
 
     <!-- 通用查询映射结果 -->
     <resultMap id="BaseResultMap" type="com.maple.userapi.bean.BaseUser">
-        <id column="id" property="id" />
-        <result column="nick_name" property="nickName" />
-        <result column="user_name" property="userName" />
-        <result column="pass_word" property="passWord" />
-        <result column="phone" property="phone" />
-        <result column="email_status" property="emailStatus" />
-        <result column="email" property="email" />
-        <result column="qq_status" property="qqStatus" />
-        <result column="qq_link" property="qqLink" />
-        <result column="wx_status" property="wxStatus" />
-        <result column="wx_link" property="wxLink" />
-        <result column="create_date" property="createDate" />
-        <result column="modify_date" property="modifyDate" />
-        <result column="is_delete" property="isDelete" />
-        <result column="is_lock" property="isLock" />
-        <result column="content" property="content" />
+        <id column="id" property="id"/>
+        <result column="nick_name" property="nickName"/>
+        <result column="user_name" property="userName"/>
+        <result column="pass_word" property="passWord"/>
+        <result column="phone" property="phone"/>
+        <result column="email_status" property="emailStatus"/>
+        <result column="email" property="email"/>
+        <result column="qq_status" property="qqStatus"/>
+        <result column="qq_link" property="qqLink"/>
+        <result column="wx_status" property="wxStatus"/>
+        <result column="wx_link" property="wxLink"/>
+        <result column="create_date" property="createDate"/>
+        <result column="modify_date" property="modifyDate"/>
+        <result column="is_delete" property="isDelete"/>
+        <result column="is_lock" property="isLock"/>
+        <result column="content" property="content"/>
     </resultMap>
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        id, nick_name, user_name, phone, email_status, email, qq_status, qq_link, wx_status, wx_link, create_date, modify_date, is_delete, is_lock, content
+        id, nick_name, user_name, phone, email_status, email, qq_status, qq_link, wx_status, wx_link, create_date,
+        modify_date, is_delete, is_lock, content
     </sql>
     <select id="getUserPage" resultType="com.maple.userapi.bean.BaseUser">
-        select <include refid="Base_Column_List"></include>
+        select
+        <include refid="Base_Column_List"></include>
         from base_user
         <where>
             <if test="user != null">

@@ -38,8 +38,9 @@ public class BaseResourcesController {
 
     /**
      * 返回当前用户的树形菜单集合
-     * @author zhua
+     *
      * @return 当前用户的树形菜单
+     * @author zhua
      */
     @GetMapping("getUserMenu")
     public R getUserMenu() {
@@ -57,32 +58,35 @@ public class BaseResourcesController {
 
     /**
      * 获取菜单树
-     * @author zhua
+     *
      * @return
+     * @author zhua
      */
     @GetMapping("getMenuTree")
     public R getMenuTree() {
         QueryWrapper<BaseResources> queryWrapper = new QueryWrapper<>();
-        queryWrapper.eq("is_delete",CommonConstants.STATUS_NORMAL);
+        queryWrapper.eq("is_delete", CommonConstants.STATUS_NORMAL);
         List<BaseResources> menuList = baseResourcesService.list(queryWrapper);
-        if(menuList == null || menuList.size() == 0) {
-            return R.ok(null,"无菜单树");
+        if (menuList == null || menuList.size() == 0) {
+            return R.ok(null, "无菜单树");
         }
         List<MenuTree> menuTreeList = menuList.stream()
                 .map(MenuTree::new)
                 .sorted(Comparator.comparingInt(MenuTree::getSort))
-                .collect(Collectors.toList());;
+                .collect(Collectors.toList());
+        ;
         return R.ok(TreeUtil.buildByRecursive(menuTreeList, -1));
     }
 
     /**
      * 添加
-     * @author zhua
+     *
      * @return
+     * @author zhua
      */
     @PostMapping("addMenu")
     public R addMenu(BaseResources res) {
-        if(res == null) {
+        if (res == null) {
             return R.failed("获取资源信息失败");
         }
         res.setCreateDate(new Date());
@@ -92,12 +96,13 @@ public class BaseResourcesController {
 
     /**
      * 修改
-     * @author zhua
+     *
      * @return
+     * @author zhua
      */
     @PostMapping("updateMenu")
     public R updateMenu(BaseResources res) {
-        if(res == null) {
+        if (res == null) {
             return R.failed("获取资源信息失败");
         }
         res.setModifyDate(new Date());
@@ -106,13 +111,14 @@ public class BaseResourcesController {
 
     /**
      * 删除菜单
+     *
      * @param id
-     * @author zhua
      * @return
+     * @author zhua
      */
     @DeleteMapping("/delete/{id}")
     public R delete(@PathVariable("id") String id) {
-        if(id == null) {
+        if (id == null) {
             return R.failed("获取菜单信息失败");
         }
         return R.ok(baseResourcesService.removeById(id));
@@ -120,17 +126,18 @@ public class BaseResourcesController {
 
     /**
      * 获取权限菜单树
+     *
      * @param roleId
-     * @author zhua
      * @return
+     * @author zhua
      */
     @GetMapping("getAuthTree")
     public R getAuthTree(String roleId) {
         QueryWrapper<BaseResources> queryWrapper = new QueryWrapper<>();
-        queryWrapper.eq("is_delete",CommonConstants.STATUS_NORMAL);
+        queryWrapper.eq("is_delete", CommonConstants.STATUS_NORMAL);
         List<BaseResources> menuList = baseResourcesService.list(queryWrapper);
-        if(menuList == null || menuList.size() == 0) {
-            return R.ok(null,"无菜单树");
+        if (menuList == null || menuList.size() == 0) {
+            return R.ok(null, "无菜单树");
         }
 
         List<MenuTree> menuTreeList = menuList.stream()
@@ -138,14 +145,14 @@ public class BaseResourcesController {
                 .sorted(Comparator.comparingInt(MenuTree::getSort))
                 .collect(Collectors.toList());
 
-        if(StrUtil.isNotEmpty(roleId)) {
+        if (StrUtil.isNotEmpty(roleId)) {
             QueryWrapper<BaseRoleRes> resQueryWrapper = new QueryWrapper<>();
-            resQueryWrapper.eq("role_id",roleId);
+            resQueryWrapper.eq("role_id", roleId);
             List<BaseRoleRes> roleResList = roleResService.list(resQueryWrapper);
-            if(roleResList != null && roleResList.size() > 0) {
+            if (roleResList != null && roleResList.size() > 0) {
                 menuTreeList.forEach(menuTree -> {
-                    for(BaseRoleRes roleRes : roleResList) {
-                        if(roleRes.getResId() == menuTree.getId()) {
+                    for (BaseRoleRes roleRes : roleResList) {
+                        if (roleRes.getResId() == menuTree.getId()) {
                             menuTree.setChecked(true);
                             continue;
                         }

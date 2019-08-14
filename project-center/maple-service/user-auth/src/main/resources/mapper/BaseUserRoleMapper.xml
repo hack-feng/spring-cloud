@@ -4,10 +4,10 @@
 
     <!-- 通用查询映射结果 -->
     <resultMap id="BaseResultMap" type="com.maple.userapi.bean.BaseUserRole">
-        <id column="id" property="id" />
-        <result column="user_id" property="userId" />
-        <result column="role_id" property="roleId" />
-        <result column="create_date" property="createDate" />
+        <id column="id" property="id"/>
+        <result column="user_id" property="userId"/>
+        <result column="role_id" property="roleId"/>
+        <result column="create_date" property="createDate"/>
     </resultMap>
 
     <!-- 通用查询结果列 -->
@@ -21,19 +21,19 @@
         where sur.role_id = r.id and sur.user_id = u.id and u.user_name = #{username}
     </select>
     <select id="findUserRes" resultType="java.lang.String">
-		SELECT
-            res.id
+        SELECT
+        res.id
         FROM
-            base_resources res,
-            base_role_res rr,
-            base_user_role ur,
-            base_user u
+        base_resources res,
+        base_role_res rr,
+        base_user_role ur,
+        base_user u
         WHERE
-            res.res_type = 2
-            AND res.id = rr.res_id
-            AND rr.role_id = ur.role_id
-            AND ur.user_id = u.id
-            AND u.user_name = #{username}
+        res.res_type = 2
+        AND res.id = rr.res_id
+        AND rr.role_id = ur.role_id
+        AND ur.user_id = u.id
+        AND u.user_name = #{username}
     </select>
 
 </mapper>

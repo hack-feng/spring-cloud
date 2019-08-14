@@ -30,8 +30,8 @@ public class ConfigPropertiesController {
     private IConfigPropertiesService configPropertiesService;
 
     @GetMapping("/getList")
-    public R getList(ConfigPropertiesRo configPropertiesRo){
-        if(configPropertiesRo.getApplication() == null){
+    public R getList(ConfigPropertiesRo configPropertiesRo) {
+        if (configPropertiesRo.getApplication() == null) {
             return R.failed("服务名称不能为空");
         }
         ConfigProperties configProperties = configPropertiesRo.toBean(ConfigProperties.class);
@@ -41,7 +41,7 @@ public class ConfigPropertiesController {
 
     @ApiOperation(value = "新增配置信息", notes = "新增一个配置信息")
     @PostMapping
-    public R add(ConfigPropertiesRo configPropertiesRo){
+    public R add(ConfigPropertiesRo configPropertiesRo) {
         ConfigProperties configProperties = configPropertiesRo.toBean(ConfigProperties.class);
         configProperties.setCreateDate(new Date());
         return configPropertiesService.add(configProperties);
@@ -50,9 +50,9 @@ public class ConfigPropertiesController {
     @ApiOperation(value = "修改配置信息", notes = "根据id修改一个配置信息")
     @ApiImplicitParam(name = "id", value = "微服务id，路由地址", required = true, paramType = "path")
     @PutMapping(value = "/{id}")
-    public R update(@PathVariable Integer id, ConfigPropertiesRo configPropertiesRo){
-        if(id == null){
-            return  R.failed("错误代码：ID IS NULL, 请刷新页面重试");
+    public R update(@PathVariable Integer id, ConfigPropertiesRo configPropertiesRo) {
+        if (id == null) {
+            return R.failed("错误代码：ID IS NULL, 请刷新页面重试");
         }
         ConfigProperties configProperties = configPropertiesRo.toBean(ConfigProperties.class);
         configProperties.setModifyDate(new Date());
@@ -63,9 +63,9 @@ public class ConfigPropertiesController {
     @ApiOperation(value = "删除配置信息", notes = "根据id删除一个配置信息")
     @ApiImplicitParam(name = "id", value = "微服务id，路由地址", required = true, dataType = "int", paramType = "path")
     @DeleteMapping(value = "/{id}")
-    public R delete(@PathVariable Integer id){
-        if(id == null){
-            return  R.failed("错误代码：ID IS NULL, 请刷新页面重试");
+    public R delete(@PathVariable Integer id) {
+        if (id == null) {
+            return R.failed("错误代码：ID IS NULL, 请刷新页面重试");
         }
         return configPropertiesService.delete(id);
     }

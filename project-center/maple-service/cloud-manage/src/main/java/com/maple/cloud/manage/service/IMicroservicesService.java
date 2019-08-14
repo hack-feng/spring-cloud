@@ -7,7 +7,7 @@ import com.maple.system.api.bean.Microservices;
 
 /**
  * <p>
- *  服务类
+ * 服务类
  * </p>
  *
  * @author maple

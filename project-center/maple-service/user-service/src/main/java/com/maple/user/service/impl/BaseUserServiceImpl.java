@@ -41,17 +41,17 @@ public class BaseUserServiceImpl extends ServiceImpl<BaseUserMapper, BaseUser> i
     @Autowired
     private BaseResourcesMapper baseResourcesMapper;
 
-    public BaseUser userLogin(String username, String password) throws RuntimeException{
+    public BaseUser userLogin(String username, String password) throws RuntimeException {
         BaseUser user = userMapper.selectOne(new QueryWrapper<BaseUser>().eq("user_name", username).eq("is_delete", 0));
-        if (user == null){
+        if (user == null) {
             throw new RuntimeException("该用户不存在！");
         }
 
-        if (!user.getPassWord().equals(password)){
+        if (!user.getPassWord().equals(password)) {
             throw new RuntimeException("用户名或密码错误！");
         }
 
-        if (user.getIsLock().equals(1)){
+        if (user.getIsLock().equals(1)) {
             throw new RuntimeException("该用户被锁定！");
         }
         return user;
@@ -84,7 +84,7 @@ public class BaseUserServiceImpl extends ServiceImpl<BaseUserMapper, BaseUser> i
                     .collect(Collectors.toList());
             resSet.addAll(resourcesStrArr);
         });
-        if(resSet != null && resSet.size() > 0) {
+        if (resSet != null && resSet.size() > 0) {
             userInfo.setPermissions(ArrayUtil.toArray(resSet, String.class));
         }
 
@@ -93,6 +93,6 @@ public class BaseUserServiceImpl extends ServiceImpl<BaseUserMapper, BaseUser> i
 
     @Override
     public IPage getUserPage(Page page, BaseUser user) {
-        return userMapper.getUserPage(page,user);
+        return userMapper.getUserPage(page, user);
     }
 }

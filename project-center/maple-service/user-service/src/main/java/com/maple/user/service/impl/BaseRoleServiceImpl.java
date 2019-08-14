@@ -28,7 +28,7 @@ public class BaseRoleServiceImpl extends ServiceImpl<BaseRoleMapper, BaseRole> i
 
     @Override
     public IPage getRolePage(Page page, BaseRole role) {
-        return baseRoleMapper.getRolePage(page,role);
+        return baseRoleMapper.getRolePage(page, role);
     }
 
     @Override

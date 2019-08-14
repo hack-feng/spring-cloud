@@ -36,10 +36,10 @@ public class BaseRoleController {
     /**
      * 分页查询用户
      *
-     * @param page    参数集
+     * @param page 参数集
      * @param role 查询参数列表
-     * @author zhua
      * @return 用户集合
+     * @author zhua
      */
     @GetMapping("/page")
     public R getUserPage(Page page, BaseRole role) {
@@ -48,13 +48,14 @@ public class BaseRoleController {
 
     /**
      * 添加角色
+     *
      * @param role
-     * @author zhua
      * @return
+     * @author zhua
      */
     @PostMapping("/add")
     public R add(BaseRole role) {
-        if(role == null) {
+        if (role == null) {
             return R.failed("获取角色信息失败");
         }
         role.setIsDelete(Convert.toInt(CommonConstants.STATUS_NORMAL));
@@ -65,13 +66,14 @@ public class BaseRoleController {
 
     /**
      * 编辑角色
+     *
      * @param role
-     * @author zhua
      * @return
+     * @author zhua
      */
     @PostMapping("/update")
     public R update(BaseRole role) {
-        if(role == null) {
+        if (role == null) {
             return R.failed("获取角色信息失败");
         }
         role.setModifyDate(new Date());
@@ -80,13 +82,14 @@ public class BaseRoleController {
 
     /**
      * 删除角色
+     *
      * @param ids
-     * @author zhua
      * @return
+     * @author zhua
      */
     @DeleteMapping("/delete/{ids}")
     public R delete(@PathVariable("ids") String ids) {
-        if(ids == null) {
+        if (ids == null) {
             return R.failed("获取角色信息失败");
         }
         return R.ok(roleService.deleteByIds(ids));
@@ -94,8 +97,9 @@ public class BaseRoleController {
 
     /**
      * 获取角色列表
-     * @author zhua
+     *
      * @return 角色列表
+     * @author zhua
      */
     @GetMapping("/list")
     public R listRoles() {
@@ -104,10 +108,11 @@ public class BaseRoleController {
 
     /**
      * 授权
+     *
      * @param roleId
      * @param resIds
-     * @author zhua
      * @return
+     * @author zhua
      */
     @PostMapping("/updateRoleAuth")
     public R updateRoleAuth(Integer roleId, String resIds) {

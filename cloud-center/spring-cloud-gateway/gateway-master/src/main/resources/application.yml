@@ -6,21 +6,21 @@ spring:
           enabled: false
           lowerCaseServiceId: true
       default-filters:
-        # 熔断降级配置
-        - name: Hystrix
-          args:
-            name : fallbackcmd
-            fallbackUri: 'forward:/defaultfallback'
-        - name: RequestRateLimiter
-          args:
-            rate-limiter: "#{@defaultRedisRateLimiter}"  #SPEL表达式去的对应的bean
-            key-resolver: "#{@apiKeyResolver}" #SPEL表达式去的对应的bean
-            redis-rate-limiter.replenishRate: 10
-            redis-rate-limiter.burstCapacity: 20
-        - name: Retry
-          args:
-            retries: 3
-            statuses: BAD_GATEWAY
+      # 熔断降级配置
+      - name: Hystrix
+        args:
+          name: fallbackcmd
+          fallbackUri: 'forward:/defaultfallback'
+      - name: RequestRateLimiter
+        args:
+          rate-limiter: "#{@defaultRedisRateLimiter}"  #SPEL表达式去的对应的bean
+          key-resolver: "#{@apiKeyResolver}" #SPEL表达式去的对应的bean
+          redis-rate-limiter.replenishRate: 10
+          redis-rate-limiter.burstCapacity: 20
+      - name: Retry
+        args:
+          retries: 3
+          statuses: BAD_GATEWAY
 
 # hystrix 信号量隔离，5秒后自动超时
 hystrix:

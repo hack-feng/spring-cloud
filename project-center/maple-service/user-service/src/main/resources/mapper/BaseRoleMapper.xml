@@ -4,14 +4,14 @@
 
     <!-- 通用查询映射结果 -->
     <resultMap id="BaseResultMap" type="com.maple.userapi.bean.BaseRole">
-        <id column="id" property="id" />
-        <result column="role_name" property="roleName" />
-        <result column="role_code" property="roleCode" />
-        <result column="create_date" property="createDate" />
-        <result column="modify_date" property="modifyDate" />
-        <result column="is_delete" property="isDelete" />
-        <result column="status" property="status" />
-        <result column="remark" property="remark" />
+        <id column="id" property="id"/>
+        <result column="role_name" property="roleName"/>
+        <result column="role_code" property="roleCode"/>
+        <result column="create_date" property="createDate"/>
+        <result column="modify_date" property="modifyDate"/>
+        <result column="is_delete" property="isDelete"/>
+        <result column="status" property="status"/>
+        <result column="remark" property="remark"/>
     </resultMap>
 
     <!-- 通用查询结果列 -->
@@ -21,18 +21,19 @@
 
     <select id="listRolesByUserId" resultType="com.maple.userapi.bean.BaseRole">
         SELECT
-            r.*
+        r.*
         FROM
-            base_role r,
-            base_user_role ur
+        base_role r,
+        base_user_role ur
         WHERE
-            r.id = ur.role_id
-            AND r.is_delete = 0
-            AND r.status = 0
-            AND ur.user_id = #{id}
+        r.id = ur.role_id
+        AND r.is_delete = 0
+        AND r.status = 0
+        AND ur.user_id = #{id}
     </select>
     <select id="getRolePage" resultType="com.maple.userapi.bean.BaseRole">
-        select <include refid="Base_Column_List"></include>
+        select
+        <include refid="Base_Column_List"></include>
         from base_role
         <where>
             <if test="role != null">
@@ -43,10 +44,10 @@
         </where>
     </select>
     <delete id="deleteByIds">
-      delete from base_role
-      where id in
-      <foreach collection="idArr" item="id" open="(" separator="," close=")">
-        #{id}
-      </foreach>
+        delete from base_role
+        where id in
+        <foreach collection="idArr" item="id" open="(" separator="," close=")">
+            #{id}
+        </foreach>
     </delete>
 </mapper>

@@ -18,27 +18,27 @@ import java.util.Map;
  * OAuth2 异常格式化
  */
 public class MapleAuth2ExceptionSerializer extends StdSerializer<MapleAuth2Exception> {
-	public MapleAuth2ExceptionSerializer() {
-		super(MapleAuth2Exception.class);
-	}
+    public MapleAuth2ExceptionSerializer() {
+        super(MapleAuth2Exception.class);
+    }
 
-	@Override
-	@SneakyThrows
-	public void serialize(MapleAuth2Exception value, JsonGenerator gen, SerializerProvider provider) {
-		HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
-		gen.writeStartObject();
-		gen.writeObjectField("code", String.valueOf(value.getHttpErrorCode()));
-		gen.writeStringField("msg", value.getMessage());
-		gen.writeStringField("data", value.getErrorCode());
-		gen.writeStringField("path", request.getServletPath());
-		gen.writeStringField("timestamp", String.valueOf(System.currentTimeMillis()));
-		if (value.getAdditionalInformation()!=null) {
-			for (Map.Entry<String, String> entry : value.getAdditionalInformation().entrySet()) {
-				String key = entry.getKey();
-				String add = entry.getValue();
-				gen.writeStringField(key, add);
-			}
-		}
-		gen.writeEndObject();
-	}
+    @Override
+    @SneakyThrows
+    public void serialize(MapleAuth2Exception value, JsonGenerator gen, SerializerProvider provider) {
+        HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
+        gen.writeStartObject();
+        gen.writeObjectField("code", String.valueOf(value.getHttpErrorCode()));
+        gen.writeStringField("msg", value.getMessage());
+        gen.writeStringField("data", value.getErrorCode());
+        gen.writeStringField("path", request.getServletPath());
+        gen.writeStringField("timestamp", String.valueOf(System.currentTimeMillis()));
+        if (value.getAdditionalInformation() != null) {
+            for (Map.Entry<String, String> entry : value.getAdditionalInformation().entrySet()) {
+                String key = entry.getKey();
+                String add = entry.getValue();
+                gen.writeStringField(key, add);
+            }
+        }
+        gen.writeEndObject();
+    }
 }

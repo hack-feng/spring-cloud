@@ -28,7 +28,7 @@ import java.util.List;
 
 /**
  * <p>
- *  服务实现类
+ * 服务实现类
  * </p>
  *
  * @author maple
@@ -60,11 +60,11 @@ public class MicroservicesServiceImpl extends ServiceImpl<MicroservicesMapper, M
                         .eq("service_name", microservices.getServiceName())
                         .or()
                         .eq("service_port", microservices.getServicePort()));
-        if(micCount > 0){
+        if (micCount > 0) {
             return R.failed("服务名称或者端口号已经存在，不可重复使用");
         }
         // 是否自动创建文件
-        if(microservices.getIsCreateConfig() == 1){
+        if (microservices.getIsCreateConfig() == 1) {
             List<ConfigProperties> configList = new ArrayList<>();
             ConfigProperties config = new ConfigProperties();
             config.setApplication(microservices.getServiceName());
@@ -81,10 +81,10 @@ public class MicroservicesServiceImpl extends ServiceImpl<MicroservicesMapper, M
             configList.add(createBaseConfig("间隔多久去拉取服务注册信息，默认为30秒", config, "eureka.client.registryFetchIntervalSeconds", "10", configList.size()));
             configList.add(createBaseConfig("配置注册中心", config, "eureka.client.service-url.defaultZone", "http://127.0.0.1:1111/eureka/", configList.size()));
             configList.add(createBaseConfig("zipkin链路跟踪", config, "spring.zipkin.base-url", "http://localhost:3101", configList.size()));
-            if(microservices.getIsUseMysql() == 1){
+            if (microservices.getIsUseMysql() == 1) {
                 int mysqlId = microservices.getMysqlInfo();
                 Info info = infoMapper.selectById(mysqlId);
-                String url = "jdbc:mysql://"+info.getHost()+":"+info.getPort()+"/"+info.getDataName()+"?useUnicode=true&characterEncoding=utf8&useSSL=false";
+                String url = "jdbc:mysql://" + info.getHost() + ":" + info.getPort() + "/" + info.getDataName() + "?useUnicode=true&characterEncoding=utf8&useSSL=false";
                 configList.add(createBaseConfig("数据库数据库驱动", config, "spring.datasource.driver-class-name", "com.mysql.cj.jdbc.Driver", configList.size()));
                 configList.add(createBaseConfig("数据库数据库地址", config, "spring.datasource.url", url, configList.size()));
                 configList.add(createBaseConfig("数据库用户名", config, "spring.datasource.username", info.getUserName(), configList.size()));
@@ -107,7 +107,7 @@ public class MicroservicesServiceImpl extends ServiceImpl<MicroservicesMapper, M
                 configList.add(createBaseConfig("数据库连接池合并多个DruidDataSource的监控数据", config, "spring.datasource.useGlobalDataSourceStat", "true", configList.size()));
 
             }
-            if(microservices.getIsUseRabbitmq() == 1){
+            if (microservices.getIsUseRabbitmq() == 1) {
                 int rabbitmqId = microservices.getRabbitmqInfo();
                 Info info = infoMapper.selectById(rabbitmqId);
                 configList.add(createBaseConfig("rabbitmq地址", config, "spring.rabbitmq.host", info.getHost(), configList.size()));
@@ -115,7 +115,7 @@ public class MicroservicesServiceImpl extends ServiceImpl<MicroservicesMapper, M
                 configList.add(createBaseConfig("rabbitmq用户名", config, "spring.rabbitmq.username", info.getUserName(), configList.size()));
                 configList.add(createBaseConfig("rabbitmq密码", config, "spring.rabbitmq.password", info.getPassWord(), configList.size()));
             }
-            if(microservices.getIsUseRedis() == 1){
+            if (microservices.getIsUseRedis() == 1) {
                 int redisId = microservices.getRedisInfo();
                 Info info = infoMapper.selectById(redisId);
                 configList.add(createBaseConfig("redis数据库索引（默认为0）", config, "spring.redis.database", "0", configList.size()));
