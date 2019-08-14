@@ -13,6 +13,7 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.Date;
 
 /**
@@ -39,7 +40,7 @@ public class MicroservicesController {
 
     @ApiOperation(value = "新增微服务", notes = "新增一个微服务，根据选择判断是否自动生成config配置文件")
     @PostMapping
-    public R add(MicroservicesRo microservicesRo) {
+    public R add(@Valid MicroservicesRo microservicesRo) {
         Microservices microservices = microservicesRo.toBean(Microservices.class);
         microservices.setCreateDate(new Date());
         return microservicesService.add(microservices);
@@ -48,7 +49,7 @@ public class MicroservicesController {
     @ApiOperation(value = "修改微服务", notes = "根据id修改一个微服务，不会修改config信息")
     @ApiImplicitParam(name = "id", value = "微服务id，路由地址", required = true, paramType = "path")
     @PutMapping(value = "/{id}")
-    public R update(@PathVariable Integer id, MicroservicesRo microservicesRo) {
+    public R update(@PathVariable Integer id, @Valid MicroservicesRo microservicesRo) {
         if (id == null) {
             return R.failed("错误代码：ID IS NULL, 请刷新页面重试");
         }

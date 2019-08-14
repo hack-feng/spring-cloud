@@ -1,6 +1,7 @@
 package com.maple.cloud.manage.controller;
 
 
+import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import com.maple.cloud.manage.service.IConfigPropertiesService;
 import com.maple.common.core.util.R;
 import com.maple.system.api.bean.ConfigProperties;
@@ -11,6 +12,7 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.Date;
 import java.util.List;
 
@@ -31,7 +33,7 @@ public class ConfigPropertiesController {
 
     @GetMapping("/getList")
     public R getList(ConfigPropertiesRo configPropertiesRo) {
-        if (configPropertiesRo.getApplication() == null) {
+        if (StringUtils.isEmpty(configPropertiesRo.getApplication())) {
             return R.failed("服务名称不能为空");
         }
         ConfigProperties configProperties = configPropertiesRo.toBean(ConfigProperties.class);
@@ -41,7 +43,7 @@ public class ConfigPropertiesController {
 
     @ApiOperation(value = "新增配置信息", notes = "新增一个配置信息")
     @PostMapping
-    public R add(ConfigPropertiesRo configPropertiesRo) {
+    public R add(@Valid ConfigPropertiesRo configPropertiesRo) {
         ConfigProperties configProperties = configPropertiesRo.toBean(ConfigProperties.class);
         configProperties.setCreateDate(new Date());
         return configPropertiesService.add(configProperties);
@@ -50,7 +52,7 @@ public class ConfigPropertiesController {
     @ApiOperation(value = "修改配置信息", notes = "根据id修改一个配置信息")
     @ApiImplicitParam(name = "id", value = "微服务id，路由地址", required = true, paramType = "path")
     @PutMapping(value = "/{id}")
-    public R update(@PathVariable Integer id, ConfigPropertiesRo configPropertiesRo) {
+    public R update(@PathVariable Integer id, @Valid ConfigPropertiesRo configPropertiesRo) {
         if (id == null) {
             return R.failed("错误代码：ID IS NULL, 请刷新页面重试");
         }
