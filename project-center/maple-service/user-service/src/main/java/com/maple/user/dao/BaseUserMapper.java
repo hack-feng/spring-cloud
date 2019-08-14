@@ -19,4 +19,6 @@ import org.apache.ibatis.annotations.Param;
 public interface BaseUserMapper extends BaseMapper<BaseUser> {
 
     IPage<BaseUser> getUserPage(Page page, @Param("user") BaseUser user);
+
+    void deleteByIds(@Param("idArr") String[] idArr);
 }

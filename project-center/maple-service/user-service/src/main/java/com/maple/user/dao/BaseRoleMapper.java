@@ -24,5 +24,5 @@ public interface BaseRoleMapper extends BaseMapper<BaseRole> {
 
     IPage<BaseRole> getRolePage(Page page, @Param("role") BaseRole role);
 
-    void deleteByIds(@Param("ids") String[] idArr);
+    void deleteByIds(@Param("idArr") String[] idArr);
 }

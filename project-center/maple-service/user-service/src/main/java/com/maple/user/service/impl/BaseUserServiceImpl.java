@@ -5,7 +5,6 @@ import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.maple.common.core.util.R;
 import com.maple.user.dao.BaseResourcesMapper;
 import com.maple.user.dao.BaseRoleMapper;
 import com.maple.user.dao.BaseUserMapper;
@@ -17,6 +16,7 @@ import com.maple.userapi.bean.BaseUser;
 import com.maple.userapi.vo.UserInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.HashSet;
 import java.util.List;
@@ -94,5 +94,13 @@ public class BaseUserServiceImpl extends ServiceImpl<BaseUserMapper, BaseUser> i
     @Override
     public IPage getUserPage(Page page, BaseUser user) {
         return userMapper.getUserPage(page, user);
+    }
+
+    @Override
+    @Transactional
+    public String deleteByIds(String ids) {
+        String[] idArr = ids.split(",");
+        userMapper.deleteByIds(idArr);
+        return "删除成功";
     }
 }

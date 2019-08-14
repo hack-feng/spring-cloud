@@ -7,6 +7,10 @@ package com.maple.common.core.constant;
 public interface CommonConstants {
 
     /**
+     * 默认密码
+     */
+    String DEFAULT_PASSWORD = "12346";
+    /**
      * 删除
      */
     String STATUS_DEL = "1";

@@ -48,5 +48,12 @@
             </if>
         </where>
     </select>
-
+    <delete id="deleteByIds">
+        update base_user
+        set is_delete = 1
+        where id in
+        <foreach collection="idArr" item="id" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
 </mapper>

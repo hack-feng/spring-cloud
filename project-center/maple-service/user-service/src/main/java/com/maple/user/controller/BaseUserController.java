@@ -1,22 +1,20 @@
 package com.maple.user.controller;
 
 
+import cn.hutool.core.convert.Convert;
 import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.maple.common.core.constant.CommonConstants;
 import com.maple.common.core.util.R;
 import com.maple.common.security.util.SecurityUtils;
 import com.maple.user.service.IBaseUserService;
 import com.maple.userapi.bean.BaseUser;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
 import java.util.List;
@@ -105,5 +103,57 @@ public class BaseUserController {
         return R.ok(userService.getUserPage(page, user));
     }
 
+
+    /**
+     * 添加用户
+     *
+     * @param user
+     * @return
+     * @author zhua
+     */
+    @ApiOperation(value = "添加用户服务", notes = "新增一个用户")
+    @PostMapping("/add")
+    public R add(BaseUser user) {
+        if (user == null) {
+            return R.failed("获取用户信息失败");
+        }
+        user.setPassWord(CommonConstants.DEFAULT_PASSWORD);
+        user.setIsDelete(Convert.toInt(CommonConstants.STATUS_NORMAL));
+        user.setCreateDate(new Date());
+        return R.ok(userService.save(user));
+    }
+
+    /**
+     * 编辑用户
+     *
+     * @param user
+     * @return
+     * @author zhua
+     */
+    @ApiOperation(value = "编辑用户服务", notes = "编辑现有的用户")
+    @PostMapping("/update")
+    public R update(BaseUser user) {
+        if (user == null) {
+            return R.failed("获取用户信息失败");
+        }
+        user.setModifyDate(new Date());
+        return R.ok(userService.updateById(user));
+    }
+
+    /**
+     * 删除用户
+     *
+     * @param ids
+     * @return
+     * @author zhua
+     */
+    @ApiOperation(value = "删除用户服务", notes = "删除现有的用户")
+    @DeleteMapping("/delete")
+    public R delete(String ids) {
+        if (ids == null) {
+            return R.failed("获取用户信息失败");
+        }
+        return R.ok(null,userService.deleteByIds(ids));
+    }
 }
 
