@@ -13,6 +13,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 
+import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
 import java.util.Date;
 
@@ -31,22 +32,25 @@ import java.util.Date;
 public class ConfigPropertiesRo extends BaseRo<ConfigProperties> {
 
     @ApiModelProperty(value = "配置中key的值")
+    @NotBlank(message = "配置中的key不能为空")
     private String key1;
 
     @ApiModelProperty(value = "配置中value的值")
+    @NotBlank(message = "配置中的value不能为空")
     private String value1;
 
     @ApiModelProperty(value = "应用名")
+    @NotBlank(message = "应用名不能为空")
     private String application;
 
     @ApiModelProperty(value = "环境")
-    private String profile;
+    private String profile = "dev";
 
     @ApiModelProperty(value = "读取的分支")
-    private String label;
+    private String label = "master";
 
     @ApiModelProperty(value = "排序")
-    private Integer sort;
+    private Integer sort = 0;
 
     @ApiModelProperty(value = "备注")
     private String remark;

@@ -7,6 +7,8 @@ import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
+import javax.validation.constraints.NotBlank;
+
 /**
  * <p>
  *
@@ -23,12 +25,14 @@ public class MicroservicesRo extends BaseRo<Microservices> {
     private static final long serialVersionUID = 1L;
 
     @ApiModelProperty(value = "微服务名称")
+    @NotBlank(message = "微服务名称不能为空")
     private String serviceName;
 
     @ApiModelProperty(value = "微服务部署机器ip")
     private String serviceIp;
 
     @ApiModelProperty(value = "微服务端口号")
+    @NotBlank(message = "微服务端口号不能为空")
     private String servicePort;
 
     @ApiModelProperty(value = "是否启动")

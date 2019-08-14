@@ -1,6 +1,7 @@
 package com.maple.cloud.manage.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.maple.cloud.manage.mapper.ConfigPropertiesMapper;
 import com.maple.cloud.manage.service.IConfigPropertiesService;
@@ -29,21 +30,22 @@ public class ConfigPropertiesServiceImpl extends ServiceImpl<ConfigPropertiesMap
 
     @Override
     public List<ConfigProperties> getList(ConfigProperties configProperties) {
-        Class cls = configProperties.getClass();
         Map<String, Object> map = new HashMap<>();
-        if (configProperties.getApplication() != null) {
-            map.put("application", configProperties.getApplication());
+        QueryWrapper<ConfigProperties> qw = new QueryWrapper();
+        if (StringUtils.isNotEmpty(configProperties.getApplication())) {
+            qw.eq("application", configProperties.getApplication());
         } else {
-            map.put("application", "不存在");
+            qw.eq("application", "不存在");
         }
 
-        if (configProperties.getKey1() != null) {
-            map.put("key1", configProperties.getKey1());
+        if (StringUtils.isNotEmpty(configProperties.getKey1())) {
+            qw.eq("key1", configProperties.getKey1());
         }
 
-        if (configProperties.getValue1() != null) {
-            map.put("value1", configProperties.getValue1());
+        if (StringUtils.isNotEmpty(configProperties.getValue1())) {
+            qw.eq("value1", configProperties.getValue1());
         }
+        qw.orderByAsc("sort");
         return configPropertiesMapper.selectByMap(map);
     }
 
