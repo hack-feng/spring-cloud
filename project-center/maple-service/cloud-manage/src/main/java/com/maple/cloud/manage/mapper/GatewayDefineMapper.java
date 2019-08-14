@@ -2,7 +2,6 @@ package com.maple.cloud.manage.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.maple.system.api.bean.GatewayDefine;
-import org.apache.ibatis.annotations.Mapper;
 
 /**
  * <p>
