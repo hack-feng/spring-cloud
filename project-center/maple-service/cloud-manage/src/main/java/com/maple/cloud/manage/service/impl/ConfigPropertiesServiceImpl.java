@@ -12,7 +12,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * <p>
@@ -30,7 +29,6 @@ public class ConfigPropertiesServiceImpl extends ServiceImpl<ConfigPropertiesMap
 
     @Override
     public List<ConfigProperties> getList(ConfigProperties configProperties) {
-        Map<String, Object> map = new HashMap<>();
         QueryWrapper<ConfigProperties> qw = new QueryWrapper();
         if (StringUtils.isNotEmpty(configProperties.getApplication())) {
             qw.eq("application", configProperties.getApplication());
@@ -46,7 +44,7 @@ public class ConfigPropertiesServiceImpl extends ServiceImpl<ConfigPropertiesMap
             qw.eq("value1", configProperties.getValue1());
         }
         qw.orderByAsc("sort");
-        return configPropertiesMapper.selectByMap(map);
+        return configPropertiesMapper.selectList(qw);
     }
 
     @Override
