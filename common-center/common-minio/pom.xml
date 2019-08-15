@@ -13,4 +13,11 @@
     <packaging>jar</packaging>
     <description>分布式文件仓库</description>
 
+    <dependencies>
+        <dependency>
+            <groupId>io.minio</groupId>
+            <artifactId>minio</artifactId>
+            <version>${minio.version}</version>
+        </dependency>
+    </dependencies>
 </project>
