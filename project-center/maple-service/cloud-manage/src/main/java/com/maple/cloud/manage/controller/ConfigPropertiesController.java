@@ -19,7 +19,9 @@ import org.springframework.web.client.RestTemplate;
 
 import javax.validation.Valid;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * <p>
@@ -89,14 +91,19 @@ public class ConfigPropertiesController {
         return configPropertiesService.delete(id);
     }
 
-
+    /**
+     * bus-refresh，刷新单个项目的config配置
+     * @param code
+     * @param application
+     */
     public void refreshResult(int code, String application){
         if(code == CommonConstants.SUCCESS){
+            Map map = new HashMap();
             MicroservicesRo configMic = microservicesService.getByServiceName("config-master");
             MicroservicesRo appMic = microservicesService.getByServiceName(application);
-            String url = "http://"+configMic.getServiceIp()+":"+configMic.getServicePort()+"/bus/refresh?destination="
+            String url = "http://"+configMic.getServiceIp()+":"+configMic.getServicePort()+"/actuator/bus-refresh/"
                     + application + ":" + appMic.getServicePort();
-            String refreshResult = restTemplate.getForEntity(url, String.class).getBody();
+            String refreshResult = restTemplate.postForEntity(url, map, String.class).getBody();
             log.info(application+"刷新配置文件，刷新地址："+ url + "执行结果：" + refreshResult);
         }
     }
