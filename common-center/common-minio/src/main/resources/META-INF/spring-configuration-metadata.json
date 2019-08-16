@@ -1,0 +1,9 @@
+{
+  "groups": [
+    {
+      "name": "minio",
+      "type": "com.maple.common.minio.MinioProperties",
+      "sourceType": "com.maple.common.minio.MinioProperties"
+    }
+  ]
+}
