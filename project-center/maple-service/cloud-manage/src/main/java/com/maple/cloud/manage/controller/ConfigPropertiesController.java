@@ -93,10 +93,10 @@ public class ConfigPropertiesController {
 
     /**
      * bus-refresh，刷新单个项目的config配置
-     * @param code
-     * @param application
+     * @param code        改变状态的编码：失败则不刷新配置
+     * @param application 服务名称
      */
-    public void refreshResult(int code, String application){
+    private void refreshResult(int code, String application){
         if(code == CommonConstants.SUCCESS){
             Map map = new HashMap();
             MicroservicesRo configMic = microservicesService.getByServiceName("config-master");
