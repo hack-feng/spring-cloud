@@ -7,15 +7,15 @@ spring:
   application:
     name: config-master
   rabbitmq:
-    host: 47.101.181.228
+    host: 127.0.0.1
     port: 5672
     username: admin
-    password: zhangQQ123456
+    password: 123456
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://47.101.181.228:3306/maple?useUnicode=true&characterEncoding=utf8&characterSetResults=utf8&serverTimezone=GMT%2B8
+    url: jdbc:mysql://127.0.0.1:3306/maple?useUnicode=true&characterEncoding=utf8&characterSetResults=utf8&serverTimezone=GMT%2B8
     username: root
-    password: zhangQQ94264
+    password: 123456
   cloud:
     config:
       label: master
@@ -39,4 +39,13 @@ spring:
 eureka:
   client:
     service-url:
-      defaultZone: http://47.101.181.228:1111/eureka/
+      defaultZone: http://127.0.0.1:1111/eureka/
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  endpoint:
+    health:
+      show-details: ALWAYS
