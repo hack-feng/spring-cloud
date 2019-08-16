@@ -19,6 +19,7 @@
 ### cloud-center(spring-cloud组件中心)
 #### spring-cloud-config(配置中心)
 * config-master(已启用，本项目的配置中心)
+config使用手册：https://github.com/hack-feng/spring-cloud/blob/master/cloud-center/spring-cloud-config/readme.md
 
 #### spring-cloud-eureka(注册中心)
 * eureka-master(已启用，本项目的注册中心)
