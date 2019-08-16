@@ -16,6 +16,7 @@ import com.maple.common.core.util.R;
 import com.maple.system.api.bean.ConfigProperties;
 import com.maple.system.api.bean.Info;
 import com.maple.system.api.bean.Microservices;
+import com.maple.system.api.ro.MicroservicesRo;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -82,7 +83,7 @@ public class MicroservicesServiceImpl extends ServiceImpl<MicroservicesMapper, M
             configList.add(createBaseConfig("配置注册中心", config, "eureka.client.service-url.defaultZone", "http://127.0.0.1:1111/eureka/", configList.size()));
             configList.add(createBaseConfig("zipkin链路跟踪", config, "spring.zipkin.base-url", "http://localhost:3101", configList.size()));
             if (microservices.getIsUseMysql() == 1) {
-                int mysqlId = microservices.getMysqlInfo();
+                int mysqlId = 1;//microservices.getMysqlInfo();
                 Info info = infoMapper.selectById(mysqlId);
                 String url = "jdbc:mysql://" + info.getHost() + ":" + info.getPort() + "/" + info.getDataName() + "?useUnicode=true&characterEncoding=utf8&useSSL=false";
                 configList.add(createBaseConfig("数据库数据库驱动", config, "spring.datasource.driver-class-name", "com.mysql.cj.jdbc.Driver", configList.size()));
@@ -108,7 +109,7 @@ public class MicroservicesServiceImpl extends ServiceImpl<MicroservicesMapper, M
 
             }
             if (microservices.getIsUseRabbitmq() == 1) {
-                int rabbitmqId = microservices.getRabbitmqInfo();
+                int rabbitmqId = 2;//microservices.getRabbitmqInfo();
                 Info info = infoMapper.selectById(rabbitmqId);
                 configList.add(createBaseConfig("rabbitmq地址", config, "spring.rabbitmq.host", info.getHost(), configList.size()));
                 configList.add(createBaseConfig("rabbitmq端口号", config, "spring.rabbitmq.port", info.getPort(), configList.size()));
@@ -116,7 +117,7 @@ public class MicroservicesServiceImpl extends ServiceImpl<MicroservicesMapper, M
                 configList.add(createBaseConfig("rabbitmq密码", config, "spring.rabbitmq.password", info.getPassWord(), configList.size()));
             }
             if (microservices.getIsUseRedis() == 1) {
-                int redisId = microservices.getRedisInfo();
+                int redisId = 3;//microservices.getRedisInfo();
                 Info info = infoMapper.selectById(redisId);
                 configList.add(createBaseConfig("redis数据库索引（默认为0）", config, "spring.redis.database", "0", configList.size()));
                 configList.add(createBaseConfig("redis地址", config, "spring.redis.host", info.getHost(), configList.size()));
@@ -124,6 +125,9 @@ public class MicroservicesServiceImpl extends ServiceImpl<MicroservicesMapper, M
                 configList.add(createBaseConfig("redis密码", config, "spring.redis.password", info.getPassWord(), configList.size()));
                 configList.add(createBaseConfig("redis连接超时时间（毫秒）默认是2000ms", config, "spring.redis.timeout", "5000ms", configList.size()));
             }
+
+            configList.add(createBaseConfig("Actuator暴露的端点", config, "management.endpoints.web.exposure.include", "*", configList.size()));
+            configList.add(createBaseConfig("Actuator的健康检查", config, "management.endpoint.health.show-details", "ALWAYS", configList.size()));
 
             // 批量插入config的配置信息
             try (SqlSession batchSqlSession = SqlHelper.sqlSessionBatch(ReflectionKit.getSuperClassGenericType(ConfigPropertiesServiceImpl.class, 1))) {
@@ -160,6 +164,14 @@ public class MicroservicesServiceImpl extends ServiceImpl<MicroservicesMapper, M
         // 删除微服务
         int count = microservicesMapper.deleteById(id);
         return R.isOk(count > 0, "删除微服务");
+    }
+
+    @Override
+    public MicroservicesRo getByServiceName(String application) {
+        Microservices mic = microservicesMapper.selectOne(new QueryWrapper<Microservices>().eq("service_name", application));
+        MicroservicesRo result = new MicroservicesRo();
+        BeanUtils.copyProperties(mic, result);
+        return result;
     }
 
     private ConfigProperties createBaseConfig(String remark, ConfigProperties configFlag, String key, String value, int sort) {

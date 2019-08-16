@@ -41,6 +41,12 @@
             <artifactId>spring-boot-starter-data-redis-reactive</artifactId>
         </dependency>
 
+        <!-- Spring Cloud ==> 引入bus的消息总线-->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-bus-amqp</artifactId>
+        </dependency>
+
     </dependencies>
 
 
