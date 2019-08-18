@@ -31,8 +31,6 @@ public class GatewayDefineController {
     private IGatewayDefineService gatewayDefineService;
 
     @ApiOperation(value = "新增网关路由", notes = "新增一个网关路由")
-    @ApiImplicitParam(name = "gatewayDefineRo", value = "需要新增网关实体对象", required = true,
-            dataType = "GatewayDefineRo", dataTypeClass = GatewayDefineRo.class)
     @PostMapping
     public R add(@Valid @RequestBody GatewayDefineRo gatewayDefineRo) {
         boolean isOk = gatewayDefineService.add(gatewayDefineRo.toBean(GatewayDefine.class));
@@ -40,11 +38,7 @@ public class GatewayDefineController {
     }
 
     @ApiOperation(value = "修改网关路由", notes = "根据id修改指定的网关路由")
-    @ApiImplicitParams({
-            @ApiImplicitParam(name = "id", value = "网关路由id", required = true, dataType = "Integer"),
-            @ApiImplicitParam(name = "gatewayDefineRo", value = "需要修改的网关实体对象", required = true,
-                    dataType = "GatewayDefineRo", dataTypeClass = GatewayDefineRo.class)
-    })
+    @ApiImplicitParam(name = "id", value = "网关路由id", required = true, dataType = "Integer")
     @PutMapping(value = "/{id}")
     public R update(@PathVariable Integer id, @Valid @RequestBody GatewayDefineRo gatewayDefineRo) {
         GatewayDefine gatewayDefine = gatewayDefineRo.toBean(GatewayDefine.class);
