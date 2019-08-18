@@ -13,9 +13,6 @@ public class TestController {
     @Value("${maple.test}")
     private String test;
 
-    @Value("${maple.test.aaa}")
-    private String aaa;
-
     @GetMapping("/test")
     public String test(){
         return "test:"+test;
