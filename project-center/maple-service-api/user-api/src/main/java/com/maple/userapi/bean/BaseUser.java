@@ -3,9 +3,12 @@ package com.maple.userapi.bean;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
+
 import java.util.Date;
+
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableField;
+
 import java.io.Serializable;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -21,7 +24,7 @@ import io.swagger.annotations.ApiModelProperty;
  * @since 2019-07-09
  */
 @TableName("base_user")
-@ApiModel(value="BaseUser对象", description="基础信息-用户信息")
+@ApiModel(value = "BaseUser对象", description = "基础信息-用户信息")
 public class BaseUser extends Model<BaseUser> {
 
     private static final long serialVersionUID = 1L;
@@ -222,22 +225,22 @@ public class BaseUser extends Model<BaseUser> {
     @Override
     public String toString() {
         return "BaseUser{" +
-        ", id=" + id +
-        ", nickName=" + nickName +
-        ", userName=" + userName +
-        ", passWord=" + passWord +
-        ", phone=" + phone +
-        ", emailStatus=" + emailStatus +
-        ", email=" + email +
-        ", qqStatus=" + qqStatus +
-        ", qqLink=" + qqLink +
-        ", wxStatus=" + wxStatus +
-        ", wxLink=" + wxLink +
-        ", createDate=" + createDate +
-        ", modifyDate=" + modifyDate +
-        ", isDelete=" + isDelete +
-        ", isLock=" + isLock +
-        ", content=" + content +
-        "}";
+                ", id=" + id +
+                ", nickName=" + nickName +
+                ", userName=" + userName +
+                ", passWord=" + passWord +
+                ", phone=" + phone +
+                ", emailStatus=" + emailStatus +
+                ", email=" + email +
+                ", qqStatus=" + qqStatus +
+                ", qqLink=" + qqLink +
+                ", wxStatus=" + wxStatus +
+                ", wxLink=" + wxLink +
+                ", createDate=" + createDate +
+                ", modifyDate=" + modifyDate +
+                ", isDelete=" + isDelete +
+                ", isLock=" + isLock +
+                ", content=" + content +
+                "}";
     }
 }

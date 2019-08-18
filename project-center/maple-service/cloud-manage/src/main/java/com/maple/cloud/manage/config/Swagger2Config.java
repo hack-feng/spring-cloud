@@ -17,6 +17,7 @@ public class Swagger2Config {
 
     /**
      * Swagger2参数详解
+     *
      * @Api：修饰整个类，描述Controller的作用
      * @ApiOperation：描述一个类的一个方法，或者说一个接口
      * @ApiParam：单个参数描述@ApiModel：用对象来接收参数
@@ -39,6 +40,7 @@ public class Swagger2Config {
                 .paths(PathSelectors.any())
                 .build();
     }
+
     //构建 api文档的详细信息函数
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()

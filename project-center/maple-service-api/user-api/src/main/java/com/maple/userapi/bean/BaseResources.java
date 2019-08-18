@@ -22,9 +22,9 @@ import java.util.Date;
  * @since 2019-07-09
  */
 @Data
-@EqualsAndHashCode(callSuper=false)
+@EqualsAndHashCode(callSuper = false)
 @TableName("base_resources")
-@ApiModel(value="BaseResources对象", description="基础信息-资源表")
+@ApiModel(value = "BaseResources对象", description = "基础信息-资源表")
 public class BaseResources extends Model<BaseResources> {
 
     private static final long serialVersionUID = 1L;

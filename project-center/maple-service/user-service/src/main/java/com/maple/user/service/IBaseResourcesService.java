@@ -17,6 +17,7 @@ public interface IBaseResourcesService extends IService<BaseResources> {
 
     /**
      * 根据角色代码查询
+     *
      * @param roleCode
      * @return
      */

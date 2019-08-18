@@ -13,11 +13,12 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.Date;
 
 /**
  * <p>
- *  前端控制器
+ * 前端控制器
  * </p>
  *
  * @author maple
@@ -31,15 +32,16 @@ public class MicroservicesController {
     @Autowired
     private IMicroservicesService microservicesService;
 
+    @ApiOperation(value = "查询微服务列表", notes = "分页查询微服务的列表")
     @GetMapping("/getList")
-    public R getList(Page page){
+    public R getList(Page page) {
         IPage<Microservices> result = microservicesService.getList();
         return R.ok(result);
     }
 
     @ApiOperation(value = "新增微服务", notes = "新增一个微服务，根据选择判断是否自动生成config配置文件")
     @PostMapping
-    public R add(MicroservicesRo microservicesRo){
+    public R add(@Valid MicroservicesRo microservicesRo) {
         Microservices microservices = microservicesRo.toBean(Microservices.class);
         microservices.setCreateDate(new Date());
         return microservicesService.add(microservices);
@@ -48,9 +50,9 @@ public class MicroservicesController {
     @ApiOperation(value = "修改微服务", notes = "根据id修改一个微服务，不会修改config信息")
     @ApiImplicitParam(name = "id", value = "微服务id，路由地址", required = true, paramType = "path")
     @PutMapping(value = "/{id}")
-    public R update(@PathVariable Integer id, MicroservicesRo microservicesRo){
-        if(id == null){
-            return  R.failed("错误代码：ID IS NULL, 请刷新页面重试");
+    public R update(@PathVariable Integer id, @Valid MicroservicesRo microservicesRo) {
+        if (id == null) {
+            return R.failed("错误代码：ID IS NULL, 请刷新页面重试");
         }
         Microservices microservices = microservicesRo.toBean(Microservices.class);
         microservices.setServiceName(null);
@@ -63,9 +65,9 @@ public class MicroservicesController {
     @ApiOperation(value = "删除微服务", notes = "根据id删除一个微服务，同时删除该服务对应的所有信息")
     @ApiImplicitParam(name = "id", value = "微服务id，路由地址", required = true, dataType = "int", paramType = "path")
     @DeleteMapping(value = "/{id}")
-    public R delete(@PathVariable Integer id){
-        if(id == null){
-            return  R.failed("错误代码：ID IS NULL, 请刷新页面重试");
+    public R delete(@PathVariable Integer id) {
+        if (id == null) {
+            return R.failed("错误代码：ID IS NULL, 请刷新页面重试");
         }
         return microservicesService.delete(id);
     }

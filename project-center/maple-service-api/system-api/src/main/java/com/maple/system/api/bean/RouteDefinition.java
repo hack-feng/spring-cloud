@@ -13,7 +13,7 @@ import java.util.List;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class RouteDefinition{
+public class RouteDefinition {
     private Uri uri;
     private String routeId;
     private List<FilterDefinition> filters = new ArrayList<>();

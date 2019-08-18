@@ -16,8 +16,7 @@ import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 /**
- * @author
- * 启用方法级的权限认证EnableGlobalMethodSecurity
+ * @author 启用方法级的权限认证EnableGlobalMethodSecurity
  */
 @Configuration
 @Order(2)
@@ -38,7 +37,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
      */
     @Override
     public void configure(WebSecurity web) {
-        web.ignoring().antMatchers("/css/**","/js/**");
+        web.ignoring().antMatchers("/css/**", "/js/**");
     }
 
     @Override
@@ -55,7 +54,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .permitAll()
                 .and()
                 .logout().disable()
-                .authorizeRequests().antMatchers("/token/**","/oauth/authorize").permitAll()
+                .authorizeRequests().antMatchers("/token/**", "/oauth/authorize").permitAll()
                 .anyRequest().fullyAuthenticated();
 
     }

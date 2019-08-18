@@ -46,11 +46,11 @@ public class MapleBasicAuthenticationFilter extends OncePerRequestFilter {
             R<String> result = new R<>();
             result.setCode(HttpStatus.HTTP_FORBIDDEN);
             result.setMsg("请求头中client信息为空");
-            WebUtils.writerError(result,response);
+            WebUtils.writerError(result, response);
             return;
         }
 
-        this.handle(request,response,clientDetails,filterChain);
+        this.handle(request, response, clientDetails, filterChain);
 
     }
 
@@ -58,7 +58,7 @@ public class MapleBasicAuthenticationFilter extends OncePerRequestFilter {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
         if (authentication != null && authentication.isAuthenticated()) {
-            filterChain.doFilter(request,response);
+            filterChain.doFilter(request, response);
             return;
         }
 
@@ -68,7 +68,7 @@ public class MapleBasicAuthenticationFilter extends OncePerRequestFilter {
 
         SecurityContextHolder.getContext().setAuthentication(token);
 
-        filterChain.doFilter(request,response);
+        filterChain.doFilter(request, response);
     }
 
     // 判断请求头中是否包含client信息，不包含返回false

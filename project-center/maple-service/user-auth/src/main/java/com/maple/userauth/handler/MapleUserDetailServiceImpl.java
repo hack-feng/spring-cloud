@@ -36,9 +36,9 @@ public class MapleUserDetailServiceImpl implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
         QueryWrapper<BaseUser> queryWrapper = new QueryWrapper<BaseUser>();
-        queryWrapper.eq("user_name",username);
+        queryWrapper.eq("user_name", username);
         BaseUser user = baseUserMapper.selectOne(queryWrapper);
-        if(user == null) {
+        if (user == null) {
             throw new UsernameNotFoundException("用户不存在");
         }
 
@@ -47,21 +47,21 @@ public class MapleUserDetailServiceImpl implements UserDetailsService {
 
         //所谓的角色，只是增加ROLE_前缀
         List<String> roleList = baseUserRoleMapper.findUserRole(username);
-        if(roleList != null && roleList.size() > 0) {
+        if (roleList != null && roleList.size() > 0) {
             dbAuthsSet.addAll(roleList);
         }
         List<String> permissionList = baseUserRoleMapper.findUserRes(username);
-        if(permissionList != null && permissionList.size() > 0) {
+        if (permissionList != null && permissionList.size() > 0) {
             dbAuthsSet.addAll(permissionList);
         }
-        if(dbAuthsSet != null && dbAuthsSet.size() > 0) {
+        if (dbAuthsSet != null && dbAuthsSet.size() > 0) {
             authorities = AuthorityUtils.createAuthorityList(dbAuthsSet.toArray(new String[0]));
         }
 
-        boolean enabled =  CommonConstants.STATUS_NORMAL.equals(Convert.toStr(user.getIsLock()));
+        boolean enabled = CommonConstants.STATUS_NORMAL.equals(Convert.toStr(user.getIsLock()));
         //返回UserDetails的实现user不为空，则验证通过
         // 构造security用户
-        return new AuthUser(user.getId(),user.getUserName(), SecurityConstants.NOOP + user.getPassWord(),
+        return new AuthUser(user.getId(), user.getUserName(), SecurityConstants.NOOP + user.getPassWord(),
                 enabled, true, true, !CommonConstants.STATUS_LOCK.equals(Convert.toStr(user.getIsLock())), authorities);
     }
 }

@@ -12,15 +12,15 @@ import org.springframework.security.oauth2.common.exceptions.OAuth2Exception;
  */
 @JsonSerialize(using = MapleAuth2ExceptionSerializer.class)
 public class MapleAuth2Exception extends OAuth2Exception {
-	@Getter
-	private String errorCode;
+    @Getter
+    private String errorCode;
 
-	public MapleAuth2Exception(String msg) {
-		super(msg);
-	}
+    public MapleAuth2Exception(String msg) {
+        super(msg);
+    }
 
-	public MapleAuth2Exception(String msg, String errorCode) {
-		super(msg);
-		this.errorCode = errorCode;
-	}
+    public MapleAuth2Exception(String msg, String errorCode) {
+        super(msg);
+        this.errorCode = errorCode;
+    }
 }

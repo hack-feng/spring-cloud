@@ -34,9 +34,9 @@ public class GatewayDefineController {
     @ApiImplicitParam(name = "gatewayDefineRo", value = "需要新增网关实体对象", required = true,
             dataType = "GatewayDefineRo", dataTypeClass = GatewayDefineRo.class)
     @PostMapping
-    public R add(@Valid @RequestBody GatewayDefineRo gatewayDefineRo){
-       boolean isOk = gatewayDefineService.add(gatewayDefineRo.toBean(GatewayDefine.class));
-       return R.isOk(isOk, "新增网关路由");
+    public R add(@Valid @RequestBody GatewayDefineRo gatewayDefineRo) {
+        boolean isOk = gatewayDefineService.add(gatewayDefineRo.toBean(GatewayDefine.class));
+        return R.isOk(isOk, "新增网关路由");
     }
 
     @ApiOperation(value = "修改网关路由", notes = "根据id修改指定的网关路由")
@@ -46,7 +46,7 @@ public class GatewayDefineController {
                     dataType = "GatewayDefineRo", dataTypeClass = GatewayDefineRo.class)
     })
     @PutMapping(value = "/{id}")
-    public R update(@PathVariable Integer id, @Valid @RequestBody GatewayDefineRo gatewayDefineRo){
+    public R update(@PathVariable Integer id, @Valid @RequestBody GatewayDefineRo gatewayDefineRo) {
         GatewayDefine gatewayDefine = gatewayDefineRo.toBean(GatewayDefine.class);
         gatewayDefine.setId(id);
         return R.isOk(gatewayDefineService.update(gatewayDefine), "修改网关路由");
@@ -56,12 +56,12 @@ public class GatewayDefineController {
     @ApiOperation(value = "删除网关路由", notes = "根据id删除指定的网关路由")
     @ApiImplicitParam(name = "id", value = "网关路由id", required = true, dataType = "Integer")
     @DeleteMapping(value = "/{id}")
-    public R delete(@PathVariable Integer id){
+    public R delete(@PathVariable Integer id) {
         return R.isOk(gatewayDefineService.delete(id), "删除网关路由");
     }
 
     @GetMapping(value = "/{id}")
-    public R get(@PathVariable Integer id){
+    public R get(@PathVariable Integer id) {
         return R.ok(gatewayDefineService.get(id));
     }
 

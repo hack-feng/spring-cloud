@@ -31,7 +31,7 @@ import java.util.List;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-@ApiModel(value="GatewayDefine对象", description="系统配置-gateway动态路由配置")
+@ApiModel(value = "GatewayDefine对象", description = "系统配置-gateway动态路由配置")
 public class GatewayDefineRo extends BaseRo<GatewayDefine> {
 
     @ApiModelProperty(value = "主键id")

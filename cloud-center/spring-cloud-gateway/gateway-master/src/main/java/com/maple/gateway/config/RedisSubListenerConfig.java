@@ -18,8 +18,9 @@ public class RedisSubListenerConfig {
 
     /**
      * 消息适配器
-     *
+     * <p>
      * 绑定消息监听者和接收监听的方法,必须要注入这个监听器，不然会报错
+     *
      * @return MessageListenerAdapter
      */
     @Bean
@@ -33,7 +34,6 @@ public class RedisSubListenerConfig {
     }
 
     /**
-     *
      * @param connectionFactory
      * @param listenerAdapterSave
      * @param listenerAdapterDelete

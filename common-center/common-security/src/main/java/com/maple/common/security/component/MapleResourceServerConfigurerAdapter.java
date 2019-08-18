@@ -27,8 +27,8 @@ public class MapleResourceServerConfigurerAdapter extends ResourceServerConfigur
 
         //允许使用iframe 嵌套
         httpSecurity.headers().frameOptions().disable()
-            .and().csrf().disable();
-        if(ignorePropertiesConfig.getUrls() != null && ignorePropertiesConfig.getUrls().size() > 0) {
+                .and().csrf().disable();
+        if (ignorePropertiesConfig.getUrls() != null && ignorePropertiesConfig.getUrls().size() > 0) {
             String[] ignoreUrls = ignorePropertiesConfig.getUrls().toArray(new String[ignorePropertiesConfig.getUrls().size()]);
             httpSecurity.authorizeRequests().antMatchers(ignoreUrls).permitAll();
         }

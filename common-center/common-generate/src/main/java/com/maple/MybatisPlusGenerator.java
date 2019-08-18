@@ -19,7 +19,7 @@ import java.util.Scanner;
  */
 public class MybatisPlusGenerator {
 
-    public static void main(String[] args){
+    public static void main(String[] args) {
 
         String auth = "maple";
         String packageName = "com.maple.demo";
@@ -29,30 +29,30 @@ public class MybatisPlusGenerator {
         String password = "123456";
 
         String authSc = scanner("请输入生成代码的作者，（默认maple）：");
-        if(StringUtils.isNotEmpty(authSc)){
+        if (StringUtils.isNotEmpty(authSc)) {
             auth = authSc;
         }
 
         String packageNameSc = scanner("请输入项目包名，例如（com.maple.demo），默认com.maple.demo：");
-        if(StringUtils.isNotEmpty(packageNameSc)){
+        if (StringUtils.isNotEmpty(packageNameSc)) {
             packageName = packageNameSc;
         }
 
         String pathSc = scanner("请输入存放路径, (默认D:)：");
-        if(StringUtils.isNotEmpty(pathSc)){
+        if (StringUtils.isNotEmpty(pathSc)) {
             path = pathSc;
         }
 
         String sqlInfo = scanner("请输入数据库连接信息，必须为以下格式(连接地址:端口号/数据库名称&用户名&密码)（默认：127.0.0.1:3306/maple&root&123456）：");
-        if(StringUtils.isNotEmpty(sqlInfo)){
+        if (StringUtils.isNotEmpty(sqlInfo)) {
             String[] drivers = sqlInfo.split("&");
-            if(StringUtils.isNotEmpty(drivers[0])){
+            if (StringUtils.isNotEmpty(drivers[0])) {
                 url = drivers[0];
             }
-            if(StringUtils.isNotEmpty(drivers[1])){
+            if (StringUtils.isNotEmpty(drivers[1])) {
                 username = drivers[1];
             }
-            if(StringUtils.isNotEmpty(drivers[2])){
+            if (StringUtils.isNotEmpty(drivers[2])) {
                 password = drivers[2];
             }
         }
@@ -67,13 +67,13 @@ public class MybatisPlusGenerator {
         System.out.println(allInfo);
 
         String code = scanner("确认生成请输入'Y',取消请回车");
-        if(code.toUpperCase().equals("Y")){
+        if (code.toUpperCase().equals("Y")) {
             generateTest(auth, packageName, path, url, username, password);
         }
     }
 
     public static void generateTest(String auth, String packageName, String path,
-                                    String url, String username, String password){
+                                    String url, String username, String password) {
         //全局配置
         GlobalConfig config = new GlobalConfig();
         //设置是否支持AR模式
@@ -111,7 +111,7 @@ public class MybatisPlusGenerator {
                     public DbColumnType processTypeConvert(GlobalConfig globalConfig, String fieldType) {
                         System.out.println("转换类型：" + fieldType);
                         //将数据库中datetime转换成date
-                        if ( fieldType.toLowerCase().contains( "datetime" ) ) {
+                        if (fieldType.toLowerCase().contains("datetime")) {
                             return DbColumnType.DATE;
                         }
                         return (DbColumnType) super.processTypeConvert(globalConfig, fieldType);
@@ -181,7 +181,7 @@ public class MybatisPlusGenerator {
     }
 
 
-    public static String scanner(String param){
+    public static String scanner(String param) {
         Scanner scanner = new Scanner(System.in);
         System.out.println(param);
         return scanner.nextLine();

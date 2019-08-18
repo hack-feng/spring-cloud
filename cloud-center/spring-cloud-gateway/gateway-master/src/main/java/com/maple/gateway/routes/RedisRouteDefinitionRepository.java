@@ -1,7 +1,5 @@
 package com.maple.gateway.routes;
 
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,7 +30,7 @@ public class RedisRouteDefinitionRepository implements RouteDefinitionRepository
 
     @Override
     public Flux<RouteDefinition> getRouteDefinitions() {
-        if(routeDefinitionMaps == null || routeDefinitionMaps.size() == 0){
+        if (routeDefinitionMaps == null || routeDefinitionMaps.size() == 0) {
             loadRouteDefinition();
         }
         return Flux.fromIterable(routeDefinitionMaps.values());
@@ -57,9 +55,10 @@ public class RedisRouteDefinitionRepository implements RouteDefinitionRepository
     /**
      * redis topic "saveRouteDefinition" 消费者
      * 动态新增或修改路由
+     *
      * @param routeDefinitionJson
      */
-    public void saveRouteDefinition(String routeDefinitionJson){
+    public void saveRouteDefinition(String routeDefinitionJson) {
         log.info("saveRouteDefinition--------------->" + routeDefinitionJson);
         try {
             RouteDefinition routeDefinition = new ObjectMapper().readValue(routeDefinitionJson, RouteDefinition.class);
@@ -72,9 +71,10 @@ public class RedisRouteDefinitionRepository implements RouteDefinitionRepository
     /**
      * redis topic "deleteRouteDefinition" 消费者
      * 动态删除路由
+     *
      * @param routeId
      */
-    public void deleteRouteDefinition(String routeId){
+    public void deleteRouteDefinition(String routeId) {
         log.info("deleteRouteDefinition----------->" + routeId);
         routeDefinitionMaps.remove(routeId);
     }
@@ -82,7 +82,7 @@ public class RedisRouteDefinitionRepository implements RouteDefinitionRepository
     /**
      * 初始化路由中redis的数据
      */
-    public void loadRouteDefinition(){
+    public void loadRouteDefinition() {
         Set<String> gatewayKeys = stringRedisTemplate.keys(MAPLE_CLOUD_GATEWAY_ROUTES + "*");
         if (CollectionUtils.isEmpty(gatewayKeys)) {
             return;

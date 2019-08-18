@@ -33,15 +33,15 @@ public class BaseRoleResServiceImpl extends ServiceImpl<BaseRoleResMapper, BaseR
     public String updateRoleAuth(Integer roleId, String resIds) {
 
         UpdateWrapper<BaseRoleRes> updateWrapper = new UpdateWrapper<>();
-        updateWrapper.eq("role_id",roleId);
+        updateWrapper.eq("role_id", roleId);
         baseRoleResMapper.delete(updateWrapper);
 
-        if(StrUtil.isEmpty(resIds)) {
+        if (StrUtil.isEmpty(resIds)) {
             return "操作成功";
         }
 
         String[] resIdArr = resIds.split(",");
-        for(String id : resIdArr) {
+        for (String id : resIdArr) {
             BaseRoleRes baseRoleRes = new BaseRoleRes();
             baseRoleRes.setRoleId(roleId);
             baseRoleRes.setResId(Convert.toInt(id));

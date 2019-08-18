@@ -9,7 +9,7 @@ import java.util.Date;
 
 /**
  * <p>
- * 
+ *
  * </p>
  *
  * @author maple
@@ -17,8 +17,8 @@ import java.util.Date;
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
-@ApiModel(value="Microservices对象", description="微服务备案")
-public class MicroservicesVo{
+@ApiModel(value = "Microservices对象", description = "微服务备案")
+public class MicroservicesVo {
 
     @ApiModelProperty(value = "主键id")
     private Integer id;

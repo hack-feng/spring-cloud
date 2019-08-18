@@ -97,7 +97,7 @@ public class MenuTree extends TreeNode {
 
         this.meta = new Meta();
         this.meta.setTitle(resource.getResName());
-        if(StrUtil.isNotEmpty(resource.getComponent()) && resource.getComponent().startsWith("http")) {
+        if (StrUtil.isNotEmpty(resource.getComponent()) && resource.getComponent().startsWith("http")) {
             this.meta.setHref(resource.getComponent());
         }
         this.meta.setIcon(resource.getIcon());

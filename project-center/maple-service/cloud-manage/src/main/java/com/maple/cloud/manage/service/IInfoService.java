@@ -5,7 +5,7 @@ import com.maple.system.api.bean.Info;
 
 /**
  * <p>
- *  服务类
+ * 服务类
  * </p>
  *
  * @author maple

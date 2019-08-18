@@ -15,6 +15,7 @@
         <module>common-core</module>
         <module>common-security</module>
         <module>common-generate</module>
+        <module>common-minio</module>
     </modules>
 
 

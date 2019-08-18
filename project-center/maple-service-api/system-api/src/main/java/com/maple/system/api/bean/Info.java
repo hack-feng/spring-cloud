@@ -2,9 +2,13 @@ package com.maple.system.api.bean;
 
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
+
 import java.util.Date;
+
 import com.baomidou.mybatisplus.annotation.TableField;
+
 import java.io.Serializable;
+
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -13,7 +17,7 @@ import lombok.experimental.Accessors;
 
 /**
  * <p>
- * 
+ *
  * </p>
  *
  * @author maple
@@ -23,7 +27,7 @@ import lombok.experimental.Accessors;
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
 @TableName("system_info")
-@ApiModel(value="Info对象", description="")
+@ApiModel(value = "Info对象", description = "")
 public class Info extends Model<Info> {
 
     private static final long serialVersionUID = 1L;

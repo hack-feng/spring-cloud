@@ -3,10 +3,14 @@ package com.maple.userapi.bean;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
+
 import java.util.Date;
+
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableField;
+
 import java.io.Serializable;
+
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
@@ -19,7 +23,7 @@ import io.swagger.annotations.ApiModelProperty;
  * @since 2019-07-09
  */
 @TableName("base_user_role")
-@ApiModel(value="BaseUserRole对象", description="基础信息-用户和角色关联表")
+@ApiModel(value = "BaseUserRole对象", description = "基础信息-用户和角色关联表")
 public class BaseUserRole extends Model<BaseUserRole> {
 
     private static final long serialVersionUID = 1L;
@@ -80,10 +84,10 @@ public class BaseUserRole extends Model<BaseUserRole> {
     @Override
     public String toString() {
         return "BaseUserRole{" +
-        ", id=" + id +
-        ", userId=" + userId +
-        ", roleId=" + roleId +
-        ", createDate=" + createDate +
-        "}";
+                ", id=" + id +
+                ", userId=" + userId +
+                ", roleId=" + roleId +
+                ", createDate=" + createDate +
+                "}";
     }
 }

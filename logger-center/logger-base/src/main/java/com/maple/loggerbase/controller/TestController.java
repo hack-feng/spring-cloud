@@ -11,7 +11,7 @@ public class TestController {
     private String myww;
 
     @RequestMapping(value = "/test")
-    public String test(){
+    public String test() {
         System.out.println(myww);
         return myww;
     }

@@ -4,10 +4,10 @@
 
     <!-- 通用查询映射结果 -->
     <resultMap id="BaseResultMap" type="com.maple.userapi.bean.BaseUserRole">
-        <id column="id" property="id" />
-        <result column="user_id" property="userId" />
-        <result column="role_id" property="roleId" />
-        <result column="create_date" property="createDate" />
+        <id column="id" property="id"/>
+        <result column="user_id" property="userId"/>
+        <result column="role_id" property="roleId"/>
+        <result column="create_date" property="createDate"/>
     </resultMap>
 
     <!-- 通用查询结果列 -->

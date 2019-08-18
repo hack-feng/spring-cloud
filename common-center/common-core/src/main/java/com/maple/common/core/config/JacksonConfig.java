@@ -21,13 +21,13 @@ import java.util.TimeZone;
 @ConditionalOnClass(ObjectMapper.class)
 @AutoConfigureBefore(JacksonAutoConfiguration.class)
 public class JacksonConfig {
-	@Bean
-	public Jackson2ObjectMapperBuilderCustomizer customizer() {
-		return builder -> {
-			builder.locale(Locale.CHINA);
-			builder.timeZone(TimeZone.getTimeZone(ZoneId.systemDefault()));
-			builder.simpleDateFormat(DatePattern.NORM_DATETIME_PATTERN);
-			builder.modules(new MapleJavaTimeModule());
-		};
-	}
+    @Bean
+    public Jackson2ObjectMapperBuilderCustomizer customizer() {
+        return builder -> {
+            builder.locale(Locale.CHINA);
+            builder.timeZone(TimeZone.getTimeZone(ZoneId.systemDefault()));
+            builder.simpleDateFormat(DatePattern.NORM_DATETIME_PATTERN);
+            builder.modules(new MapleJavaTimeModule());
+        };
+    }
 }

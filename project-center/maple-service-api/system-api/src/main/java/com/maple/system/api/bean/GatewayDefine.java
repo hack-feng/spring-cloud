@@ -5,7 +5,9 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableField;
+
 import java.io.Serializable;
+
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -24,7 +26,7 @@ import lombok.experimental.Accessors;
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
 @TableName("system_gateway_define")
-@ApiModel(value="GatewayDefine对象", description="系统配置-gateway动态路由配置")
+@ApiModel(value = "GatewayDefine对象", description = "系统配置-gateway动态路由配置")
 public class GatewayDefine extends Model<GatewayDefine> {
 
     private static final long serialVersionUID = 1L;

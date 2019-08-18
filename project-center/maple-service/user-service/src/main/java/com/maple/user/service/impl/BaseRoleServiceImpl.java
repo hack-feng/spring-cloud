@@ -9,6 +9,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.maple.userapi.bean.BaseRole;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * <p>
@@ -28,10 +29,11 @@ public class BaseRoleServiceImpl extends ServiceImpl<BaseRoleMapper, BaseRole> i
 
     @Override
     public IPage getRolePage(Page page, BaseRole role) {
-        return baseRoleMapper.getRolePage(page,role);
+        return baseRoleMapper.getRolePage(page, role);
     }
 
     @Override
+    @Transactional
     public String deleteByIds(String ids) {
         String[] idArr = ids.split(",");
         //删除角色菜单关联关系

@@ -1,4 +1,3 @@
-
 server:
   port: 3101
   use-forward-headers: true
@@ -9,7 +8,7 @@ spring:
   application:
     #应用名称
     name: zipkin-server
- 
+
 spring.main.web-application-type: none
 
 armeria:

@@ -21,4 +21,6 @@ public interface IBaseUserService extends IService<BaseUser> {
     UserInfo getUserInfo(BaseUser user);
 
     IPage getUserPage(Page page, BaseUser user);
+
+    String deleteByIds(String ids);
 }

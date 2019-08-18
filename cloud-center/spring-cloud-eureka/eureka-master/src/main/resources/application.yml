@@ -17,6 +17,9 @@ eureka:
     register-with-eureka: false
     service-url:
       defaultZone: http://localhost:1111/eureka/
+  server:
+    # 测试时关闭自我保护机制，保证不可用服务及时踢出
+    enable-self-preservation: false
 
 management:
   endpoints:

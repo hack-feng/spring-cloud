@@ -6,11 +6,9 @@ import com.maple.common.core.util.R;
 import com.maple.system.api.bean.Microservices;
 import com.maple.system.api.ro.MicroservicesRo;
 
-import java.util.Map;
-
 /**
  * <p>
- *  服务类
+ * 服务类
  * </p>
  *
  * @author maple
@@ -25,4 +23,6 @@ public interface IMicroservicesService extends IService<Microservices> {
     R update(Microservices microservices);
 
     R delete(Integer id);
+
+    MicroservicesRo getByServiceName(String application);
 }

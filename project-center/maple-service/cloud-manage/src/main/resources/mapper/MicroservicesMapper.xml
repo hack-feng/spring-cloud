@@ -4,28 +4,29 @@
 
     <!-- 通用查询映射结果 -->
     <resultMap id="BaseResultMap" type="com.maple.system.api.bean.Microservices">
-        <id column="id" property="id" />
-        <result column="service_name" property="serviceName" />
-        <result column="service_ip" property="serviceIp" />
-        <result column="is_start" property="isStart" />
-        <result column="status" property="status" />
-        <result column="is_create_config" property="isCreateConfig" />
-        <result column="is_use_msyql" property="isUseMsyql" />
-        <result column="is_user_redis" property="isUserRedis" />
-        <result column="is_use_rabbitmq" property="isUseRabbitmq" />
-        <result column="mysql_info" property="mysqlInfo" />
-        <result column="redis_info" property="redisInfo" />
-        <result column="rabbitmq_info" property="rabbitmqInfo" />
-        <result column="create_date" property="createDate" />
-        <result column="modify_date" property="modifyDate" />
-        <result column="create_id" property="createId" />
-        <result column="modify_id" property="modifyId" />
-        <result column="remark" property="remark" />
+        <id column="id" property="id"/>
+        <result column="service_name" property="serviceName"/>
+        <result column="service_ip" property="serviceIp"/>
+        <result column="is_start" property="isStart"/>
+        <result column="status" property="status"/>
+        <result column="is_create_config" property="isCreateConfig"/>
+        <result column="is_use_msyql" property="isUseMsyql"/>
+        <result column="is_user_redis" property="isUserRedis"/>
+        <result column="is_use_rabbitmq" property="isUseRabbitmq"/>
+        <result column="mysql_info" property="mysqlInfo"/>
+        <result column="redis_info" property="redisInfo"/>
+        <result column="rabbitmq_info" property="rabbitmqInfo"/>
+        <result column="create_date" property="createDate"/>
+        <result column="modify_date" property="modifyDate"/>
+        <result column="create_id" property="createId"/>
+        <result column="modify_id" property="modifyId"/>
+        <result column="remark" property="remark"/>
     </resultMap>
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        id, service_name, service_ip, is_start, status, is_create_config, is_use_msyql, is_user_redis, is_use_rabbitmq, mysql_info, redis_info, rabbitmq_info, create_date, modify_date, create_id, modify_id, remark
+        id, service_name, service_ip, is_start, status, is_create_config, is_use_msyql, is_user_redis, is_use_rabbitmq,
+        mysql_info, redis_info, rabbitmq_info, create_date, modify_date, create_id, modify_id, remark
     </sql>
 
 </mapper>

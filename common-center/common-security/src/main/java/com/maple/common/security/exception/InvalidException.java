@@ -10,18 +10,18 @@ import com.maple.common.security.component.MapleAuth2ExceptionSerializer;
 @JsonSerialize(using = MapleAuth2ExceptionSerializer.class)
 public class InvalidException extends MapleAuth2Exception {
 
-	public InvalidException(String msg, Throwable t) {
-		super(msg);
-	}
+    public InvalidException(String msg, Throwable t) {
+        super(msg);
+    }
 
-	@Override
-	public String getOAuth2ErrorCode() {
-		return "invalid_exception";
-	}
+    @Override
+    public String getOAuth2ErrorCode() {
+        return "invalid_exception";
+    }
 
-	@Override
-	public int getHttpErrorCode() {
-		return 426;
-	}
+    @Override
+    public int getHttpErrorCode() {
+        return 426;
+    }
 
 }
