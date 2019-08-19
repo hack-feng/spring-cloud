@@ -60,6 +60,7 @@ public class BaseUserServiceImpl extends ServiceImpl<BaseUserMapper, BaseUser> i
     @Override
     public UserInfo getUserInfo(BaseUser user) {
         UserInfo userInfo = new UserInfo();
+        user.setPassWord(null);
         userInfo.setSysUser(user);
         //设置角色列表
         List<BaseRole> roleList = baseRoleMapper.listRolesByUserId(user.getId());

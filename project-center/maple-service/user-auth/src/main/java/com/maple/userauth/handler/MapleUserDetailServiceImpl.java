@@ -36,11 +36,15 @@ public class MapleUserDetailServiceImpl implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
         QueryWrapper<BaseUser> queryWrapper = new QueryWrapper<BaseUser>();
-        queryWrapper.eq("user_name", username);
+        queryWrapper.eq("user_name",username);
         BaseUser user = baseUserMapper.selectOne(queryWrapper);
-        if (user == null) {
+        if(user == null) {
             throw new UsernameNotFoundException("用户不存在");
         }
+//        BaseUser user = baseUserMapper.selectUserByUsername(username);
+//        if (user == null) {
+//            throw new UsernameNotFoundException("用户不存在");
+//        }
 
         Collection<? extends GrantedAuthority> authorities = null;
         Set<String> dbAuthsSet = new HashSet<>();
