@@ -45,6 +45,10 @@ public class BaseUser extends Model<BaseUser> {
     @TableField("pass_word")
     private String passWord;
 
+    @ApiModelProperty(value = "头像")
+    @TableField("avatar")
+    private String avatar;
+
     @ApiModelProperty(value = "手机号")
     private String phone;
 
@@ -119,6 +123,14 @@ public class BaseUser extends Model<BaseUser> {
 
     public void setPassWord(String passWord) {
         this.passWord = passWord;
+    }
+
+    public String getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
     }
 
     public String getPhone() {
@@ -225,22 +237,24 @@ public class BaseUser extends Model<BaseUser> {
     @Override
     public String toString() {
         return "BaseUser{" +
-                ", id=" + id +
-                ", nickName=" + nickName +
-                ", userName=" + userName +
-                ", passWord=" + passWord +
-                ", phone=" + phone +
+                "id=" + id +
+                ", nickName='" + nickName + '\'' +
+                ", userName='" + userName + '\'' +
+                ", passWord='" + passWord + '\'' +
+                ", avatar='" + avatar + '\'' +
+                ", phone='" + phone + '\'' +
                 ", emailStatus=" + emailStatus +
-                ", email=" + email +
+                ", email='" + email + '\'' +
                 ", qqStatus=" + qqStatus +
-                ", qqLink=" + qqLink +
+                ", qqLink='" + qqLink + '\'' +
                 ", wxStatus=" + wxStatus +
-                ", wxLink=" + wxLink +
+                ", wxLink='" + wxLink + '\'' +
                 ", createDate=" + createDate +
                 ", modifyDate=" + modifyDate +
                 ", isDelete=" + isDelete +
                 ", isLock=" + isLock +
-                ", content=" + content +
-                "}";
+                ", content='" + content + '\'' +
+                '}';
     }
+
 }
