@@ -40,7 +40,7 @@ public class BaseUser extends Model<BaseUser> {
     @TableField("user_name")
     private String userName;
 
-    //@JsonIgnore
+    @JsonIgnore
     @ApiModelProperty(value = "密码")
     @TableField("pass_word")
     private String passWord;
