@@ -5,11 +5,13 @@ import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.maple.common.core.constant.CommonConstants;
 import com.maple.common.core.constant.SecurityConstants;
+import com.maple.common.core.util.AesEncryptUtil;
 import com.maple.common.security.vo.AuthUser;
 import com.maple.userapi.bean.BaseUser;
 import com.maple.userauth.mapper.BaseUserMapper;
 import com.maple.userauth.mapper.BaseUserRoleMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -31,6 +33,12 @@ public class MapleUserDetailServiceImpl implements UserDetailsService {
 
     @Autowired
     private BaseUserRoleMapper baseUserRoleMapper;
+
+    /**
+     * 使用AES加密模式，key需要为16位
+     */
+    @Value("${security.encode.key:1234567812345678}")
+    private String KEY;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -65,7 +73,14 @@ public class MapleUserDetailServiceImpl implements UserDetailsService {
         boolean enabled = CommonConstants.STATUS_NORMAL.equals(Convert.toStr(user.getIsLock()));
         //返回UserDetails的实现user不为空，则验证通过
         // 构造security用户
-        return new AuthUser(user.getId(), user.getUserName(), SecurityConstants.NOOP + user.getPassWord(),
+        String password = "";
+        try {
+            password = AesEncryptUtil.Encrypt(user.getPassWord(), KEY);
+        } catch (Exception e) {
+            e.printStackTrace();
+            password = user.getPassWord();
+        }
+        return new AuthUser(user.getId(), user.getUserName(), SecurityConstants.NOOP + password,
                 enabled, true, true, !CommonConstants.STATUS_LOCK.equals(Convert.toStr(user.getIsLock())), authorities);
     }
 }
