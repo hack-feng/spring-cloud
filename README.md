@@ -16,6 +16,21 @@
 
 
 ## 项目介绍
+
+### 项目使用端口号、数据库、MQ等资源清单
+
+| 项目名称 | 端口号 | mysql | redis | rabbitMQ | 必须启动 | 所属模块 | 开发情况 |
+| ------- | ----- | ----- | ----- | -------- | ------- | --------| ------- |
+| eureka-master  | 1111 | N | N | N | Y | 注册中心 | √ |
+| config-master  | 2000 | Y | N | Y | Y | 配置中心 | √ |
+| gateway-master | 5001 | N | Y | Y | Y | 路由转发 | √ |
+| zipkin-master  | 3101 | N | N | Y | N | 链路跟踪 | √ |
+| admin-server   | 6666 | N | N | Y | N | 可视化监控 | √ |
+| user-auth      | 3000 | Y | Y | Y | Y | 统一授权中心 | √ |
+| cloud-manage   | 5002 | Y | Y | Y | N | 系统配置服务 | 进行中 |
+| user-service   | 8001 | Y | Y | Y | Y | 用户服务 | 进行中 |
+
+
 ### cloud-center(spring-cloud组件中心)
 #### spring-cloud-config(配置中心)
 * config-master(已启用，本项目的配置中心)
