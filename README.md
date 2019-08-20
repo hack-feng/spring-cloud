@@ -30,6 +30,12 @@
 | cloud-manage   | 5002 | Y | Y | Y | N | 系统配置服务 | 进行中 |
 | user-service   | 8001 | Y | Y | Y | Y | 用户服务 | 进行中 |
 
+### Mysql、Redis、RabbitMQ信息
+|    类型   |    地址   | 端口号 | 用户名 |  密码  | 数据库名称 |
+| -------- | --------- | ----- | ----- | ------ | -------- |
+| Mysql    | 127.0.0.1 |  3306 |  root | 123456 |   maple  |
+| Redis    | 127.0.0.1 |  6379 |       | 123456 |          |
+| RabbitMQ | 127.0.0.1 |  5672 | admin | 123456 |          |
 
 ### cloud-center(spring-cloud组件中心)
 #### spring-cloud-config(配置中心)
