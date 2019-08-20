@@ -75,7 +75,7 @@ public class MapleUserDetailServiceImpl implements UserDetailsService {
         // 构造security用户
         String password = "";
         try {
-            password = AesEncryptUtil.Encrypt(user.getPassWord(), KEY);
+            password = AesEncryptUtil.encrypt(user.getPassWord(), KEY);
         } catch (Exception e) {
             e.printStackTrace();
             password = user.getPassWord();

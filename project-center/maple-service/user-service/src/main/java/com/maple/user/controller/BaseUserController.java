@@ -1,6 +1,5 @@
 package com.maple.user.controller;
 
-
 import cn.hutool.core.convert.Convert;
 import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
@@ -164,7 +163,7 @@ public class BaseUserController {
         if (user == null) {
             return R.failed("获取当前用户信息失败");
         }
-        user.setPassWord(AesEncryptUtil.Decrypt(passwd, KEY));
+        user.setPassWord(AesEncryptUtil.desEncrypt(passwd, KEY));
         return R.ok(userService.updateById(user));
     }
 
