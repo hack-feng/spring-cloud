@@ -1,39 +1,23 @@
-server:
-  port: 3101
-  use-forward-headers: true
-  compression:
-    enabled: true
-    mime-types: application/json,application/javascript,text/css,image/svg
 spring:
   application:
     #应用名称
-    name: zipkin-server
+    name: zipkin-master
+  cloud:
+    config:
+      uri: http://127.0.0.1:2000
+      profile: dev
+      label: master
+
+server:
+  port: 3101
 
 spring.main.web-application-type: none
 
 armeria:
   ports:
-  - port: ${server.port}
-    protocols:
-    - http
+    - port: ${server.port}
+      protocols:
+        - http
   gracefulShutdownQuietPeriodMillis: -1
   gracefulShutdownTimeoutMillis: -1
 
-#去除控制台异常
-management:
-  endpoints:
-    web:
-      exposure:
-        include: '*'
-  endpoint:
-    health:
-      show-details: always
-  metrics:
-    web:
-      server:
-        auto-time-requests: false
-
-eureka:
-  client:
-    service-url:
-      defaultZone: http://localhost:1111/eureka/
