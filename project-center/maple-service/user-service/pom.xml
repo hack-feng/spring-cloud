@@ -22,6 +22,11 @@
             <artifactId>common-security</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
+        <dependency>
+            <groupId>com.maple</groupId>
+            <artifactId>common-minio</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
         <!--mybatis-->
         <dependency>
             <groupId>com.baomidou</groupId>

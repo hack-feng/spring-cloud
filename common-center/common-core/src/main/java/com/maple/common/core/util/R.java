@@ -19,61 +19,60 @@ import java.io.Serializable;
 @Accessors(chain = true)
 @AllArgsConstructor
 public class R<T> implements Serializable {
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    @Getter
-    @Setter
-    private int code;
+	@Getter
+	@Setter
+	private int code;
 
-    @Getter
-    @Setter
-    private String msg;
+	@Getter
+	@Setter
+	private String msg;
 
 
-    @Getter
-    @Setter
-    private T data;
+	@Getter
+	@Setter
+	private T data;
 
-    public static <T> R<T> ok() {
-        return restResult(null, CommonConstants.SUCCESS, null);
-    }
+	public static <T> R<T> ok() {
+		return restResult(null, CommonConstants.SUCCESS, null);
+	}
 
-    public static <T> R<T> ok(T data) {
-        return restResult(data, CommonConstants.SUCCESS, null);
-    }
+	public static <T> R<T> ok(T data) {
+		return restResult(data, CommonConstants.SUCCESS, null);
+	}
 
-    public static <T> R<T> ok(T data, String msg) {
-        return restResult(data, CommonConstants.SUCCESS, msg);
-    }
+	public static <T> R<T> ok(T data, String msg) {
+		return restResult(data, CommonConstants.SUCCESS, msg);
+	}
 
-    public static <T> R<T> failed() {
-        return restResult(null, CommonConstants.FAIL, null);
-    }
+	public static <T> R<T> failed() {
+		return restResult(null, CommonConstants.FAIL, null);
+	}
 
-    public static <T> R<T> failed(String msg) {
-        return restResult(null, CommonConstants.FAIL, msg);
-    }
+	public static <T> R<T> failed(String msg) {
+		return restResult(null, CommonConstants.FAIL, msg);
+	}
 
-    public static <T> R<T> failed(T data) {
-        return restResult(data, CommonConstants.FAIL, null);
-    }
+	public static <T> R<T> failed(T data) {
+		return restResult(data, CommonConstants.FAIL, null);
+	}
 
-    public static <T> R<T> failed(T data, String msg) {
-        return restResult(data, CommonConstants.FAIL, msg);
-    }
+	public static <T> R<T> failed(T data, String msg) {
+		return restResult(data, CommonConstants.FAIL, msg);
+	}
+	public static <T> R<T> isOk(boolean isOk, String msg){
+		if(isOk)
+			return restResult(null, CommonConstants.SUCCESS, msg + "成功");
+		else
+			return restResult(null, CommonConstants.FAIL, msg + "失败, 请重试");
+	}
 
-    public static <T> R<T> isOk(boolean isOk, String msg) {
-        if (isOk)
-            return restResult(null, CommonConstants.SUCCESS, msg + "成功");
-        else
-            return restResult(null, CommonConstants.FAIL, msg + "失败, 请重试");
-    }
-
-    private static <T> R<T> restResult(T data, int code, String msg) {
-        R<T> apiResult = new R<>();
-        apiResult.setCode(code);
-        apiResult.setData(data);
-        apiResult.setMsg(StrUtil.isEmpty(msg) ? "操作成功" : msg);
-        return apiResult;
-    }
+	private static <T> R<T> restResult(T data, int code, String msg) {
+		R<T> apiResult = new R<>();
+		apiResult.setCode(code);
+		apiResult.setData(data);
+		apiResult.setMsg(StrUtil.isNotBlank(msg) ? "操作成功" : msg);
+		return apiResult;
+	}
 }

@@ -4,10 +4,13 @@ import cn.hutool.core.util.StrUtil;
 import com.google.api.client.util.Value;
 import com.maple.common.minio.vo.MinioItem;
 import io.minio.MinioClient;
+import io.minio.ObjectStat;
 import io.minio.Result;
 import io.minio.errors.*;
+import io.minio.messages.Bucket;
 import io.minio.messages.Item;
 import lombok.AllArgsConstructor;
+import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
@@ -19,6 +22,7 @@ import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * Minio 工具类
@@ -35,7 +39,7 @@ public class MinioClientUtils {
     private int RETRY_NUM;
     private MinioClient minioClient;
 
-    public boolean createBucketPublic(String bucketName) {
+    public boolean createBucket(String bucketName) {
         boolean isCreated;
         try {
             if(!minioClient.bucketExists(bucketName)){
@@ -48,6 +52,41 @@ public class MinioClientUtils {
             e.printStackTrace();
         }
         return isCreated;
+    }
+
+    @SneakyThrows
+    public List<Bucket> getAllBuckets() {
+        return minioClient.listBuckets();
+    }
+
+    @SneakyThrows
+    public Optional<Bucket> getBucket(String bucketName) {
+        return minioClient.listBuckets().stream().filter( b -> b.name().equals(bucketName)).findFirst();
+    }
+
+    @SneakyThrows
+    public void removeBucket(String bucketName) {
+        minioClient.removeBucket(bucketName);
+    }
+
+    @SneakyThrows
+    public void saveObject(String bucketName, String objectName, InputStream stream, long size, String contentType) {
+        minioClient.putObject(bucketName, objectName, stream, size, null, null, contentType);
+    }
+
+    @SneakyThrows
+    public ObjectStat getObjectInfo(String bucketName, String objectName) {
+        return minioClient.statObject(bucketName, objectName);
+    }
+
+    @SneakyThrows
+    public void removeObject(String bucketName, String objectName ) {
+        minioClient.removeObject(bucketName, objectName);
+    }
+
+    @SneakyThrows
+    public String getObjectURL(String bucketName, String objectName, Integer expires) {
+        return minioClient.presignedGetObject(bucketName, objectName, expires);
     }
 
     public String uploadJpegFile(String bucketName, String minioPath, String jpgFilePath) {

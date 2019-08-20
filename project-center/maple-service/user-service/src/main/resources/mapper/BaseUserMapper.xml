@@ -8,6 +8,7 @@
         <result column="nick_name" property="nickName"/>
         <result column="user_name" property="userName"/>
         <result column="pass_word" property="passWord"/>
+        <result column="avatar" property="avatar"/>
         <result column="phone" property="phone"/>
         <result column="email_status" property="emailStatus"/>
         <result column="email" property="email"/>
@@ -24,7 +25,7 @@
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        id, nick_name, user_name, phone, email_status, email, qq_status, qq_link, wx_status, wx_link, create_date,
+        id, nick_name, user_name, avatar, phone, email_status, email, qq_status, qq_link, wx_status, wx_link, create_date,
         modify_date, is_delete, is_lock, content
     </sql>
     <select id="getUserPage" resultType="com.maple.userapi.bean.BaseUser">

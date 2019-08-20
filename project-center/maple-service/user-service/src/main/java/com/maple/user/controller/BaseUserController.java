@@ -6,6 +6,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.maple.common.core.constant.CommonConstants;
+import com.maple.common.core.util.AesEncryptUtil;
 import com.maple.common.core.util.R;
 import com.maple.common.security.util.SecurityUtils;
 import com.maple.user.service.IBaseUserService;
@@ -13,6 +14,7 @@ import com.maple.userapi.bean.BaseUser;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.web.bind.annotation.*;
 
@@ -34,6 +36,12 @@ public class BaseUserController {
 
     @Autowired
     private IBaseUserService userService;
+
+    /**
+     * 使用AES加密模式，key需要为16位
+     */
+    @Value("${security.encode.key:1234567812345678}")
+    private String KEY;
 
     /**
      * 获取当前用户全部信息
@@ -137,6 +145,26 @@ public class BaseUserController {
             return R.failed("获取用户信息失败");
         }
         user.setModifyDate(new Date());
+        return R.ok(userService.updateById(user));
+    }
+
+    /**
+     * 修改密码
+     *
+     * @param passwd
+     * @return
+     * @author zhua
+     */
+    @ApiOperation(value = "修改密码", notes = "用户修改密码")
+    @PostMapping("/updatePasswd")
+    public R updatePasswd(String passwd) {
+        String username = SecurityUtils.getUsername();
+        BaseUser user = userService.getOne(Wrappers.<BaseUser>query()
+                .lambda().eq(BaseUser::getUserName, username));
+        if (user == null) {
+            return R.failed("获取当前用户信息失败");
+        }
+        user.setPassWord(AesEncryptUtil.Decrypt(passwd, KEY));
         return R.ok(userService.updateById(user));
     }
 
