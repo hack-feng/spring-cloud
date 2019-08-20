@@ -6,6 +6,7 @@
 * 数据库：mysql-5.7.22（版本在5.7以上即可）
 * Maven：
 * 页面：Vue.js
+vue前端页面地址：https://github.com/zhua-an/adminUI.git
 
 项目目的：
 * 学习spring cloud的知识，总结java常用技术
