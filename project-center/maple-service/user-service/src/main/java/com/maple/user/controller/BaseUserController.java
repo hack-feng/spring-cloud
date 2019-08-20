@@ -1,6 +1,5 @@
 package com.maple.user.controller;
 
-
 import cn.hutool.core.convert.Convert;
 import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
@@ -157,14 +156,17 @@ public class BaseUserController {
      */
     @ApiOperation(value = "修改密码", notes = "用户修改密码")
     @PostMapping("/updatePasswd")
-    public R updatePasswd(String passwd) {
+    public R updatePasswd(String oldPasswd, String passwd) {
         String username = SecurityUtils.getUsername();
         BaseUser user = userService.getOne(Wrappers.<BaseUser>query()
                 .lambda().eq(BaseUser::getUserName, username));
         if (user == null) {
             return R.failed("获取当前用户信息失败");
         }
-        user.setPassWord(AesEncryptUtil.Decrypt(passwd, KEY));
+        if (!user.getPassWord().equals(oldPasswd)) {
+           return R.failed("当前密码输入错误");
+        }
+        user.setPassWord(AesEncryptUtil.desEncrypt(passwd, KEY));
         return R.ok(userService.updateById(user));
     }
 
