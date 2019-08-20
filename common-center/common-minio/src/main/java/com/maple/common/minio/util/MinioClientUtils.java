@@ -225,4 +225,15 @@ public class MinioClientUtils {
         }
     }
 
+    /**
+     * 获取文件流操作
+     * @param bucketName
+     * @param objectName
+     * @return
+     */
+    @SneakyThrows
+    public InputStream getObject(String bucketName, String objectName) {
+        return minioClient.getObject(bucketName, objectName);
+    }
+
 }

@@ -10,6 +10,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -106,6 +110,45 @@ public class MinioEndpoint {
     public void deleteObject(@PathVariable String bucketName, @PathVariable String objectName) {
 
         minioClientUtils.removeObject(bucketName, objectName);
+    }
+
+    @SneakyThrows
+    @GetMapping("/download/{bucketName}/{objectName}")
+    public void downloadObject(@PathVariable String bucketName, @PathVariable String objectName, HttpServletResponse response) {
+        InputStream in = null;
+        OutputStream out = null;
+        try {
+            int len = 0;
+            byte[] buffer = new byte[1024];
+            out = response.getOutputStream();
+            response.reset();
+            response.addHeader("Content-Disposition",
+                    " attachment;filename=" + new String(objectName.getBytes(),"iso-8859-1"));
+            response.setContentType("application/octet-stream");
+
+            in = minioClientUtils.getObject(bucketName, objectName);
+            while ((len = in.read(buffer)) > 0) {
+                out.write(buffer, 0, len);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (in != null){
+                try {
+                    in.close();
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
+                }
+            }
+            if (out != null) {
+                try {
+                    out.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
     }
 
 }
