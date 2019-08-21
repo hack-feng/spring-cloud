@@ -69,7 +69,7 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
     @Override
     public void configure(AuthorizationServerSecurityConfigurer security) throws Exception {
         //允许表单认证
-        //这里增加拦截器到安全认证链中，实现自定义认证，包括图片验证，短信验证，微信小程序，第三方系统，CAS单点登录
+        //这里增加过滤器到安全认证链中，实现自定义认证，包括图片验证，短信验证，微信小程序，第三方系统，CAS单点登录
         //addTokenEndpointAuthenticationFilter(IntegrationAuthenticationFilter())
         //IntegrationAuthenticationFilter 采用 @Component 注入
         security.allowFormAuthenticationForClients()
