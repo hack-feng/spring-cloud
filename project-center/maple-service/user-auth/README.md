@@ -231,14 +231,13 @@ public TokenStore tokenStore() {
         <th>字段说明</th>  
     </tr>
     <tr>
-        <td rowspan="9">oauth_client_details</td>
+        <td rowspan="14">oauth_client_details</td>
         <td>client_id</td>
         <td>主键,必须唯一,不能为空. 
             用于唯一标识每一个客户端(client); 在注册时必须填写(也可由服务端自动生成). 
             对于不同的grant_type,该字段都是必须的. 在实际应用中的另一个名称叫appKey,与client_id是同一个概念.</td>
     </tr>
     <tr>
-        <td>oauth_client_details</td>
         <td>resource_ids</td>
         <td>客户端所能访问的资源id集合,多个资源时用逗号(,)分隔,如: "unity-resource,mobile-resource". 
             该字段的值必须来源于与security.xml中标签‹oauth2:resource-server的属性resource-id值一致. 在security.xml配置有几个‹oauth2:resource-server标签, 则该字段可以使用几个该值. 
@@ -246,14 +245,12 @@ public TokenStore tokenStore() {
          </td>  
     </tr>
     <tr>
-        <td>oauth_client_details</td>
         <td>client_secret</td>
         <td>用于指定客户端(client)的访问密匙; 在注册时必须填写(也可由服务端自动生成). 
             对于不同的grant_type,该字段都是必须的. 在实际应用中的另一个名称叫appSecret,与client_secret是同一个概念.
          </td>  
     </tr>
     <tr>
-        <td>oauth_client_details</td>
         <td>scope</td>
         <td>指定客户端申请的权限范围,可选值包括read,write,trust;若有多个权限范围用逗号(,)分隔,如: "read,write". 
            scope的值与security.xml中配置的‹intercept-url的access属性有关系. 如‹intercept-url的配置为
@@ -263,7 +260,6 @@ public TokenStore tokenStore() {
         </td>  
     </tr>
     <tr>
-        <td>oauth_client_details</td>
         <td>authorized_grant_types</td>
         <td>指定客户端支持的grant_type,可选值包括authorization_code,password,refresh_token,implicit,client_credentials, 若支持多个grant_type用逗号(,)分隔,如: "authorization_code,password". 
           在实际应用中,当注册时,该字段是一般由服务器端指定的,而不是由申请者去选择的,最常用的grant_type组合有: "authorization_code,refresh_token"(针对通过浏览器访问的客户端); "password,refresh_token"(针对移动设备的客户端). 
@@ -271,7 +267,6 @@ public TokenStore tokenStore() {
         </td>  
     </tr>
     <tr>
-        <td>oauth_client_details</td>
         <td>web_server_redirect_uri</td>
         <td>客户端的重定向URI,可为空, 当grant_type为authorization_code或implicit时, 在Oauth的流程中会使用并检查与注册时填写的redirect_uri是否一致. 下面分别说明:
             当grant_type=authorization_code时, 第一步 从 spring-oauth-server获取 'code'时客户端发起请求时必须有redirect_uri参数, 该参数的值必须与web_server_redirect_uri的值一致. 第二步 用 'code' 换取 'access_token' 时客户也必须传递相同的redirect_uri. 
@@ -283,7 +278,6 @@ public TokenStore tokenStore() {
         </td>  
     </tr>
     <tr>
-        <td>oauth_client_details</td>
         <td>authorities</td>
         <td>指定客户端所拥有的Spring Security的权限值,可选, 若有多个权限值,用逗号(,)分隔, 如: "ROLE_UNITY,ROLE_USER". 
             对于是否要设置该字段的值,要根据不同的grant_type来判断, 若客户端在Oauth流程中需要用户的用户名(username)与密码(password)的(authorization_code,password), 
@@ -294,7 +288,6 @@ public TokenStore tokenStore() {
         </td>  
     </tr>
     <tr>
-        <td>oauth_client_details</td>
         <td>access_token_validity</td>
         <td>设定客户端的access_token的有效时间值(单位:秒),可选, 若不设定值则使用默认的有效时间值(60 * 60 * 12, 12小时). 
           在服务端获取的access_token JSON数据中的expires_in字段的值即为当前access_token的有效时间值. 
@@ -303,7 +296,6 @@ public TokenStore tokenStore() {
         </td>  
     </tr>
     <tr>
-        <td>oauth_client_details</td>
         <td>refresh_token_validity</td>
         <td>设定客户端的refresh_token的有效时间值(单位:秒),可选, 若不设定值则使用默认的有效时间值(60 * 60 * 24 * 30, 30天). 
           若客户端的grant_type不包括refresh_token,则不用关心该字段 在项目中, 可具体参考DefaultTokenServices.java中属性refreshTokenValiditySeconds. 
@@ -311,7 +303,6 @@ public TokenStore tokenStore() {
         </td>  
     </tr>
     <tr>
-        <td>oauth_client_details</td>
         <td>additional_information</td>
         <td>这是一个预留的字段,在Oauth的流程中没有实际的使用,可选,但若设置值,必须是JSON格式的数据,如:
            {"country":"CN","country_code":"086"}
@@ -321,20 +312,17 @@ public TokenStore tokenStore() {
         </td>  
     </tr>
     <tr>
-        <td>oauth_client_details</td>
         <td>create_time</td>
         <td>数据的创建时间,精确到秒,由数据库在插入数据时取当前系统时间自动生成(扩展字段)
         </td>  
     </tr>
     <tr>
-        <td>oauth_client_details</td>
         <td>archived</td>
         <td>用于标识客户端是否已存档(即实现逻辑删除),默认值为'0'(即未存档). 
             对该字段的具体使用请参考CustomJdbcClientDetailsService.java,在该类中,扩展了在查询client_details的SQL加上archived = 0条件 (扩展字段)
         </td>  
     </tr>
     <tr>
-        <td>oauth_client_details</td>
         <td>trusted</td>
         <td>设置客户端是否为受信任的,默认为'0'(即不受信任的,1为受信任的). 
             该字段只适用于grant_type="authorization_code"的情况,当用户登录成功后,若该值为0,则会跳转到让用户Approve的页面让用户同意授权, 
@@ -343,7 +331,6 @@ public TokenStore tokenStore() {
         </td>  
     </tr>
     <tr>
-        <td>oauth_client_details</td>
         <td>autoapprove</td>
         <td>设置用户是否自动Approval操作, 默认值为 'false', 可选值包括 'true','false', 'read','write'. 
             该字段只适用于grant_type="authorization_code"的情况,当用户登录成功后,若该值为'true'或支持的scope值,则会跳过用户Approve的页面, 直接授权. 
@@ -351,104 +338,90 @@ public TokenStore tokenStore() {
         </td>  
     </tr>
     <tr>
-        <td>oauth_client_token</td>
+        <td rowspan="6">oauth_client_token</td>
         <td>create_time</td>
         <td>数据的创建时间,精确到秒,由数据库在插入数据时取当前系统时间自动生成(扩展字段)
         </td>
     </tr>
     <tr>
-        <td>oauth_client_token</td>
         <td>token_id</td>
         <td>从服务器端获取到的access_token的值.
         </td>
     </tr>
     <tr>
-        <td>oauth_client_token</td>
         <td>token</td>
         <td>这是一个二进制的字段, 存储的数据是OAuth2AccessToken.java对象序列化后的二进制数据.
         </td>
     </tr>
     <tr>
-        <td>oauth_client_token</td>
         <td>authentication_id</td>
         <td>该字段具有唯一性, 是根据当前的username(如果有),client_id与scope通过MD5加密生成的. 
             具体实现请参考DefaultClientKeyGenerator.java类.
         </td>
     </tr>
     <tr>
-        <td>oauth_client_token</td>
         <td>user_name</td>
         <td>登录时的用户名
         </td>
     </tr>
     <tr>
-        <td>oauth_client_token</td>
         <td>client_id</td>
         <td>
         </td>
     </tr>
     <tr>
-        <td>oauth_access_token</td>
+        <td rowspan="8">oauth_access_token</td>
         <td>create_time</td>
         <td>数据的创建时间,精确到秒,由数据库在插入数据时取当前系统时间自动生成(扩展字段)
         </td>
     </tr>
     <tr>
-        <td>oauth_access_token</td>
         <td>token_id</td>
         <td>该字段的值是将access_token的值通过MD5加密后存储的.
         </td>
     </tr>
     <tr>
-        <td>oauth_access_token</td>
         <td>token</td>
         <td>存储将OAuth2AccessToken.java对象序列化后的二进制数据, 是真实的AccessToken的数据值.
         </td>
     </tr>
     <tr>
-        <td>oauth_access_token</td>
         <td>authentication_id</td>
         <td>该字段具有唯一性, 其值是根据当前的username(如果有),client_id与scope通过MD5加密生成的. 具体实现请参考DefaultAuthenticationKeyGenerator.java类.
         </td>
     </tr>
     <tr>
-        <td>oauth_access_token</td>
         <td>user_name</td>
         <td>登录时的用户名, 若客户端没有用户名(如grant_type="client_credentials"),则该值等于client_id
         </td>
     </tr>
     <tr>
-        <td>oauth_access_token</td>
         <td>client_id</td>
         <td>
         </td>
     </tr>
     <tr>
-        <td>oauth_access_token</td>
         <td>authentication</td>
         <td>存储将OAuth2Authentication.java对象序列化后的二进制数据.
         </td>
     </tr>
     <tr>
-        <td>oauth_access_token</td>
         <td>refresh_token</td>
         <td>该字段的值是将refresh_token的值通过MD5加密后存储的.
         </td>
     </tr>
     <tr>
-        <td>oauth_code</td>
+        <td  rowspan="3">oauth_code</td>
         <td>create_time</td>
         <td>数据的创建时间,精确到秒,由数据库在插入数据时取当前系统时间自动生成(扩展字段)
         </td>
     </tr>
     <tr>
-        <td>oauth_code</td>
         <td>code</td>
         <td>存储服务端系统生成的code的值(未加密).
         </td>
     </tr>
     <tr>
-        <td>oauth_code</td>
         <td>authentication</td>
         <td>存储将AuthorizationRequestHolder.java对象序列化后的二进制数据.
         </td>
