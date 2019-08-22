@@ -1,8 +1,8 @@
 package com.maple.common.minio.util;
 
 import cn.hutool.core.util.StrUtil;
-import com.google.api.client.util.Value;
 import com.maple.common.minio.vo.MinioItem;
+import com.netflix.discovery.converters.Auto;
 import io.minio.MinioClient;
 import io.minio.ObjectStat;
 import io.minio.Result;
@@ -12,6 +12,8 @@ import io.minio.messages.Item;
 import lombok.AllArgsConstructor;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
 import org.xmlpull.v1.XmlPullParserException;
@@ -32,11 +34,12 @@ import java.util.Optional;
  */
 @Slf4j
 @Component
-@AllArgsConstructor
+//@AllArgsConstructor
 public class MinioClientUtils {
 
     @Value("${minio.retry_num:3}")
-    private int RETRY_NUM;
+    private int retryNum;
+    @Autowired
     private MinioClient minioClient;
 
     public boolean createBucket(String bucketName) {
@@ -187,7 +190,7 @@ public class MinioClientUtils {
     public void putObjectWithRetry(String bucketName, String objectName, InputStream stream, String contentType) throws IOException, InvalidKeyException, NoSuchAlgorithmException, InsufficientDataException, InvalidArgumentException, NoResponseException, InvalidBucketNameException, XmlPullParserException, InternalException {
         int current = 0;
         boolean isSuccess = false;
-        while (!isSuccess && current < RETRY_NUM) {
+        while (!isSuccess && current < retryNum) {
             try {
                 Long size = new Long(stream.available());
                 minioClient.putObject(bucketName, objectName, stream, size, null, null, contentType);
@@ -200,7 +203,7 @@ public class MinioClientUtils {
                 break;
             }
         }
-        if (current == RETRY_NUM) {
+        if (current == retryNum) {
             log.error("[minio] putObject, backetName={}, objectName={}, failed finally!");
         }
     }
@@ -208,7 +211,7 @@ public class MinioClientUtils {
     public void putObjectWithRetry(String bucketName, String objectName, String fileName, String contentType) throws InvalidBucketNameException, NoSuchAlgorithmException, InsufficientDataException, IOException, InvalidKeyException, NoResponseException, XmlPullParserException, ErrorResponseException, InternalException, InvalidArgumentException, InsufficientDataException {
         int current = 0;
         boolean isSuccess = false;
-        while (!isSuccess && current < RETRY_NUM) {
+        while (!isSuccess && current < retryNum) {
             try {
                 minioClient.putObject(bucketName, objectName, fileName, null, null ,null,  contentType);
                 isSuccess = true;
@@ -220,7 +223,7 @@ public class MinioClientUtils {
                 break;
             }
         }
-        if (current == RETRY_NUM) {
+        if (current == retryNum) {
             log.error("[minio] putObject, backetName={}, objectName={}, failed finally!");
         }
     }

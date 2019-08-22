@@ -31,6 +31,11 @@ public class MinioEndpoint {
 
     private MinioClientUtils minioClientUtils;
 
+    @GetMapping("/test")
+    public String test() {
+        return "success";
+    }
+
     /**
      *
      * Bucket Endpoints

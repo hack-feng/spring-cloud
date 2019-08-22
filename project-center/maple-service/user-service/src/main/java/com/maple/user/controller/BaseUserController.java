@@ -36,6 +36,7 @@ public class BaseUserController {
     @Autowired
     private IBaseUserService userService;
 
+
     /**
      * 使用AES加密模式，key需要为16位
      */
@@ -163,7 +164,7 @@ public class BaseUserController {
         if (user == null) {
             return R.failed("获取当前用户信息失败");
         }
-        if (!user.getPassWord().equals(oldPasswd)) {
+        if (!user.getPassWord().trim().equals(AesEncryptUtil.desEncrypt(oldPasswd, KEY).trim())) {
            return R.failed("当前密码输入错误");
         }
         user.setPassWord(AesEncryptUtil.desEncrypt(passwd, KEY));
