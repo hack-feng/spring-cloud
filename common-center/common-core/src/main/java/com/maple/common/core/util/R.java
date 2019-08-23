@@ -72,7 +72,14 @@ public class R<T> implements Serializable {
 		R<T> apiResult = new R<>();
 		apiResult.setCode(code);
 		apiResult.setData(data);
-		apiResult.setMsg(StrUtil.isNotBlank(msg) ? "操作成功" : msg);
+		apiResult.setMsg(msg);
+		if(StrUtil.isBlank(msg)) {
+			if(CommonConstants.SUCCESS.intValue() != code) {
+				apiResult.setMsg("操作失败");
+			} else {
+				apiResult.setMsg("操作成功");
+			}
+		}
 		return apiResult;
 	}
 }

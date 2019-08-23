@@ -74,7 +74,7 @@ gateway手册：https://github.com/hack-feng/spring-cloud/blob/master/cloud-cent
 * maple-sso(已启用，用户登录微服务)
 
 ### logger-center(日志中心，暂未开发)
-
+* 使用ELK统一日志管理
 
 ## 开发规范
 
