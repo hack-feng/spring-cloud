@@ -135,4 +135,14 @@
         <maven.build.timestamp.format>yyyyMMddHHmmss</maven.build.timestamp.format>
         <maven-plugin-version>2.1.4.RELEASE</maven-plugin-version>
     </properties>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <version>${maven-plugin-version}</version>
+            </plugin>
+        </plugins>
+    </build>
 </project>
