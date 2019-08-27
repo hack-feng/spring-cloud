@@ -14,7 +14,7 @@
 
     <appender name="logstash" class="net.logstash.logback.appender.LogstashTcpSocketAppender">
         <param name="Encoding" value="UTF-8"/>
-        <remoteHost>119.3.102.223</remoteHost>
+        <remoteHost>127.0.0.1</remoteHost>
         <port>4569</port>
         <filter class="com.program.interceptor.ELKFilter"/>//引入过滤类
         <!-- encoder is required -->
