@@ -25,6 +25,7 @@ public class TestController {
         map.put("title", "标题");
         map.put("content", "这是内容");
         log.error(JSONObject.toJSONString(map));
+
         return "test:"+test;
     }
 }

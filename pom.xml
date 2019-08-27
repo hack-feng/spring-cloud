@@ -134,6 +134,9 @@
         <maven.compiler.target>8</maven.compiler.target>
         <maven.build.timestamp.format>yyyyMMddHHmmss</maven.build.timestamp.format>
         <maven-plugin-version>2.1.4.RELEASE</maven-plugin-version>
+        <mybatis-plus-boot-starter.version>3.0-RC3</mybatis-plus-boot-starter.version>
+        <druid.version>1.1.0</druid.version>
+        <swagger2.version>2.7.0</swagger2.version>
     </properties>
 
     <build>

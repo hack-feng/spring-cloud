@@ -16,12 +16,6 @@
         <module>maple-service</module>
     </modules>
 
-    <properties>
-        <mybatis-plus-boot-starter.version>3.0-RC3</mybatis-plus-boot-starter.version>
-        <druid.version>1.1.0</druid.version>
-        <swagger2.version>2.7.0</swagger2.version>
-    </properties>
-
     <dependencies>
         <!-- 引入web相关 -->
         <dependency>
