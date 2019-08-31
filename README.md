@@ -76,6 +76,7 @@ gateway手册：https://github.com/hack-feng/spring-cloud/blob/master/cloud-cent
 #### maple-service(本项目的微服务)
 * user-service(已启用，用户模块微服务)
 * user-auth(已启用，用户授权微服务)
+* cloud-manage(已启用，系统配置管理)
 
 ### logger-center(日志中心，已完成)
 使用ELK统一日志管理
