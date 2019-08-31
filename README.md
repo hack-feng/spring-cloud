@@ -64,7 +64,11 @@ gateway手册：https://github.com/hack-feng/spring-cloud/blob/master/cloud-cent
 #### spring-cloud-admin(spring boot admin 服务监控)
 * admin-server(已启用，本项目的服务监控)
   
-### common-center(工具中心，暂未开发)
+### common-center(工具中心)
+* common-core(系统通用工具)
+* common-generate（mybatis-plus 代码生成工具）
+* common-minio（文件处理工具）
+* common-security（授权认证工具）
   
 ### project-center(项目中心)
 #### maple-service-api(本项目的实体类)
