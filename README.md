@@ -78,6 +78,7 @@ gateway手册：https://github.com/hack-feng/spring-cloud/blob/master/cloud-cent
 * ElasticSearch
 * Logstash
 * Kibana
+搭建教程：https://blog.csdn.net/qq_34988304/article/details/100058049
 ## 开发规范
 
 ### 项目规范
