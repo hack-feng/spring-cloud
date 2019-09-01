@@ -90,7 +90,7 @@ gateway手册：https://github.com/hack-feng/spring-cloud/blob/master/cloud-cent
 ### 项目规范
  * 遵循阿里的《JAVA开发手册-华山版》
  * 项目创建放在对应的目录中，例如Eureka放在cloud-center下。
- * 项目命名
+ * 项目命名规范
 ### 数据库规范
 
 ### 文档规范
