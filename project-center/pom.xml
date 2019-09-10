@@ -65,8 +65,6 @@
             <artifactId>springfox-swagger-ui</artifactId>
             <version>${swagger2.version}</version>
         </dependency>
-
     </dependencies>
-
 
 </project>
