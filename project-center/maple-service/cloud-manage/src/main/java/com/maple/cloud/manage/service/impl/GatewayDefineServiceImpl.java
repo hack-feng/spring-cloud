@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.io.IOException;
+import java.util.List;
 
 /**
  * <p>
@@ -88,6 +89,20 @@ public class GatewayDefineServiceImpl extends ServiceImpl<GatewayDefineMapper, G
         } else {
             return updateToRedis(id);
         }
+    }
+
+    @Override
+    public boolean initGateWayToRedis() {
+        List<GatewayDefine> gatewayDefineList = gatewayDefineMapper.selectList(null);
+        for (GatewayDefine gatewayDefine: gatewayDefineList) {
+            if (gatewayDefine != null) {
+                //存放到redis数据库
+                stringRedisTemplate.opsForValue().set(MAPLE_CLOUD_GATEWAY_ROUTES + gatewayDefine.getId(),
+                        toJson(new GatewayDefineVo(gatewayDefine)));
+                stringRedisTemplate.convertAndSend(MAPLE_CLOUD_GATEWAY_ROUTES_UPDATE, toJson(new GatewayDefineVo(gatewayDefine)));
+            }
+        }
+        return true;
     }
 
     /**

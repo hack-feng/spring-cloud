@@ -3,6 +3,6 @@ spring:
     name: user-service
   cloud:
     config:
-      uri: http://127.0.0.1:2000
+      uri: http://47.101.181.228:2000
       profile: dev
       label: master
