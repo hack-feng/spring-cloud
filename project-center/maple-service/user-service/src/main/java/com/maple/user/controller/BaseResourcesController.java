@@ -64,17 +64,10 @@ public class BaseResourcesController {
      */
     @GetMapping("getMenuTree")
     public R getMenuTree() {
-        QueryWrapper<BaseResources> queryWrapper = new QueryWrapper<>();
-        queryWrapper.eq("is_delete", CommonConstants.STATUS_NORMAL);
-        List<BaseResources> menuList = baseResourcesService.list(queryWrapper);
-        if (menuList == null || menuList.size() == 0) {
+        List<MenuTree> menuTreeList = getMenuTreeTemp();
+        if(menuTreeList == null || menuTreeList.size() == 0){
             return R.ok(null, "无菜单树");
         }
-        List<MenuTree> menuTreeList = menuList.stream()
-                .map(MenuTree::new)
-                .sorted(Comparator.comparingInt(MenuTree::getSort))
-                .collect(Collectors.toList());
-        ;
         return R.ok(TreeUtil.buildByRecursive(menuTreeList, -1));
     }
 
@@ -127,23 +120,16 @@ public class BaseResourcesController {
     /**
      * 获取权限菜单树
      *
-     * @param roleId
+     * @param roleId 角色id
      * @return
      * @author zhua
      */
     @GetMapping("getAuthTree")
     public R getAuthTree(String roleId) {
-        QueryWrapper<BaseResources> queryWrapper = new QueryWrapper<>();
-        queryWrapper.eq("is_delete", CommonConstants.STATUS_NORMAL);
-        List<BaseResources> menuList = baseResourcesService.list(queryWrapper);
-        if (menuList == null || menuList.size() == 0) {
+        List<MenuTree> menuTreeList = getMenuTreeTemp();
+        if(menuTreeList == null || menuTreeList.size() == 0){
             return R.ok(null, "无菜单树");
         }
-
-        List<MenuTree> menuTreeList = menuList.stream()
-                .map(MenuTree::new)
-                .sorted(Comparator.comparingInt(MenuTree::getSort))
-                .collect(Collectors.toList());
 
         if (StrUtil.isNotEmpty(roleId)) {
             QueryWrapper<BaseRoleRes> resQueryWrapper = new QueryWrapper<>();
@@ -154,13 +140,25 @@ public class BaseResourcesController {
                     for (BaseRoleRes roleRes : roleResList) {
                         if (roleRes.getResId() == menuTree.getId()) {
                             menuTree.setChecked(true);
-                            continue;
                         }
                     }
                 });
             }
         }
         return R.ok(TreeUtil.buildByRecursive(menuTreeList, -1));
+    }
+
+    private List<MenuTree> getMenuTreeTemp(){
+        QueryWrapper<BaseResources> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("is_delete", CommonConstants.STATUS_NORMAL);
+        List<BaseResources> menuList = baseResourcesService.list(queryWrapper);
+        if (menuList == null || menuList.size() == 0) {
+            return null;
+        }
+        return menuList.stream()
+                .map(MenuTree::new)
+                .sorted(Comparator.comparingInt(MenuTree::getSort))
+                .collect(Collectors.toList());
     }
 
 }
