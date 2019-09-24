@@ -59,5 +59,11 @@ public class GatewayDefineController {
         return R.ok(gatewayDefineService.get(id));
     }
 
+    @ApiOperation(value = "初始化Redis网关路由", notes = "初始化Redis网关路由")
+    @GetMapping(value = "/init")
+    public R initGateWayToRedis(){
+        return R.isOk(gatewayDefineService.initGateWayToRedis(), "初始化网关路由信息");
+    }
+
 }
 

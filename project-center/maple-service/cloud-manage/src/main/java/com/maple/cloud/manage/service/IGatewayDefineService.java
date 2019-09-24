@@ -21,4 +21,6 @@ public interface IGatewayDefineService extends IService<GatewayDefine> {
     boolean delete(Integer id);
 
     GatewayDefineVo get(Integer id);
+
+    boolean initGateWayToRedis();
 }

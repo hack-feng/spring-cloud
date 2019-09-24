@@ -16,8 +16,8 @@
         <param name="Encoding" value="UTF-8"/>
         <remoteHost>127.0.0.1</remoteHost>
         <port>4569</port>
-        <filter class="com.program.interceptor.ELKFilter"/>//引入过滤类
-        <!-- encoder is required -->
+        <!-- <filter class="com.program.interceptor.ELKFilter"/>//引入过滤类
+        encoder is required -->
         <encoder charset="UTF-8" class="net.logstash.logback.encoder.LogstashEncoder" />
     </appender>
 

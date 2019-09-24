@@ -64,26 +64,36 @@ gateway手册：https://github.com/hack-feng/spring-cloud/blob/master/cloud-cent
 #### spring-cloud-admin(spring boot admin 服务监控)
 * admin-server(已启用，本项目的服务监控)
   
-### common-center(工具中心，暂未开发)
+### common-center(工具中心)
+* common-core(系统通用工具)
+* common-generate（mybatis-plus 代码生成工具）
+* common-minio（文件处理工具）
+* common-security（授权认证工具）
   
 ### project-center(项目中心)
 #### maple-service-api(本项目的实体类)
 * user-api(用户模块api)
 #### maple-service(本项目的微服务)
 * user-service(已启用，用户模块微服务)
-* maple-sso(已启用，用户登录微服务)
+* user-auth(已启用，用户授权微服务)
 
-### logger-center(日志中心，暂未开发)
+服务授权搭建手册：https://github.com/hack-feng/spring-cloud/tree/master/project-center/maple-service/user-auth
+
+* cloud-manage(已启用，系统配置管理)
+
+### logger-center(日志中心，已完成)
 使用ELK统一日志管理
 * ElasticSearch
 * Logstash
 * Kibana
+
+搭建教程：https://blog.csdn.net/qq_34988304/article/details/100058049
 ## 开发规范
 
 ### 项目规范
  * 遵循阿里的《JAVA开发手册-华山版》
  * 项目创建放在对应的目录中，例如Eureka放在cloud-center下。
- * 项目命名
+ * 项目命名规范
 ### 数据库规范
 
 ### 文档规范
