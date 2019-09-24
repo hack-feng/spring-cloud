@@ -1,0 +1,16 @@
+spring:
+  application:
+    name: maple-job
+  cloud:
+    config:
+      uri: http://localhost:2000
+      profile: dev
+      label: master
+  main:
+    allow-bean-definition-overriding: true
+
+
+elaticjob:
+  zookeeper:
+    server-lists: localhost:2181
+    namespace: maple-job

@@ -17,6 +17,7 @@
         <module>user-service</module>
         <module>user-auth</module>
         <module>maple-sso</module>
+        <module>maple-job</module>
     </modules>
 
     <dependencies>
