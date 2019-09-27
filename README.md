@@ -6,6 +6,7 @@
 * 数据库：mysql-5.7.22（版本在5.7以上即可）
 * Maven：
 * 页面：Vue.js
+
 vue前端页面地址：https://github.com/zhua-an/adminUI.git
 
 项目目的：
@@ -13,7 +14,7 @@ vue前端页面地址：https://github.com/zhua-an/adminUI.git
 * 集成常用的工具或模块，在工作中遇到类似功能，可拿来即用
 * 模拟工作常见的场景，寻找更优的解决方案
 * 交结志同道合的朋友，有兴趣的朋友都可以加入我们，QQ群：680348385
-* 为开源贡献一份绵薄之力
+* 为开源贡献自己的一份绵薄之力
 
 
 ## 项目介绍
@@ -97,5 +98,3 @@ gateway手册：https://github.com/hack-feng/spring-cloud/blob/master/cloud-cent
 ### 数据库规范
 
 ### 文档规范
-
-### 部署规范
